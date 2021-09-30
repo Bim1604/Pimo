@@ -43,7 +43,8 @@ class Onboarding extends StatelessWidget {
                         final provider =
                                 Provider.of<GoogleSignInProvider>(context, listen: false);
                          provider.googleLogin();
-                        Navigator.pushReplacementNamed(context, '/home');
+                         //Khi có context ở đây nó sẽ truyền qua authentication.
+                         Navigator.pushReplacementNamed(context, '/authentication');
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
