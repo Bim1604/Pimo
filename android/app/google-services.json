@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "120264384723",
+    "project_id": "pimo-project",
+    "storage_bucket": "pimo-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120264384723:android:0e7f8d358812e122a8b426",
+        "android_client_info": {
+          "package_name": "com.example.pimo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120264384723-krsqesem23qpthvc1j0b51ebalnnndeh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pimo",
+            "certificate_hash": "9c1c06b8bf00c4b6ad0da2f561f1e251578fc6b9"
+          }
+        },
+        {
+          "client_id": "120264384723-ntrml4t7d4ahj9k9rlatptohl4e8maq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApd_s4adbNd8pEU-vuK1JahjYiuQa9o9I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120264384723-ntrml4t7d4ahj9k9rlatptohl4e8maq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -14,8 +14,7 @@ class Onboarding extends StatelessWidget {
                   image: AssetImage("assets/img/background.jpg"),
                   fit: BoxFit.cover))),
       Padding(
-        padding:
-            const EdgeInsets.only(left: 32, right: 30, bottom: 16),
+        padding: const EdgeInsets.only(left: 32, right: 30, bottom: 16),
         child: Container(
           padding: EdgeInsets.only(bottom: 40),
           child: SafeArea(
@@ -44,24 +43,24 @@ class Onboarding extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                             left: 60.0, right: 16.0, top: 12, bottom: 12),
                         child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
-                          Image.asset(
-                            "assets/img/logo.png",
-                            height: 30,
-                            width: 30,
-                          ),
-                          Padding(
-                              padding: const EdgeInsets.only(
-                                left: 0,
-                            right: 10,
-                          )),
-                          Text("LOGIN WITH GOOGLE",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 16.0))
-                        ]),
+                              Image.asset(
+                                "assets/img/logo.png",
+                                height: 30,
+                                width: 30,
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text("LOGIN WITH GOOGLE",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 16.0)),
+                              )
+                            ]),
                       ),
                     ),
                   ),
