@@ -2,6 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/utils/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class Onboarding extends StatelessWidget {
   @override
@@ -37,6 +39,10 @@ class Onboarding extends StatelessWidget {
                       textColor: Colors.pinkAccent,
                       color: Colors.white,
                       onPressed: () {
+                        //setup firebase
+                        final provider =
+                                Provider.of<GoogleSignInProvider>(context, listen: false);
+                         provider.googleLogin();
                         Navigator.pushReplacementNamed(context, '/home');
                       },
                       shape: RoundedRectangleBorder(
