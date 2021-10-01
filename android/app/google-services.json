@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "120264384723",
-    "project_id": "pimo-project",
-    "storage_bucket": "pimo-project.appspot.com"
+    "project_number": "1000934922231",
+    "project_id": "pimo-fc268",
+    "storage_bucket": "pimo-fc268.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:120264384723:android:0e7f8d358812e122a8b426",
+        "mobilesdk_app_id": "1:1000934922231:android:48b825c858693a374a40f2",
         "android_client_info": {
           "package_name": "com.example.pimo"
         }
       },
       "oauth_client": [
         {
-          "client_id": "120264384723-krsqesem23qpthvc1j0b51ebalnnndeh.apps.googleusercontent.com",
+          "client_id": "1000934922231-sv66jekm7qu04nl3e0o9he5r3nohb3l0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.pimo",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "120264384723-ntrml4t7d4ahj9k9rlatptohl4e8maq9.apps.googleusercontent.com",
+          "client_id": "1000934922231-ejbumg0fb91id0krpemfv642ssjtr8m6.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyApd_s4adbNd8pEU-vuK1JahjYiuQa9o9I"
+          "current_key": "AIzaSyAHTM8DPwi5Mqx5hA8rokHsO0LboTJ0gQA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "120264384723-ntrml4t7d4ahj9k9rlatptohl4e8maq9.apps.googleusercontent.com",
+              "client_id": "1000934922231-ejbumg0fb91id0krpemfv642ssjtr8m6.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -50,7 +50,7 @@ class Kids extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Navbar(
-          title: "Kids",
+          title: "Brand",
           searchBar: true,
           categoryOne: "Categories",
           categoryTwo: "Best Deals",
@@ -66,7 +66,7 @@ class Kids extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(top: 16.0),
                   child: CardHorizontal(
-                      cta: "View article",
+                      cta: "Dior",
                       title: homeCards["Ice Cream"]['title'],
                       img: homeCards["Ice Cream"]['image'],
                       tap: () {
@@ -85,7 +85,7 @@ class Kids extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CardSmall(
-                        cta: "View article",
+                        cta: "Adidas",
                         title: homeCards["Makeup"]['title'],
                         img: homeCards["Makeup"]['image'],
                         tap: () {
@@ -99,7 +99,7 @@ class Kids extends StatelessWidget {
                               ));
                         }),
                     CardSmall(
-                        cta: "View article",
+                        cta: "Nike",
                         title: homeCards["Coffee"]['title'],
                         img: homeCards["Coffee"]['image'],
                         tap: () {
@@ -116,7 +116,7 @@ class Kids extends StatelessWidget {
                 ),
                 SizedBox(height: 8.0),
                 CardHorizontal(
-                    cta: "View article",
+                    cta: "Puma",
                     title: homeCards["Fashion"]['title'],
                     img: homeCards["Fashion"]['image'],
                     tap: () {

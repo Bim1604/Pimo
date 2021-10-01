@@ -71,7 +71,7 @@ class MaterialDrawer extends StatelessWidget {
                 )
               ],
             ))),
-        Expanded(
+        Expanded( // List view sidebar
             child: ListView(
           padding: EdgeInsets.only(top: 8, left: 8, right: 8),
           children: [
