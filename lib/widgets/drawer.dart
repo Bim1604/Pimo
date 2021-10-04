@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:url_launcher/url_launcher.dart';
-
 import 'package:pimo/constants/Theme.dart';
-
 import 'package:pimo/widgets/drawer-tile.dart';
-
 class MaterialDrawer extends StatelessWidget {
   final String currentPage;
 
@@ -49,7 +46,7 @@ class MaterialDrawer extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 16.0),
-                        child: Text("Seller",
+                        child: Text("Người mẫu",
                             style: TextStyle(
                                 color: MaterialColors.muted, fontSize: 16)),
                       ),
@@ -82,44 +79,44 @@ class MaterialDrawer extends StatelessWidget {
                     Navigator.pushReplacementNamed(context, '/home');
                 },
                 iconColor: Colors.black,
-                title: "Home",
+                title: "Trang chủ",
                 isSelected: currentPage == "Home" ? true : false),
             DrawerTile(
-                icon: Icons.face,
+                icon: Icons.local_activity_outlined,
                 onTap: () {
-                  if (currentPage != "Woman")
+                  if (currentPage != "Thương hiệu")
                     Navigator.pushReplacementNamed(context, '/woman');
                 },
                 iconColor: Colors.black,
-                title: "Woman",
-                isSelected: currentPage == "Woman" ? true : false),
+                title: "Thương hiệu",
+                isSelected: currentPage == "Thương hiệu" ? true : false),
             DrawerTile(
-                icon: Icons.tag_faces,
+                icon: Icons.connect_without_contact_outlined,
                 onTap: () {
-                  if (currentPage != "Man")
+                  if (currentPage != "Casting")
                     Navigator.pushReplacementNamed(context, '/man');
                 },
                 iconColor: Colors.black,
-                title: "Man",
-                isSelected: currentPage == "Man" ? true : false),
+                title: "Casting",
+                isSelected: currentPage == "Casting" ? true : false),
             DrawerTile(
-                icon: Icons.child_friendly,
+                icon: Icons.task,
                 onTap: () {
-                  if (currentPage != "Kids")
+                  if (currentPage != "Nhiệm vụ")
                     Navigator.pushReplacementNamed(context, '/kids');
                 },
                 iconColor: Colors.black,
-                title: "Kids",
-                isSelected: currentPage == "Kids" ? true : false),
+                title: "Nhiệm vụ",
+                isSelected: currentPage == "Nhiệm vụ" ? true : false),
             DrawerTile(
-                icon: Icons.grain,
+                icon: Icons.settings_accessibility_outlined,
                 onTap: () {
-                  if (currentPage != "New Collection")
+                  if (currentPage != "Cơ thể")
                     Navigator.pushReplacementNamed(context, '/newcollection');
                 },
                 iconColor: Colors.black,
-                title: "New Collection",
-                isSelected: currentPage == "New Collection" ? true : false),
+                title: "Cơ thể",
+                isSelected: currentPage == "Cơ thể" ? true : false),
             DrawerTile(
                 icon: Icons.settings_input_component,
                 onTap: () {
@@ -132,21 +129,21 @@ class MaterialDrawer extends StatelessWidget {
             DrawerTile(
                 icon: Icons.account_circle,
                 onTap: () {
-                  if (currentPage != "Profile")
+                  if (currentPage != "Hồ sơ")
                     Navigator.pushReplacementNamed(context, '/profile');
                 },
                 iconColor: Colors.black,
-                title: "Profile",
-                isSelected: currentPage == "Profile" ? true : false),
+                title: "Hồ sơ",
+                isSelected: currentPage == "Hồ sơ" ? true : false),
             DrawerTile(
                 icon: Icons.settings,
                 onTap: () {
-                  if (currentPage != "Settings")
+                  if (currentPage != "Cài đặt")
                     Navigator.pushReplacementNamed(context, '/settings');
                 },
                 iconColor: Colors.black,
-                title: "Settings",
-                isSelected: currentPage == "Settings" ? true : false),
+                title: "Cài đặt",
+                isSelected: currentPage == "Điều chỉnh" ? true : false),
             DrawerTile(
                 icon: Icons.exit_to_app,
                 onTap: () {
