@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:url_launcher/url_launcher.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/utils/google_sign_in.dart';
 import 'package:pimo/widgets/drawer-tile.dart';
+import 'package:provider/provider.dart';
 class MaterialDrawer extends StatelessWidget {
   final String currentPage;
 
@@ -9,6 +12,8 @@ class MaterialDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     return Drawer(
       child: Container(
           child: Column(children: [
@@ -21,12 +26,11 @@ class MaterialDrawer extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://images.unsplash.com/photo-1512529920731-e8abaea917a5?fit=crop&w=840&q=80"),
+                  backgroundImage: NetworkImage(user.photoURL),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 8.0, top: 16.0),
-                  child: Text("Rachel Brown",
+                  child: Text(user.displayName,
                       style: TextStyle(color: Colors.white, fontSize: 21)),
                 ),
                 Padding(
@@ -147,21 +151,14 @@ class MaterialDrawer extends StatelessWidget {
             DrawerTile(
                 icon: Icons.exit_to_app,
                 onTap: () {
-                  if (currentPage != "Sign In")
-                    Navigator.pushReplacementNamed(context, '/signin');
+                  if (currentPage != "Đăng xuất") {
+                    final provider = Provider.of<GoogleSignInProvider>(context, listen: false);
+                    provider.logout();
+                  }
                 },
                 iconColor: Colors.black,
-                title: "Sign In",
-                isSelected: currentPage == "Sign In" ? true : false),
-            DrawerTile(
-                icon: Icons.open_in_browser,
-                onTap: () {
-                  if (currentPage != "Sign Up")
-                    Navigator.pushReplacementNamed(context, '/signup');
-                },
-                iconColor: Colors.black,
-                title: "Sign Up",
-                isSelected: currentPage == "Sign Up" ? true : false),
+                title: "Đăng xuất",
+                isSelected: currentPage == "Đăng xuất" ? true : false),
           ],
         ))
       ])),
