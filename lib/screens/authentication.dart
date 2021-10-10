@@ -1,8 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/screens/home.dart';
 import 'package:pimo/screens/onboarding.dart';
-
+import 'package:flutter/cupertino.dart';
 class HomeAuthentication extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class HomeAuthentication extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Center(child: Text('Something Went Wrong'));
               } else {
+                print('Hello Onboaring');
                 return Onboarding();
               }
             }));

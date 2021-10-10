@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
 
 class CardHorizontal extends StatelessWidget {
+  //Khai báo những thuộc tính có trong 1 object
   CardHorizontal(
       {this.title = "Placeholder Title",
       this.cta = "",
@@ -43,11 +44,11 @@ class CardHorizontal extends StatelessWidget {
                             Text(title,
                                 style: TextStyle(
                                     color: MaterialColors.caption,
-                                    fontSize: 13)),
+                                    fontSize: 15)),
                             Text(cta,
                                 style: TextStyle(
                                     color: MaterialColors.muted,
-                                    fontSize: 11,
+                                    fontSize: 13,
                                     fontWeight: FontWeight.w600))
                           ],
                         ),
