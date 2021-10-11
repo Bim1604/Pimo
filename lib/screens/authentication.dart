@@ -20,7 +20,6 @@ class HomeAuthentication extends StatelessWidget {
               } else if (snapshot.hasError) {
                 return Center(child: Text('Something Went Wrong'));
               } else {
-                print('Hello Onboaring');
                 return Onboarding();
               }
             }));
