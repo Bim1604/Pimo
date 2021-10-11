@@ -75,111 +75,113 @@ class Home extends StatelessWidget {
     futureBrands = fetchBrands();
     return Scaffold(
         appBar: Navbar(
-          title: "Home",
+          title: "Trang chủ",
           searchBar: true,
-          categoryOne: "Categories",
-          categoryTwo: "Best Deals",
         ),
         backgroundColor: MaterialColors.bgColorScreen,
         // key: _scaffoldKey,
-        drawer: MaterialDrawer(currentPage: "Home"),
+        // drawer: MaterialDrawer(currentPage: "Home"),
         body: FutureBuilder<Brands>(
           future: futureBrands,
           builder: (context, snapshot) {
-            return Container(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
+            if(snapshot.hasData) {
+              return Container(
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Padding(
 
-                      padding: const EdgeInsets.only(top: 16.0),
-                      child: CardHorizontal(
-                          cta: "${snapshot.data.name}",
-                          title: "${snapshot.data.description}",
-                          img: homeCards["Ice Cream"]['image'],
-                          tap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Product(
-                                    title: homeCards["Ice Cream"]['title'],
-                                    urlImg: homeCards["Ice Cream"]['image'],
-                                  ),
-                                ));
-                          }),
-                    ),
-                    SizedBox(height: 8.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CardSmall(
-                            cta: "View article",
-                            title: homeCards["Makeup"]['title'],
-                            img: homeCards["Makeup"]['image'],
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: CardHorizontal(
+                            cta: "${snapshot.data.name}",
+                            title: "${snapshot.data.description}",
+                            img: homeCards["Ice Cream"]['image'],
                             tap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Product(
-                                      title: homeCards["Makeup"]['title'],
-                                      urlImg: homeCards["Makeup"]['image'],
+                                      title: homeCards["Ice Cream"]['title'],
+                                      urlImg: homeCards["Ice Cream"]['image'],
                                     ),
                                   ));
                             }),
-                        CardSmall(
-                            cta: "View article",
-                            title: homeCards["Coffee"]['title'],
-                            img: homeCards["Coffee"]['image'],
-                            tap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Product(
-                                      title: homeCards["Coffee"]['title'],
-                                      urlImg: homeCards["Coffee"]['image'],
-                                    ),
-                                  ));
-                            })
-                      ],
-                    ),
-                    SizedBox(height: 8.0),
-                    CardHorizontal(
-                        cta: "What do you see",
-                        title: homeCards["Fashion"]['title'],
-                        img: homeCards["Fashion"]['image'],
-                        tap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Product(
-                                  title: homeCards["Fashion"]['title'],
-                                  urlImg: homeCards["Fashion"]['image'],
-                                ),
-                              ));
-                        }),
-                    SizedBox(height: 8.0),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 32.0),
-                      child: CardSquare(
-                          cta: "View article",
-                          title: homeCards["Argon"]['title'],
-                          img: homeCards["Argon"]['image'],
+                      ),
+                      SizedBox(height: 8.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CardSmall(
+                              cta: "View article",
+                              title: homeCards["Makeup"]['title'],
+                              img: homeCards["Makeup"]['image'],
+                              tap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Product(
+                                        title: homeCards["Makeup"]['title'],
+                                        urlImg: homeCards["Makeup"]['image'],
+                                      ),
+                                    ));
+                              }),
+                          CardSmall(
+                              cta: "View article",
+                              title: homeCards["Coffee"]['title'],
+                              img: homeCards["Coffee"]['image'],
+                              tap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => Product(
+                                        title: homeCards["Coffee"]['title'],
+                                        urlImg: homeCards["Coffee"]['image'],
+                                      ),
+                                    ));
+                              })
+                        ],
+                      ),
+                      SizedBox(height: 8.0),
+                      CardHorizontal(
+                          cta: "What do you see",
+                          title: homeCards["Fashion"]['title'],
+                          img: homeCards["Fashion"]['image'],
                           tap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Product(
-                                    title: homeCards["Argon"]['title'],
-                                    urlImg: homeCards["Argon"]['image'],
+                                    title: homeCards["Fashion"]['title'],
+                                    urlImg: homeCards["Fashion"]['image'],
                                   ),
                                 ));
                           }),
-                    )
-                  ],
+                      SizedBox(height: 8.0),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 32.0),
+                        child: CardSquare(
+                            cta: "View article",
+                            title: homeCards["Argon"]['title'],
+                            img: homeCards["Argon"]['image'],
+                            tap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => Product(
+                                      title: homeCards["Argon"]['title'],
+                                      urlImg: homeCards["Argon"]['image'],
+                                    ),
+                                  ));
+                            }),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
           }
         ));
   }
