@@ -264,7 +264,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildOffstageNavigator("Page5"),
         ]),
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.shifting,
+          type: BottomNavigationBarType.fixed,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label:"Home",),
             BottomNavigationBarItem(icon: Icon(Icons.people_alt_outlined), label:"Casting"),
@@ -275,7 +275,9 @@ class _MyHomePageState extends State<MyHomePage> {
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.lightBlue,
           unselectedItemColor: Colors.black,
-          onTap: (index) => _onItemTapped(pageKeys[index], _selectedIndex),
+          onTap: (index) {
+            _onItemTapped(pageKeys[index], index);
+          },
         ),
       )
     );
