@@ -103,23 +103,6 @@ class _NavbarState extends State<Navbar> {
                   children: [
                     Row(
                       children: [
-                        // IconButton(
-                        //     icon: Icon(
-                        //         !widget.backButton
-                        //             ? Icons.menu
-                        //             : Icons.arrow_back_ios,
-                        //         color: !widget.transparent
-                        //             ? (widget.bgColor == Colors.white
-                        //                 ? Colors.black
-                        //                 : Colors.white)
-                        //             : Colors.white,
-                        //         size: 24.0),
-                        //     onPressed: () {
-                        //       if (!widget.backButton)
-                        //         Scaffold.of(context).openDrawer();
-                        //       else
-                        //         Navigator.pop(context);
-                        //     }),
                         Padding(
                           padding: const EdgeInsets.only(left: 8.0),
                           child: Text(widget.title,
@@ -201,56 +184,6 @@ class _NavbarState extends State<Navbar> {
                 SizedBox(
                   height: tagsExist ? 0 : 10,
                 ),
-                // if (categories)
-                //   Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     crossAxisAlignment: CrossAxisAlignment.center,
-                //     children: [
-                //       GestureDetector(
-                //         onTap: () {
-                //           Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                   builder: (context) => Categories()));
-                //         },
-                //         child: Row(
-                //           children: [
-                //             Icon(Icons.border_all,
-                //                 color: Colors.black87, size: 22.0),
-                //             SizedBox(width: 10),
-                //             Text(widget.categoryOne,
-                //                 style: TextStyle(
-                //                     color: Colors.black87, fontSize: 16.0)),
-                //           ],
-                //         ),
-                //       ),
-                //       SizedBox(width: 30),
-                //       Container(
-                //         color: MaterialColors.muted,
-                //         height: 25,
-                //         width: 0.3,
-                //       ),
-                //       SizedBox(width: 30),
-                //       GestureDetector(
-                //         onTap: () {
-                //           Navigator.push(
-                //               context,
-                //               MaterialPageRoute(
-                //                   builder: (context) => BestDeals()));
-                //         },
-                //         child: Row(
-                //           children: [
-                //             Icon(Icons.camera_enhance,
-                //                 color: Colors.black87, size: 22.0),
-                //             SizedBox(width: 10),
-                //             Text(widget.categoryTwo,
-                //                 style: TextStyle(
-                //                     color: Colors.black87, fontSize: 16.0)),
-                //           ],
-                //         ),
-                //       )
-                //     ],
-                //   ),
                 if (tagsExist)
                   Container(
                     height: 40,

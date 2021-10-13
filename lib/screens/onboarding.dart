@@ -14,7 +14,7 @@ class Onboarding extends StatelessWidget {
                       image: AssetImage("assets/img/background.jpg"),
                       fit: BoxFit.cover))),
           Padding(
-            padding: const EdgeInsets.only(left: 70, right: 45, bottom: 16),
+            padding: const EdgeInsets.only(left: 100, right: 45, bottom: 16),
             child: Container(
               padding: EdgeInsets.only(bottom: 30),
               child: SafeArea(

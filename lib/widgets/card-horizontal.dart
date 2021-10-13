@@ -5,14 +5,36 @@ class CardHorizontal extends StatelessWidget {
   //Khai báo những thuộc tính có trong 1 object
   CardHorizontal(
       {this.title = "Placeholder Title",
-      this.cta = "",
-      this.img = "https://via.placeholder.com/200",
-      this.tap = defaultFunc});
+        this.cta = "",
+        this.name,
+        this.id,
+        this.openTime,
+        this.address,
+        this.closeTime,
+        this.description,
+        this.img = "https://via.placeholder.com/200",
+        this.tap = defaultFunc});
 
+  final String name;
+  final String address;
+  final String openTime;
+  final String closeTime;
+  final String description;
   final String cta;
   final String img;
+  final int id;
   final Function tap;
   final String title;
+
+  factory CardHorizontal.fromJson(Map<String, dynamic> json) {
+    return CardHorizontal(
+      name: json['casting']['name'],
+      id: json['casting']['id'],
+      description: json['casting']['description'],
+      openTime: json['casting']['openTime'],
+      closeTime: json['casting']['closeTime'],
+    );
+  }
 
   static void defaultFunc() {
     print("the function works!");

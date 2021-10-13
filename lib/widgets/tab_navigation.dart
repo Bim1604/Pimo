@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pimo/screens/cart.dart';
+import 'package:pimo/screens/home.dart';
+import 'package:pimo/screens/test.dart';
+import 'package:provider/provider.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -39,9 +43,7 @@ class Page1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.redAccent,
-    );
+    return MainScreen();
   }
 }
 
