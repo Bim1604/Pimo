@@ -10,9 +10,8 @@ import 'package:pimo/screens/onboarding.dart';
 import 'package:pimo/screens/woman.dart';
 import 'package:pimo/utils/google_sign_in.dart';
 import 'package:provider/provider.dart';
-import 'package:pimo/screens/new-collection.dart';
+import 'package:pimo/screens/new_collection.dart';
 import 'package:pimo/screens/profile.dart';
-import 'package:pimo/screens/settings.dart';
 import 'package:pimo/screens/components.dart';
 import 'package:pimo/screens/onboarding.dart';
 class MyHttpOverrides extends HttpOverrides {
@@ -47,7 +46,6 @@ class MyApp extends StatelessWidget {
             "/components": (BuildContext context) => new Components(),
             "/newcollection": (BuildContext context) => new NewCollection(),
             "/profile": (BuildContext context) => new Profile(),
-            "/settings": (BuildContext context) => new Settings(),
           }),
     );
   }

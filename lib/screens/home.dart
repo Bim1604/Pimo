@@ -122,14 +122,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                      'Friend',
+                      'Gallery',
                       style: TextStyle(fontSize: 10),
                     ),
                   )
                 ],
               ),
             ),
-            // ),
             SizedBox(
               height: 38,
               child: Column(
@@ -140,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                      'Home',
+                      'Profile',
                       style: TextStyle(fontSize: 10),
                     ),
                   )

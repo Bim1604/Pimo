@@ -2,7 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/screens/cart.dart';
 import 'package:pimo/screens/home.dart';
-import 'package:pimo/screens/test.dart';
+import 'package:pimo/screens/home_page.dart';
+import 'package:pimo/screens/model_profile.dart';
+import 'package:pimo/screens/new_collection.dart';
+import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 
 class TabNavigatorRoutes {
@@ -52,9 +55,7 @@ class Page2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.pinkAccent,
-    );
+    return NewCollection();
   }
 }
 
@@ -75,9 +76,19 @@ class Page4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.cyan
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ModelViewModel()),
+          // ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
+        ],
+        child: FutureBuilder(
+          // future: FlutterSession().get('modelId'),
+          builder: (context, snapshot) {
+            return ModelProfilePage(
+              modelId: snapshot.data.toString(),
+            );
+          },
+        ));
   }
 }
 

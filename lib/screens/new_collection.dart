@@ -1,41 +1,70 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:pimo/models/casting.dart';
-import 'package:pimo/network/network_request.dart';
-import 'package:pimo/screens/components.dart';
-import 'package:pimo/screens/product.dart';
-import 'package:pimo/widgets/card-horizontal.dart';
 
-class MainScreen extends StatelessWidget with ChangeNotifier {
-  Future<CardHorizontal> fetchCasting() async {
+import 'package:pimo/widgets/collection_project.dart';
+
+//widgets
+import 'package:http/http.dart' as http;
+
+final Map<String, Map<String, String>> homeCards = {
+  "Ice Cream": {
+    "title": "Brand new Autumn gear for every man...",
+    "image":
+        "https://images.unsplash.com/uploads/14126691796798a85b1b0/970ca552?crop=entropy&w=840&h=840&fit=crop",
+    "price": "180"
+  },
+  "Makeup": {
+    "title": "Bird lovers can enjoy the new collection...",
+    "image":
+        "https://images.unsplash.com/photo-1513043105799-ba3f53df3ab7?crop=entropy&w=840&fit=crop",
+    "price": "220"
+  },
+  "Coffee": {
+    "title": "Pottery brand new courses just for...",
+    "image":
+        "https://images.unsplash.com/photo-1523263666618-c992b26eec21?crop=entropy&w=840&h=840&fit=crop",
+    "price": "40"
+  },
+  "Fashion": {
+    "title": "New Collection of hand-made red paper...",
+    "image":
+        "https://images.unsplash.com/photo-1543342578-aedb05536855?crop=entropy&w=840&h=840&fit=crop",
+    "price": "188"
+  },
+  "Argon": {
+    "title": "Add a trip to Bellagio Hotel to your...",
+    "image":
+        "https://images.unsplash.com/photo-1543321269-9d86d3680e1c?crop=entropy&w=840&h=840&fit=crop",
+    "price": "180"
+  }
+};
+
+
+
+class NewCollection extends StatelessWidget {
+  Future<CollectionProject> fetchCollectionProject() async {
     final response = await http
-        .get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/1'));
+        .get(Uri.parse('https://api.pimo.studio/api/v1/models/1'));
     if (response.statusCode == 200) {
-      return CardHorizontal.fromJson(jsonDecode(response.body));
+      print("What need i do");
+      return CollectionProject.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load album');
     }
   }
 
-  Future<CardHorizontal> getEvents;
-
+  Future<CollectionProject> getCollectionProject;
   @override
   Widget build(BuildContext context) {
     Size size =
         MediaQuery
             .of(context)
-            .size; //Total height and width of the screen
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
-    getEvents = fetchCasting();
+            .size;
+    getCollectionProject = fetchCollectionProject();
     return SafeArea(
-      child: FutureBuilder<CardHorizontal>(
-          future: getEvents,
+      child: FutureBuilder<CollectionProject>(
+          future: getCollectionProject,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Scaffold(
@@ -48,56 +77,38 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 10),
-                        child: CardHorizontal(
-                            cta: "${snapshot.data.description}",
-                            title: "${snapshot.data.name}",
-                            img: homeCards["Ice Cream"]['image'],
-                            tap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Product(
-                                      title: homeCards["Ice Cream"]['title'],
-                                      urlImg: homeCards["Ice Cream"]['image'],
-                                    ),
-                                  ));
-                            }),
+                        child: CollectionProject(
+                            name : "${snapshot.data.name}",
+                            description: "${snapshot.data.description}",
+                            img: "${snapshot.data.img}",
+
+                            // tap: () {
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) => Product(
+                            //           title: homeCards["Ice Cream"]['title'],
+                            //           urlImg: homeCards["Ice Cream"]['image'],
+                            //         ),
+                            //       ));
+                            // }
+                            ),
                       ),
                       const TitleWithButton(
                         text: "New Casting",
                       ),
-                      CardHorizontal(
-                          cta: "${snapshot.data.description}",
+                      CollectionProject(
                           title: "${snapshot.data.name}",
                           img: homeCards["Makeup"]['image'],
-                          tap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Product(
-                                    title: homeCards["Ice Cream"]['title'],
-                                    urlImg: homeCards["Ice Cream"]['image'],
-                                  ),
-                                ));
-                          }),
+                          ),
                       // Casting(typeView: 2),
                       const TitleWithButton(
                         text: "Best for you",
                       ),
-                      CardHorizontal(
-                          cta: "${snapshot.data.description}",
+                      CollectionProject(
                           title: "${snapshot.data.name}",
                           img: homeCards["Coffee"]['image'],
-                          tap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Product(
-                                    title: homeCards["Ice Cream"]['title'],
-                                    urlImg: homeCards["Ice Cream"]['image'],
-                                  ),
-                                ));
-                          }),
+                          ),
                       // Casting(typeView: 3),
                     ]),
                   ));

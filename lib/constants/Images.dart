@@ -229,3 +229,5 @@ final Map<String, List<Map<String, dynamic>>> imgList = {
 };
 
 Map<String, Map> images = {"categories": categories, "deals": deals};
+
+const url = "https://api.pimo.studio/";
