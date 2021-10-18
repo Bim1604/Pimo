@@ -88,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                      'Home',
+                      'Trang chủ',
                       style: TextStyle(fontSize: 10),
                     ),
                   )
@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                      'Gallery',
+                      'Ảnh',
                       style: TextStyle(fontSize: 10),
                     ),
                   )
@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                      'Profile',
+                      'Thông tin',
                       style: TextStyle(fontSize: 10),
                     ),
                   )

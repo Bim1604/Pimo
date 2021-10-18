@@ -40,14 +40,11 @@ final Map<String, Map<String, String>> homeCards = {
   }
 };
 
-
-
 class NewCollection extends StatelessWidget {
   Future<CollectionProject> fetchCollectionProject() async {
     final response = await http
         .get(Uri.parse('https://api.pimo.studio/api/v1/models/1'));
     if (response.statusCode == 200) {
-      print("What need i do");
       return CollectionProject.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load album');

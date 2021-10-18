@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:pimo/screens/cart.dart';
 import 'package:pimo/screens/home.dart';
 import 'package:pimo/screens/home_page.dart';
+import 'package:pimo/screens/model_image.dart';
 import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/screens/new_collection.dart';
+import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -52,7 +54,6 @@ class Page1 extends StatelessWidget {
 
 class Page2 extends StatelessWidget {
   const Page2({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return NewCollection();
@@ -63,11 +64,20 @@ class Page2 extends StatelessWidget {
 class Page3 extends StatelessWidget {
   const Page3({Key key}) : super(key: key);
 
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => ImageCollectionListViewModel()),
+        ],
+        child: FutureBuilder(
+          //future: FlutterSession().get('modelId'),
+          builder: (context, snapshot) {
+            print("Model Image page");
+            return ModelImagePage(
+              modelId: snapshot.data.toString(),
+            );
+          },
+        ));
   }
 }
 
