@@ -34,7 +34,7 @@ class _UpdateModelProfilePageState extends State<UpdateModelProfilePage> {
           backgroundColor: Colors.transparent,
           elevation: 0,
           title: Text(
-            'Update profile',
+            'Chỉnh sửa thông tin',
             style: TextStyle(
               color: Colors.black,
             ),
@@ -62,10 +62,10 @@ class _UpdateModelProfilePageState extends State<UpdateModelProfilePage> {
                 );
               } else {
                 if (prevData.error == null) {
-                  // return Consumer<ModelViewModel>(
-                  //     builder: (ctx, data, child) => ModelUpdate(
-                  //           modelDetail: data,
-                  //         ));
+                  return Consumer<ModelViewModel>(
+                      builder: (ctx, data, child) => ModelUpdate(
+                            modelDetail: data,
+                          ));
                   return ModelUpdate(
                       modelDetail:
                           Provider.of<ModelViewModel>(context, listen: false));
@@ -143,7 +143,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
 
   void _loadData() {
     nameController = TextEditingController()..text = widget.modelDetail.name;
-    genderController = widget.modelDetail.gender;
+    // genderController = widget.modelDetail.gender;
     dobController = TextEditingController()
       ..text = formatDate(widget.modelDetail.dateOfBirth);
     phoneController = TextEditingController()..text = widget.modelDetail.phone;
@@ -183,10 +183,10 @@ class _ModelUpdateState extends State<ModelUpdate> {
                   cursorColor: MaterialColors.mainColor,
                   decoration: InputDecoration(
                     icon: Icon(Icons.credit_card),
-                    labelText: 'Name',
-                    // suffixIcon: Icon(
-                    //   Icons.check_circle,
-                    // ),
+                    labelText: 'Tên',
+                    suffixIcon: Icon(
+                      Icons.check_circle,
+                    ),
                   ),
                 ),
                 DropdownButtonFormField(

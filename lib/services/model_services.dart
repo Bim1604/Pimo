@@ -24,7 +24,9 @@ class ModelServices {
     final response = await http
         .get(Uri.parse('https://api.pimo.studio/api/v1/models/1'));
     if (response.statusCode == 200) {
+      print(response.body);
       var model = Model.fromJson(jsonDecode(response.body));
+
       return model;
     } else {
       throw Exception('Failed to load Model !');

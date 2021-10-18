@@ -21,7 +21,7 @@ class BodyPartService {
     // heads['Authorization'] = 'Bearer $token';
     // String modelId = (await FlutterSession().get('modelId')).toString();
     final response = await http
-        .get(Uri.parse(url + "api/v1/body-parts/$modelId"), headers: heads);
+        .get(Uri.parse(url + "api/v1/body-parts/1"));
 
     if (response.statusCode == 200) {
       var list = parseBodyPartList(response.body);

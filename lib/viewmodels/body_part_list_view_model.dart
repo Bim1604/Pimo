@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:pimo/models/body_part.dart';
+import 'package:pimo/services/body_part_service.dart';
 
 import 'body_part_view_model.dart';
 

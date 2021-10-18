@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/screens/update_profile.dart';
 import 'package:pimo/utils/google_sign_in.dart';
+import 'package:pimo/viewmodels/body_part_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'avatar_page.dart';
 import 'onboarding.dart';
 class ModelProfilePage extends StatefulWidget {
   final String modelId;
@@ -61,7 +61,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
           child: Padding(
             padding: EdgeInsets.all(5),
             child: Text(
-              'Account',
+              'Tài Khoản',
               style: TextStyle(
                   color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
             ),
@@ -224,13 +224,14 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                                       create: (_) =>
                                           BodyPartListViewModel()),
                                 ],
-                                child: FutureBuilder(
-                                  builder: (context, snapshot) {
-                                    return MeasureTemplatePage(
-                                      modelId: widget.modelId,
-                                    );
-                                  },
-                                ))),
+                                // child: FutureBuilder(
+                                //   builder: (context, snapshot) {
+                                //     return MeasureTemplatePage(
+                                //       modelId: widget.modelId,
+                                //     );
+                                //   },
+                                // )
+                            )),
                       );
                     },
                     child: Row(

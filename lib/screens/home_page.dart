@@ -129,7 +129,7 @@ class HeaderWithSearchBox extends StatelessWidget {
               right: 20.0,
               bottom: 36 + 20.0,
             ),
-            height: size.height * 0.2 - 27,
+            height: size.height * 0.2 - 12,
             decoration: const BoxDecoration(
                 color: Color(0xFFf5a6b9),
                 borderRadius: BorderRadius.only(
@@ -145,8 +145,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                         // future: FlutterSession().get('modelName'),
                         builder: (context, snapshot) {
                           return Text(
-                            // 'Hi ' + snapshot.data.toString() + '!',
-                            'Chào đăng' ,
+                            'Hi ' + snapshot.data.toString() + '!',
                             style:
                             Theme.of(context).textTheme.headline5.copyWith(
                               color: Colors.black,
