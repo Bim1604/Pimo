@@ -5,6 +5,7 @@ import 'package:pimo/viewmodels/body_part_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'measure_template.dart';
 import 'onboarding.dart';
 class ModelProfilePage extends StatefulWidget {
   final String modelId;
@@ -224,13 +225,13 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                                       create: (_) =>
                                           BodyPartListViewModel()),
                                 ],
-                                // child: FutureBuilder(
-                                //   builder: (context, snapshot) {
-                                //     return MeasureTemplatePage(
-                                //       modelId: widget.modelId,
-                                //     );
-                                //   },
-                                // )
+                                child: FutureBuilder(
+                                  builder: (context, snapshot) {
+                                    return MeasureTemplatePage(
+                                      modelId: widget.modelId,
+                                    );
+                                  },
+                                )
                             )),
                       );
                     },

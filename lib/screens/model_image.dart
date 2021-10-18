@@ -1,7 +1,9 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/services/image_collection_service.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
@@ -70,13 +72,13 @@ class _ModelImagePageState extends State<ModelImagePage> {
                         } else {
                           if (data.error == null) {
                             return Consumer<ImageCollectionListViewModel>(
-                              // builder: (ctx, data, child) => ListView.builder(
-                              //   itemCount: data.imageCollections.length,
-                              //   itemBuilder: (BuildContext context, int index) {
-                              //     return _buildImageCollectList((context),
-                              //         data.imageCollections[index], index);
-                              //   },
-                              // ),
+                              builder: (ctx, data, child) => ListView.builder(
+                                itemCount: data.imageCollections.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return _buildImageCollectList((context),
+                                      data.imageCollections[index], index);
+                                },
+                              ),
 
                             );
                           } else {
@@ -246,7 +248,7 @@ class _ModelImagePageState extends State<ModelImagePage> {
                       controller: nameController,
                       decoration: InputDecoration(
                         icon: Icon(Icons.drive_file_rename_outline),
-                        labelText: 'Name',
+                        labelText: 'Tên',
                       ),
                     ),
                   ],
@@ -278,14 +280,14 @@ class _ModelImagePageState extends State<ModelImagePage> {
                 elevation: 0,
               ),
               onPressed: () async {
-                // if (nameController.text.isNotEmpty) {
-                //   await ImageCollectionService()
-                //       .createCollection(nameController.text);
-                //   Navigator.of(context).pop();
-                //   await _reloadPage();
-                // } else {
-                //   Fluttertoast.showToast(msg: 'Name can not empty');
-                // }
+                if (nameController.text.isNotEmpty) {
+                  await ImageCollectionService()
+                      .createCollection(nameController.text);
+                  Navigator.of(context).pop();
+                  await _reloadPage();
+                } else {
+                  Fluttertoast.showToast(msg: 'Tên không được để trống');
+                }
               },
             ),
           ],

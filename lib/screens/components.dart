@@ -7,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pimo/widgets/navbar.dart';
 import 'package:pimo/widgets/drawer.dart';
 import 'package:pimo/widgets/input.dart';
-import 'package:pimo/widgets/card-horizontal.dart';
+import 'package:pimo/widgets/home_view.dart';
 import 'package:pimo/widgets/card-category.dart';
 import 'package:pimo/widgets/card-small.dart';
 import 'package:pimo/widgets/card-square.dart';

@@ -4,7 +4,7 @@ import 'package:pimo/constants/Images.dart';
 
 // widgets
 import 'package:pimo/widgets/navbar.dart';
-import 'package:pimo/widgets/card-horizontal.dart';
+import 'package:pimo/widgets/home_view.dart';
 import 'package:pimo/widgets/card-small.dart';
 import 'package:pimo/widgets/table-cell.dart';
 

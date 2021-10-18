@@ -7,7 +7,8 @@ import 'package:pimo/models/casting.dart';
 import 'package:pimo/network/network_request.dart';
 import 'package:pimo/screens/components.dart';
 import 'package:pimo/screens/product.dart';
-import 'package:pimo/widgets/card-horizontal.dart';
+import 'package:pimo/widgets/home_view.dart';
+import 'package:intl/intl.dart';
 
 class MainScreen extends StatelessWidget with ChangeNotifier {
 
@@ -24,6 +25,21 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
 
   Future<CardHorizontal> getEvents;
 
+  String getFormattedDate(String date) {
+    var localDate = DateTime.parse(date).toLocal();
+
+    /// inputFormat - format getting from api or other func.
+    /// e.g If 2021-05-27 9:34:12.781341 then format should be yyyy-MM-dd HH:mm
+    /// If 27/05/2021 9:34:12.781341 then format should be dd/MM/yyyy HH:mm
+    var inputFormat = DateFormat('yyyy-MM-dd HH:mm');
+    var inputDate = inputFormat.parse(localDate.toString());
+
+    /// outputFormat - convert into format you want to show.
+    var outputFormat = DateFormat('HH:mm dd/MM/yyyy');
+    var outputDate = outputFormat.format(inputDate);
+
+    return outputDate.toString();
+  }
   @override
   Widget build(BuildContext context) {
     Size size =
@@ -53,6 +69,8 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                         child: CardHorizontal(
                             cta: "${snapshot.data.description}",
                             title: "${snapshot.data.name}",
+                            openTime: getFormattedDate("${snapshot.data.openTime}"),
+                            closeTime: getFormattedDate("${snapshot.data.closeTime}"),
                             img: homeCards["Ice Cream"]['image'],
                             tap: () {
                               Navigator.push(
@@ -71,6 +89,8 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                       CardHorizontal(
                           cta: "${snapshot.data.description}",
                           title: "${snapshot.data.name}",
+                          openTime: getFormattedDate("${snapshot.data.openTime}"),
+                          closeTime: getFormattedDate("${snapshot.data.closeTime}"),
                           img: homeCards["Makeup"]['image'],
                           tap: () {
                             Navigator.push(
@@ -89,6 +109,8 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                       CardHorizontal(
                           cta: "${snapshot.data.description}",
                           title: "${snapshot.data.name}",
+                          openTime: getFormattedDate("${snapshot.data.openTime}"),
+                          closeTime: getFormattedDate("${snapshot.data.closeTime}"),
                           img: homeCards["Coffee"]['image'],
                           tap: () {
                             Navigator.push(
@@ -145,7 +167,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                         // future: FlutterSession().get('modelName'),
                         builder: (context, snapshot) {
                           return Text(
-                            'Hi ' + snapshot.data.toString() + '!',
+                            'Hi ' + 'Lisa' + '!',
                             style:
                             Theme.of(context).textTheme.headline5.copyWith(
                               color: Colors.black,

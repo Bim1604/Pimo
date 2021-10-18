@@ -5,15 +5,12 @@ import 'image_collection_view_model.dart';
 
 
 class ImageCollectionListViewModel with ChangeNotifier {
-  // List<ImageCollectionViewModel> imageCollections = List<ImageCollectionViewModel>();
-  ImageCollectionViewModel imageCollections;
+  List<ImageCollectionViewModel> imageCollections = List<ImageCollectionViewModel>();
 
   Future<ImageCollectionListViewModel> getImageCollectionList() async {
-    print('ImageCollection List');
-    ImageCollection list = await ImageCollectionService().getImageCollectionList();
+    List<ImageCollection> list = await ImageCollectionService().getImageCollectionList();
     notifyListeners();
-    // this.imageCollections =
-    //     list.map((collections) => ImageCollectionViewModel(imageCollection: collections)).toList();
-    this.imageCollections = list as ImageCollectionViewModel;
+    this.imageCollections =
+        list.map((collections) => ImageCollectionViewModel(imageCollection: collections)).toList();
   }
 }
