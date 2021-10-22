@@ -4,8 +4,11 @@ import 'package:pimo/utils/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class Onboarding extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width ;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Stack(children: <Widget>[
           Container(
@@ -14,8 +17,10 @@ class Onboarding extends StatelessWidget {
                       image: AssetImage("assets/img/background.jpg"),
                       fit: BoxFit.cover))),
           Padding(
-            padding: const EdgeInsets.only(left: 100, right: 45, bottom: 16),
+            padding: const EdgeInsets.only(left: 75, right: 45, bottom: 16),
             child: Container(
+              width: width,
+              height: height,
               padding: EdgeInsets.only(bottom: 30),
               child: SafeArea(
                 child: Column(
@@ -24,7 +29,7 @@ class Onboarding extends StatelessWidget {
                   children: <Widget>[
                     Padding(
                       //Chỉnh khung
-                      padding: const EdgeInsets.only(top: 50.0),
+                      padding: const EdgeInsets.only(top: 40.0),
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
@@ -42,7 +47,6 @@ class Onboarding extends StatelessWidget {
                             final provider =
                             Provider.of<GoogleSignInProvider>(context, listen: false);
                             provider.googleLogin();
-                            //Khi có context ở đây nó sẽ truyền qua authentication.
                             Navigator.pushReplacementNamed(context, '/authentication');
                           },
                           shape: RoundedRectangleBorder(
@@ -50,7 +54,7 @@ class Onboarding extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 10.0, right: 10, top: 8, bottom: 8),
+                                left: 15.0, right: 8, top: 8, bottom: 8),
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[

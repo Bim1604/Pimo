@@ -77,7 +77,7 @@ class CardHorizontal extends StatelessWidget {
                                     color: MaterialColors.muted,
                                     fontSize: 13,
                                     fontWeight: FontWeight.w300)),
-                            Text('Close:'+closeTime,
+                            Text('Close: '+closeTime,
                                 style: TextStyle(
                                     color: MaterialColors.muted,
                                     fontSize: 13,

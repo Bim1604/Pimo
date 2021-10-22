@@ -11,6 +11,7 @@ import 'image_service.dart';
 class ImageCollectionService {
 
   List<ImageCollection> parseImageCollectionList(String responseBody) {
+    // Đến bước này vẫn chưa được
     final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
     return parsed
         .map<ImageCollection>((json) => ImageCollection.fromJson(json))
@@ -25,12 +26,13 @@ class ImageCollectionService {
     // heads['Authorization'] = 'Bearer $token';
     // String modelId = (await FlutterSession().get('modelId')).toString();
     final response = await http
-        .get(Uri.parse(url + "api/v1/collection-images/1"));
+        .get(Uri.parse(url + "api/v1/products/1"));
     if (response.statusCode == 200) {
       var list = parseImageCollectionList(response.body);
+      print('At List');
       return list;
     } else {
-      return null;
+      throw Exception('Unable to fetch image Collection from the REST API');
     }
   }
 
@@ -45,7 +47,7 @@ class ImageCollectionService {
     var mess = jsonEncode(body);
     // String modelId = (await FlutterSession().get('modelId')).toString();
     final response = await http
-        .post(Uri.parse(url + "api/v1/collection-images/1"),
+        .post(Uri.parse(url + "api/v1/products/1"),
         body: mess,
         );
     if (response.statusCode == 200) {
@@ -56,22 +58,24 @@ class ImageCollectionService {
     }
   }
 
-  // Future<void> deleteCollection(int collectionId) async {
-  //   // var token = (await FlutterSession().get("token")).toString();
-  //   Map<String, String> heads = Map<String, String>();
-  //   heads['Content-Type'] = 'application/json';
-  //   heads['Accept'] = 'application/json';
-  //   // heads['Authorization'] = 'Bearer $token';
-  //   final response = await http
-  //       .delete(Uri.parse(baseUrl + "api/v1/collection-images/$collectionId"),
-  //       headers: heads);
-  //   if (response.statusCode == 200) {
-  //     Fluttertoast.showToast(msg: 'Delete success');
-  //   } else {
-  //     Fluttertoast.showToast(msg: 'Delete fail');
-  //     return null;
-  //   }
-  // }
+  Future<void> deleteCollection(int collectionId) async {
+    // var token = (await FlutterSession().get("token")).toString();
+    Map<String, String> heads = Map<String, String>();
+    heads['Content-Type'] = 'application/json';
+    heads['Accept'] = 'application/json';
+    // heads['Authorization'] = 'Bearer $token';
+    // final response = await http
+    //     .delete(Uri.parse(baseUrl + "api/v1/collection-images/$collectionId"),
+    //     headers: heads);
+    final response = await http
+        .delete(Uri.parse(url + "api/v1/collection-images/1"),headers: heads);
+    if (response.statusCode == 200) {
+      Fluttertoast.showToast(msg: 'Delete success');
+    } else {
+      Fluttertoast.showToast(msg: 'Delete fail');
+      return null;
+    }
+  }
 
   // Future<bool> convertToGif(int collectionId) async {
   //   var images = await ImageService().getImageList(collectionId);

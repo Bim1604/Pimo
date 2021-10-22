@@ -8,6 +8,7 @@ class ImageCollectionListViewModel with ChangeNotifier {
   List<ImageCollectionViewModel> imageCollections = List<ImageCollectionViewModel>();
 
   Future<ImageCollectionListViewModel> getImageCollectionList() async {
+    print("Future Image Collection List View");
     List<ImageCollection> list = await ImageCollectionService().getImageCollectionList();
     notifyListeners();
     this.imageCollections =

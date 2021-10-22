@@ -66,9 +66,9 @@ class _UpdateModelProfilePageState extends State<UpdateModelProfilePage> {
                       builder: (ctx, data, child) => ModelUpdate(
                             modelDetail: data,
                           ));
-                  return ModelUpdate(
-                      modelDetail:
-                          Provider.of<ModelViewModel>(context, listen: false));
+                  // return ModelUpdate(
+                  //     modelDetail:
+                  //         Provider.of<ModelViewModel>(context, listen: false));
                 } else {
                   return Text('Error');
                 }
