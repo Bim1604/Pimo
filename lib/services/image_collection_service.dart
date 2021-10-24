@@ -1,40 +1,59 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/image_collection.dart';
 import 'package:http/http.dart' as http;
 import 'package:pimo/models/image_collection_gif.dart';
+import 'package:pimo/models/test.dart';
 
 import 'image_service.dart';
 
 class ImageCollectionService {
 
-  List<ImageCollection> parseImageCollectionList(String responseBody) {
+  List<ImageCollectionTest> parseImageCollectionList(String responseBody) {
     // Đến bước này vẫn chưa được
-    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    return parsed
-        .map<ImageCollection>((json) => ImageCollection.fromJson(json))
-        .toList();
+    // final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
+    // return parsed
+    //     .map<ImageCollection>((json) => ImageCollection.fromJson(json))
+    //     .toList();
+
+    var list = json.decode(responseBody) as List<dynamic>;
+    List<ImageCollectionTest> imageList = list.map((e) => ImageCollectionTest.fromJson(e)).toList();
+    return imageList;
   }
 
-  Future<List<ImageCollection>> getImageCollectionList() async {
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-    // String modelId = (await FlutterSession().get('modelId')).toString();
+  Future<List<ImageCollectionTest>> fetchImageCollection() async {
     final response = await http
         .get(Uri.parse(url + "api/v1/products/1"));
     if (response.statusCode == 200) {
       var list = parseImageCollectionList(response.body);
-      print('At List');
+      print(list.length);
       return list;
     } else {
-      throw Exception('Unable to fetch image Collection from the REST API');
+      throw Exception("Request API error");
     }
   }
+
+
+  // Future<List<ImageCollection>> getImageCollectionList() async {
+  //   // var token = (await FlutterSession().get("token")).toString();
+  //   // Map<String, String> heads = Map<String, String>();
+  //   // heads['Content-Type'] = 'application/json';
+  //   // heads['Accept'] = 'application/json';
+  //   // heads['Authorization'] = 'Bearer $token';
+  //   // String modelId = (await FlutterSession().get('modelId')).toString();
+  //   final response = await http
+  //       .get(Uri.parse(url + "api/v1/products/1"));
+  //   if (response.statusCode == 200) {
+  //     var list = parseImageCollectionList(response.body);
+  //     print('At List');
+  //     return list;
+  //   } else {
+  //     throw Exception('Unable to fetch image Collection from the REST API');
+  //   }
+  // }
 
   Future<void> createCollection(String collectionName) async {
     // var token = (await FlutterSession().get("token")).toString();

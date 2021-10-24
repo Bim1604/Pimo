@@ -1,11 +1,12 @@
 
 
 import 'package:pimo/models/image_collection.dart';
+import 'package:pimo/models/test.dart';
 
 class ImageCollectionViewModel {
-  ImageCollection _imageCollection;
+  ImageCollectionTest _imageCollection;
 
-  ImageCollectionViewModel({ImageCollection imageCollection}) : _imageCollection = imageCollection;
+  ImageCollectionViewModel({ImageCollectionTest imageCollection}) : _imageCollection = imageCollection;
 
   int get id {
     return _imageCollection.id;
