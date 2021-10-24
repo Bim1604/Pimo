@@ -11,31 +11,29 @@ import 'package:pimo/models/test.dart';
 import 'image_service.dart';
 
 class ImageCollectionService {
-
   List<ImageCollectionTest> parseImageCollectionList(String responseBody) {
     // Đến bước này vẫn chưa được
-    // final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    // return parsed
-    //     .map<ImageCollection>((json) => ImageCollection.fromJson(json))
-    //     .toList();
-
-    var list = json.decode(responseBody) as List<dynamic>;
-    List<ImageCollectionTest> imageList = list.map((e) => ImageCollectionTest.fromJson(e)).toList();
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<ImageCollectionTest> imageList = new List<ImageCollectionTest>();
+    list['product'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      imageList.add(ImageCollectionTest.fromJson(list['product'][i]));
+    }
     return imageList;
   }
 
   Future<List<ImageCollectionTest>> fetchImageCollection() async {
-    final response = await http
-        .get(Uri.parse(url + "api/v1/products/1"));
+    final response = await http.get(Uri.parse(url + "api/v1/products/1"));
+    // print(response.body);
     if (response.statusCode == 200) {
       var list = parseImageCollectionList(response.body);
-      print(list.length);
+      print("hihi xong roi ne");
       return list;
     } else {
       throw Exception("Request API error");
     }
   }
-
 
   // Future<List<ImageCollection>> getImageCollectionList() async {
   //   // var token = (await FlutterSession().get("token")).toString();
@@ -65,10 +63,10 @@ class ImageCollectionService {
     body['name'] = collectionName;
     var mess = jsonEncode(body);
     // String modelId = (await FlutterSession().get('modelId')).toString();
-    final response = await http
-        .post(Uri.parse(url + "api/v1/products/1"),
-        body: mess,
-        );
+    final response = await http.post(
+      Uri.parse(url + "api/v1/products/1"),
+      body: mess,
+    );
     if (response.statusCode == 200) {
       Fluttertoast.showToast(msg: 'Create success');
     } else {
@@ -87,7 +85,7 @@ class ImageCollectionService {
     //     .delete(Uri.parse(baseUrl + "api/v1/collection-images/$collectionId"),
     //     headers: heads);
     final response = await http
-        .delete(Uri.parse(url + "api/v1/collection-images/1"),headers: heads);
+        .delete(Uri.parse(url + "api/v1/collection-images/1"), headers: heads);
     if (response.statusCode == 200) {
       Fluttertoast.showToast(msg: 'Delete success');
     } else {
@@ -142,5 +140,3 @@ class ImageCollectionService {
   //   }
   // }
 }
-
-

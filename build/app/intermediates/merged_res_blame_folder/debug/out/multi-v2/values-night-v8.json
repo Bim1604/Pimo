@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
+            "outputFile": "D:\\Self Learn\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo\\android\\app\\src\\main\\res\\values-night\\styles.xml",
+                    "source": "D:\\Self Learn\\Pimo\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

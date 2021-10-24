@@ -3,8 +3,6 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:pimo/models/casting.dart';
-import 'package:pimo/network/network_request.dart';
 import 'package:pimo/screens/components.dart';
 import 'package:pimo/screens/product.dart';
 import 'package:pimo/widgets/home_view.dart';
