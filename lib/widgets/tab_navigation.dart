@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pimo/screens/cart.dart';
 import 'package:pimo/screens/home.dart';
 import 'package:pimo/screens/home_page.dart';
+import 'package:pimo/screens/model_collection.dart';
 import 'package:pimo/screens/model_image.dart';
 import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/screens/new_collection.dart';
@@ -72,7 +73,7 @@ class Page3 extends StatelessWidget {
         child: FutureBuilder(
           //future: FlutterSession().get('modelId'),
           builder: (context, snapshot) {
-            return ModelImagePage(
+            return ModelCollection(
               modelId: snapshot.data.toString(),
             );
           },

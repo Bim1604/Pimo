@@ -12,7 +12,8 @@ class ImageService {
     print(responseBody);
     var list = jsonDecode(responseBody);
     List<ModelImage> imageList = new List<ModelImage>();
-    list['listCollectionProject'][0]['imageList'].map((e) => count++).toList();
+    var fetchList = list['listCollectionProject'][0]['imageList'];
+    fetchList.map((e) => count++).toList();
     for (int i = 0; i < count; i++) {
       imageList.add(ModelImage.fromJson(list['listCollectionProject'][0]['imageList'][i]));
     }
