@@ -14,8 +14,12 @@ class ModelImageViewModel {
     return _image.fileName;
   }
 
-  String get extension {
-    return _image.extension;
+  int get collectionId {
+    return _image.collectionId;
+  }
+
+  bool get status {
+    return _image.status;
   }
 
   String get uploadDate {

@@ -8,8 +8,15 @@ import 'package:http/http.dart' as http;
 
 class ImageService {
   List<ModelImage> parseImageList(String responseBody) {
-    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<ModelImage>((json) => ModelImage.fromJson(json)).toList();
+    int count = 0;
+    print(responseBody);
+    var list = jsonDecode(responseBody);
+    List<ModelImage> imageList = new List<ModelImage>();
+    list['listCollectionProject'][0]['imageList'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      imageList.add(ModelImage.fromJson(list['listCollectionProject'][0]['imageList'][i]));
+    }
+    return imageList;
   }
 
   Future<List<ModelImage>> getImageList(int collectionId) async {
@@ -24,6 +31,7 @@ class ImageService {
     final response = await http.get(Uri.parse(url + "api/v1/models/1"));
     if (response.statusCode == 200) {
       var list = parseImageList(response.body);
+      print("hihi xong roi ne");
       return list;
     } else {
       throw Exception('Failed to load');

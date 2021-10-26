@@ -72,7 +72,6 @@ class Page3 extends StatelessWidget {
         child: FutureBuilder(
           //future: FlutterSession().get('modelId'),
           builder: (context, snapshot) {
-            print("Model Image page");
             return ModelImagePage(
               modelId: snapshot.data.toString(),
             );

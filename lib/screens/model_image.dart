@@ -75,11 +75,11 @@ class _ModelImagePageState extends State<ModelImagePage> {
                               builder: (ctx, data, child) => ListView.builder(
                                 itemCount: data.imageCollections.length,
                                 itemBuilder: (BuildContext context, int index) {
+                                  print(data.imageCollections[index]);
                                   return _buildImageCollectList((context),
                                       data.imageCollections[index], index);
                                 },
                               ),
-
                             );
                           } else {
                             return Center(child: Text('Hiện tại chưa có bộ sưu tập'),);

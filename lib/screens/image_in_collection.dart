@@ -57,11 +57,11 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                   // if (check) {
                   //  Body of image
                   // }
-                  // var collection = ImageCollectionViewModel(
-                  //     imageCollection:
-                  //     (await ImageCollectionService()
-                  //         .getImageCollectionList())
-                  //         .elementAt(widget.index));
+                  var collection = ImageCollectionViewModel(
+                      imageCollection:
+                      (await ImageCollectionService()
+                          .getImageCollectionList())
+                          .elementAt(widget.index));
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -74,7 +74,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                             child: FutureBuilder(
                               builder: (context, snapshot) {
                                 return ImageInCollectionPage(
-                                  // collection: collection,
+                                  collection: collection,
                                 );
                               },
                             ))),
@@ -111,7 +111,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 20, bottom: 20),
                   child: Text(
-                    'Gallery',
+                    'Ảnh',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
@@ -120,55 +120,45 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                 ),
               )
                   : Padding(padding: EdgeInsets.zero),
-              // Expanded(
-              //   child: Padding(
-              //       padding: EdgeInsets.only(left: 5, right: 5),
-              //       child: (widget.collection.gif != null)
-              //           ? Center(
-              //         child: Image.network(
-              //           widget.collection.gif,
-              //           width: 400,
-              //           fit: BoxFit.contain,
-              //         ),
-              //       )
-              //           : FutureBuilder<ImageListViewModel>(
-              //         future: Provider.of<ImageListViewModel>(context,
-              //             listen: false)
-              //             .getImageList(widget.collection.id),
-              //         builder: (context, data) {
-              //           if (data.connectionState ==
-              //               ConnectionState.waiting) {
-              //             return Column(
-              //               children: <Widget>[
-              //                 SizedBox(
-              //                   height: 150,
-              //                 ),
-              //                 Center(child: CircularProgressIndicator()),
-              //               ],
-              //             );
-              //           } else {
-              //             if (data.error == null) {
-              //               return Consumer<ImageListViewModel>(
-              //                 builder: (ctx, data, child) =>
-              //                     StaggeredGridView.countBuilder(
-              //                         crossAxisCount: 2,
-              //                         itemCount: data.images.length,
-              //                         itemBuilder: (context, index) {
-              //                           return _buildImageList((context),
-              //                               data.images[index], index);
-              //                         },
-              //                         staggeredTileBuilder: (index) {
-              //                           return new StaggeredTile.count(
-              //                               1, index.isEven ? 1.2 : 2);
-              //                         }),
-              //               );
-              //             } else {
-              //               return Center(child: Text('Not have any picture'),);
-              //             }
-              //           }
-              //         },
-              //       )),
-              // )
+              Expanded(
+                child:  FutureBuilder<ImageListViewModel>(
+                      future: Provider.of<ImageListViewModel>(context,
+                          listen: false)
+                          .getImageList(widget.collection.id),
+                      builder: (context, data) {
+                        if (data.connectionState ==
+                            ConnectionState.waiting) {
+                          return Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 150,
+                              ),
+                              Center(child: CircularProgressIndicator()),
+                            ],
+                          );
+                        } else {
+                          if (data.error == null) {
+                            return Consumer<ImageListViewModel>(
+                              builder: (ctx, data, child) =>
+                                  StaggeredGridView.countBuilder(
+                                      crossAxisCount: 2,
+                                      itemCount: data.images.length,
+                                      itemBuilder: (context, index) {
+                                        return _buildImageList((context),
+                                            data.images[index], index);
+                                      },
+                                      staggeredTileBuilder: (index) {
+                                        return new StaggeredTile.count(
+                                            1, index.isEven ? 1.2 : 2);
+                                      }),
+                            );
+                          } else {
+                            return Center(child: Text('Không có hình ảnh'),);
+                          }
+                        }
+                      },
+                    )
+                ),
             ],
           ),
         ),
@@ -262,7 +252,8 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                   image: NetworkImage(
                     image.fileName,
                   ),
-                  fit: BoxFit.cover)),
+                  fit: BoxFit.cover)
+          ),
         )
             : Container(
           margin: EdgeInsets.all(10),

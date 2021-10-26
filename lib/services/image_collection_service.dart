@@ -12,7 +12,6 @@ import 'image_service.dart';
 
 class ImageCollectionService {
   List<ImageCollectionTest> parseImageCollectionList(String responseBody) {
-    // Đến bước này vẫn chưa được
     int count = 0;
     var list = jsonDecode(responseBody);
     List<ImageCollectionTest> imageList = new List<ImageCollectionTest>();
@@ -25,33 +24,30 @@ class ImageCollectionService {
 
   Future<List<ImageCollectionTest>> fetchImageCollection() async {
     final response = await http.get(Uri.parse(url + "api/v1/products/1"));
-    // print(response.body);
     if (response.statusCode == 200) {
       var list = parseImageCollectionList(response.body);
-      print("hihi xong roi ne");
       return list;
     } else {
       throw Exception("Request API error");
     }
   }
 
-  // Future<List<ImageCollection>> getImageCollectionList() async {
-  //   // var token = (await FlutterSession().get("token")).toString();
-  //   // Map<String, String> heads = Map<String, String>();
-  //   // heads['Content-Type'] = 'application/json';
-  //   // heads['Accept'] = 'application/json';
-  //   // heads['Authorization'] = 'Bearer $token';
-  //   // String modelId = (await FlutterSession().get('modelId')).toString();
-  //   final response = await http
-  //       .get(Uri.parse(url + "api/v1/products/1"));
-  //   if (response.statusCode == 200) {
-  //     var list = parseImageCollectionList(response.body);
-  //     print('At List');
-  //     return list;
-  //   } else {
-  //     throw Exception('Unable to fetch image Collection from the REST API');
-  //   }
-  // }
+  Future<List<ImageCollectionTest>> getImageCollectionList() async {
+    // var token = (await FlutterSession().get("token")).toString();
+    // Map<String, String> heads = Map<String, String>();
+    // heads['Content-Type'] = 'application/json';
+    // heads['Accept'] = 'application/json';
+    // heads['Authorization'] = 'Bearer $token';
+    // String modelId = (await FlutterSession().get('modelId')).toString();
+    final response = await http
+        .get(Uri.parse(url + "api/v1/products/1"));
+    if (response.statusCode == 200) {
+      var list = parseImageCollectionList(response.body);
+      return list;
+    } else {
+      throw Exception('Unable to fetch image Collection from the REST API');
+    }
+  }
 
   Future<void> createCollection(String collectionName) async {
     // var token = (await FlutterSession().get("token")).toString();
