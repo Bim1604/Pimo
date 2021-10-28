@@ -7,6 +7,7 @@ import 'package:pimo/screens/model_collection.dart';
 import 'package:pimo/screens/model_image.dart';
 import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/screens/new_collection.dart';
+import 'package:pimo/viewmodels/collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
@@ -69,6 +70,7 @@ class Page3 extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ImageCollectionListViewModel()),
+          // ChangeNotifierProvider(create: (_) => CollectionListViewModel()),
         ],
         child: FutureBuilder(
           //future: FlutterSession().get('modelId'),

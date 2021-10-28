@@ -24,6 +24,7 @@ class ImageCollectionService {
 
   Future<List<ImageCollectionTest>> fetchImageCollection() async {
     final response = await http.get(Uri.parse(url + "api/v1/products/1"));
+    // print(response.body);
     if (response.statusCode == 200) {
       var list = parseImageCollectionList(response.body);
       return list;

@@ -59,7 +59,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                     child: Column(children: <Widget>[
                       HeaderWithSearchBox(size: size),
                       const TitleWithButton(
-                        text: "Upcoming Booking",
+                        text: "Sự kiện sắp tới",
                         isBooking: true,
                       ),
                       Padding(
@@ -82,7 +82,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                             }),
                       ),
                       const TitleWithButton(
-                        text: "New Casting",
+                        text: "Casting mới",
                       ),
                       CardHorizontal(
                           cta: "${snapshot.data.description}",
@@ -102,7 +102,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                           }),
                       // Casting(typeView: 2),
                       const TitleWithButton(
-                        text: "Best for you",
+                        text: "Tốt nhất dành cho bạn",
                       ),
                       CardHorizontal(
                           cta: "${snapshot.data.description}",
@@ -165,7 +165,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                         // future: FlutterSession().get('modelName'),
                         builder: (context, snapshot) {
                           return Text(
-                            'Hi ' + 'Lisa' + '!',
+                            'Xin chào ' + 'Lisa' + '!',
                             style:
                             Theme.of(context).textTheme.headline5.copyWith(
                               color: Colors.black,
@@ -211,7 +211,7 @@ class HeaderWithSearchBox extends StatelessWidget {
                       width: 20,
                     ),
                     Text(
-                      'Search',
+                      'Tìm kiếm',
                       style: TextStyle(color: Colors.black, fontSize: 18),
                     )
                   ],

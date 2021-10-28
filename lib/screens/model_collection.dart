@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/screens/model_image.dart';
 import 'package:pimo/services/image_collection_service.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
@@ -170,14 +171,15 @@ class _ModelImagePageState extends State<ModelCollection> {
               MaterialPageRoute(
                   builder: (context) => MultiProvider(
                       providers: [
-                        ChangeNotifierProvider(
-                            create: (_) => ImageListViewModel()),
+                        ChangeNotifierProvider(create: (_) => ImageCollectionListViewModel()),
+                        // ChangeNotifierProvider(
+                        //     create: (_) => ImageListViewModel()),
                       ],
                       child: FutureBuilder(
                         builder: (context, snapshot) {
-                          return ImageInCollectionPage(
-                            collection: collection,
-                            index: index,
+                          print("Anh ơi, ở lại đây một tí");
+                          return ModelImagePage(
+                            modelId: snapshot.data.toString(),
                           );
                         },
                       ))),
@@ -188,7 +190,7 @@ class _ModelImagePageState extends State<ModelCollection> {
             children: [
               Expanded(
                 child: Text(
-                  (index == 0 ? 'Bộ sưu tập bộ phận' : 'Bộ sưu tập dự án'),
+                  (index == 0 ? 'Bộ sưu tập dự án' : 'Bộ sưu tập cơ thể'),
                   style: TextStyle(fontSize: 16),
                 ),
               ),

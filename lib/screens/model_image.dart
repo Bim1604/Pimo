@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/services/image_collection_service.dart';
+import 'package:pimo/viewmodels/collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
@@ -18,7 +19,6 @@ class ModelImagePage extends StatefulWidget {
   @override
   _ModelImagePageState createState() => _ModelImagePageState();
 }
-
 
 class _ModelImagePageState extends State<ModelImagePage> {
   @override
@@ -35,30 +35,25 @@ class _ModelImagePageState extends State<ModelImagePage> {
           backgroundColor: Colors.black,
           onPressed: () async => {await _showDialog(context, widget.modelId)},
         ),
+        appBar: AppBar(
+          title: Text('Bộ sưu tập dự án'),
+          backgroundColor: MaterialColors.mainColor,
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20, bottom: 20),
-                  child: Text(
-                    'Hình ảnh',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+              SizedBox(
+                height: 20,
               ),
               Expanded(
                 child: Padding(
                     padding: EdgeInsets.only(left: 5, right: 5),
-                    child: FutureBuilder<ImageCollectionListViewModel>(
-                      future: Provider.of<ImageCollectionListViewModel>(context,
+                    child: FutureBuilder<CollectionListViewModel>(
+                      future: Provider.of<CollectionListViewModel>(context,
                           listen: false)
-                          .getImageCollectionList(),
+                          .getCollectionProjectList(),
                       builder: (context, data) {
                         if (data.connectionState == ConnectionState.waiting) {
                           return Column(

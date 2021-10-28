@@ -9,7 +9,6 @@ import 'package:http/http.dart' as http;
 class ImageService {
   List<ModelImage> parseImageList(String responseBody) {
     int count = 0;
-    print(responseBody);
     var list = jsonDecode(responseBody);
     List<ModelImage> imageList = new List<ModelImage>();
     var fetchList = list['listCollectionProject'][0]['imageList'];
@@ -32,7 +31,6 @@ class ImageService {
     final response = await http.get(Uri.parse(url + "api/v1/models/1"));
     if (response.statusCode == 200) {
       var list = parseImageList(response.body);
-      print("hihi xong roi ne");
       return list;
     } else {
       throw Exception('Failed to load');
