@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/services/image_collection_service.dart';
-import 'package:pimo/viewmodels/collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
@@ -50,10 +49,10 @@ class _ModelImagePageState extends State<ModelImagePage> {
               Expanded(
                 child: Padding(
                     padding: EdgeInsets.only(left: 5, right: 5),
-                    child: FutureBuilder<CollectionListViewModel>(
-                      future: Provider.of<CollectionListViewModel>(context,
+                    child: FutureBuilder<ImageCollectionListViewModel>(
+                      future: Provider.of<ImageCollectionListViewModel>(context,
                           listen: false)
-                          .getCollectionProjectList(),
+                          .getImageCollectionList(),
                       builder: (context, data) {
                         if (data.connectionState == ConnectionState.waiting) {
                           return Column(

@@ -85,8 +85,9 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                 color: Colors.black,
               ))
                   : null,
-            )
+            ),
           ],
+          backgroundColor: MaterialColors.mainColor,
         ),
         floatingActionButton: (widget.collection == null)
             ? FloatingActionButton(
