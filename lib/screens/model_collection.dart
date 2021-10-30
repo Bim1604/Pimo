@@ -3,13 +3,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/screens/model_image.dart';
 import 'package:pimo/services/image_collection_service.dart';
-import 'package:pimo/viewmodels/collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
-import 'package:pimo/viewmodels/image_list_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'image_in_collection.dart';
 
 class ModelCollection extends StatefulWidget {
   final String modelId;
@@ -178,7 +175,6 @@ class _ModelImagePageState extends State<ModelCollection> {
                       ],
                       child: FutureBuilder(
                         builder: (context, snapshot) {
-                          print("Anh ơi, ở lại đây một tí");
                           return ModelImagePage(
                             modelId: snapshot.data.toString(),
                           );

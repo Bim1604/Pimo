@@ -34,6 +34,7 @@ class CollectionService {
     List<Collection> collection = new List<Collection>();
     list['listCollectionProject'].map((e) => count++).toList();
     for (int i = 0; i < count; i++) {
+      print(i);
       collection.add(Collection.fromJson(list['listCollectionProject'][i]));
     }
     return collection;

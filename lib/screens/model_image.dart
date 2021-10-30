@@ -49,6 +49,7 @@ class _ModelImagePageState extends State<ModelImagePage> {
               Expanded(
                 child: Padding(
                     padding: EdgeInsets.only(left: 5, right: 5),
+                    //Sửa từ trên xuống
                     child: FutureBuilder<ImageCollectionListViewModel>(
                       future: Provider.of<ImageCollectionListViewModel>(context,
                           listen: false)
