@@ -176,7 +176,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text(
-                "Do you want to delete",
+                "Bạn chắc chắn muốn xóa?",
                 style: TextStyle(color: MaterialColors.mainColor),
               ),
               actions: <Widget>[
@@ -185,7 +185,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                     Navigator.of(context).pop();
                   },
                   child: const Text(
-                    'Cancel',
+                    'Hủy',
                     style: TextStyle(color: Colors.grey),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -200,7 +200,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                     // _reloadPage();
                   },
                   child: const Text(
-                    'Delete',
+                    'Xóa',
                     style: TextStyle(color: MaterialColors.mainColor),
                   ),
                   style: ElevatedButton.styleFrom(

@@ -26,7 +26,7 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
         child: Scaffold(
             appBar: AppBar(
               backgroundColor: MaterialColors.mainColor,
-              title: Text('Measure template'),
+              title: Text('Thông số cơ thể'),
             ),
             body: FutureBuilder<BodyPartListViewModel>(
               future: Provider.of<BodyPartListViewModel>(context, listen: false)

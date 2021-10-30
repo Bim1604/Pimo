@@ -51,8 +51,8 @@ class Model {
         mail: json["model"][0]["model"]["mail"],
         gifted: json["model"][0]["model"]["gifted"],
         avatar: json["model"][0]["model"]["avatar"],
-        //status: json["model"][0]["model"]["status"],
-        //description: json["model"][0]["model"]["description"],
+        status: json["model"][0]["model"]["status"],
+        description: json["model"][0]["model"]["description"],
         );
   }
 

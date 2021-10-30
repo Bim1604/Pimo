@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/services/image_collection_service.dart';
+import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
+import 'package:pimo/viewmodels/collection_project_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
@@ -27,6 +29,7 @@ class _ModelImagePageState extends State<ModelImagePage> {
 
   @override
   Widget build(BuildContext context) {
+    //Lựa chọn bộ sưu tập của người mẫu.
     return SafeArea(
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
@@ -50,10 +53,10 @@ class _ModelImagePageState extends State<ModelImagePage> {
                 child: Padding(
                     padding: EdgeInsets.only(left: 5, right: 5),
                     //Sửa từ trên xuống
-                    child: FutureBuilder<ImageCollectionListViewModel>(
-                      future: Provider.of<ImageCollectionListViewModel>(context,
+                    child: FutureBuilder<ListCollectionProjectListViewModel>(
+                      future: Provider.of<ListCollectionProjectListViewModel>(context,
                           listen: false)
-                          .getImageCollectionList(),
+                          .getListCollectionProject(),
                       builder: (context, data) {
                         if (data.connectionState == ConnectionState.waiting) {
                           return Column(
@@ -66,12 +69,12 @@ class _ModelImagePageState extends State<ModelImagePage> {
                           );
                         } else {
                           if (data.error == null) {
-                            return Consumer<ImageCollectionListViewModel>(
+                            return Consumer<ListCollectionProjectListViewModel>(
                               builder: (ctx, data, child) => ListView.builder(
-                                itemCount: data.imageCollections.length,
+                                itemCount: data.listCollectionProject.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   return _buildImageCollectList((context),
-                                      data.imageCollections[index], index);
+                                      data.listCollectionProject[index], index);
                                 },
                               ),
                             );
@@ -91,7 +94,7 @@ class _ModelImagePageState extends State<ModelImagePage> {
 
 
   Widget _buildImageCollectList(
-      BuildContext context, ImageCollectionViewModel collection, int index) {
+      BuildContext context, CollectionProjectViewModel collection, int index) {
     // Size size = MediaQuery.of(context).size;
     Future _showDeleteDialog(BuildContext context, int id) {
       return showDialog(
@@ -137,6 +140,7 @@ class _ModelImagePageState extends State<ModelImagePage> {
     }
 
     return Padding(
+
       padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
       child: Container(
         decoration: BoxDecoration(
@@ -159,32 +163,33 @@ class _ModelImagePageState extends State<ModelImagePage> {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           color: Colors.white,
           onLongPress: () async {
-            await _showDeleteDialog(context, collection.id);
+            await _showDeleteDialog(context, collection.idCollection);
           },
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => MultiProvider(
-                      providers: [
-                        ChangeNotifierProvider(
-                            create: (_) => ImageListViewModel()),
-                      ],
-                      child: FutureBuilder(
-                        builder: (context, snapshot) {
-                          return ImageInCollectionPage(
-                            collection: collection,
-                            index: index,
-                          );
-                        },
-                      ))),
-            );
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //       builder: (context) => MultiProvider(
+            //           providers: [
+            //             ChangeNotifierProvider(
+            //                 create: (_) => ImageListViewModel()),
+            //           ],
+            //           child: FutureBuilder(
+            //             builder: (context, snapshot) {
+            //               //Chọn 1 bộ sưu tập, sau đó xuất hiện hình ảnh ở đây!
+            //               return ImageInCollectionPage(
+            //                 collection: collection.,
+            //                 index: index,
+            //               );
+            //             },
+            //           ))),
+            // );
           },
           child: Row(
             children: [
               Expanded(
                 child: Text(
-                  collection.name,
+                  collection.nameCollection,
                   style: TextStyle(fontSize: 16),
                 ),
               ),

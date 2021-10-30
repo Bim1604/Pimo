@@ -3,6 +3,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/screens/model_image.dart';
 import 'package:pimo/services/image_collection_service.dart';
+import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:provider/provider.dart';
@@ -170,8 +171,10 @@ class _ModelImagePageState extends State<ModelCollection> {
                   builder: (context) => MultiProvider(
                       providers: [
                         // ChangeNotifierProvider(create: (_) => CollectionListViewModel()),
+                        // ChangeNotifierProvider(
+                        //     create: (_) => ImageCollectionListViewModel()),
                         ChangeNotifierProvider(
-                            create: (_) => ImageCollectionListViewModel()),
+                            create: (_) => ListCollectionProjectListViewModel()),
                       ],
                       child: FutureBuilder(
                         builder: (context, snapshot) {

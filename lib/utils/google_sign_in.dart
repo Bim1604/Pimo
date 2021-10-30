@@ -47,7 +47,7 @@ class GoogleSignInProvider extends ChangeNotifier {
             msg: "Rất tiếc, bạn không thuộc trong hệ thống.\n Hãy đăng kí với admin. ",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 3
+            timeInSecForIosWeb: 1
         );
         return logout();
       } else {
