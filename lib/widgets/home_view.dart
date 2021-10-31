@@ -28,11 +28,11 @@ class CardHorizontal extends StatelessWidget {
 
   factory CardHorizontal.fromJson(Map<String, dynamic> json) {
     return CardHorizontal(
-      name: json['casting']['casting']['name'],
-      id: json['casting']['casting']['id'],
-      description: json['casting']['casting']['description'],
-      openTime: json['casting']['casting']['openTime'],
-      closeTime: json['casting']['casting']['closeTime'],
+      name: json['casting']['name'],
+      id: json['casting']['id'],
+      description: json['casting']['description'],
+      openTime: json['casting']['openTime'],
+      closeTime: json['casting']['closeTime'],
     );
   }
 

@@ -120,7 +120,6 @@ class ModelViewModel with ChangeNotifier {
 
   Future<ModelViewModel> getModel() async {
     return Future.delayed(const Duration(seconds: 1), () async {
-      print("Model view Model: Thong tin ca nhan");
       Model model = await ModelServices().getModelDetail();
       notifyListeners();
       this._model = model;

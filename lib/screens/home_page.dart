@@ -378,7 +378,7 @@ class TitleWithButton extends StatelessWidget {
             //   }
             // },
             child: const Text(
-              'More',
+              '',
               style: TextStyle(color: Colors.black),
             ))
       ]),

@@ -8,6 +8,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:convert';
 
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
+
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
   GoogleSignInAccount _user;
@@ -20,7 +22,6 @@ class GoogleSignInProvider extends ChangeNotifier {
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) return;
       _user = googleUser;
-
       final googleAuth = await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
@@ -30,6 +31,7 @@ class GoogleSignInProvider extends ChangeNotifier {
       await FirebaseAuth.instance.signInWithCredential(credential);
       var idToken = await FirebaseAuth.instance.currentUser.getIdToken();
       var mail = await FirebaseAuth.instance.currentUser.email;
+      print(FirebaseAuth.instance.currentUser.email + ' *****' + idToken);
       var token = {"token": idToken, "mail": mail};
       HttpClient client = HttpClient();
       client.badCertificateCallback =
@@ -41,7 +43,6 @@ class GoogleSignInProvider extends ChangeNotifier {
       HttpClientResponse response = await request.close();
       String reply = await response.transform(utf8.decoder).join();
       final parseJson = jsonDecode(reply);
-
       if (parseJson['isExist'] == false) {
         Fluttertoast.showToast(
             msg: "Rất tiếc, bạn không thuộc trong hệ thống.\n Hãy đăng kí với admin. ",
@@ -51,6 +52,7 @@ class GoogleSignInProvider extends ChangeNotifier {
         );
         return logout();
       } else {
+        print(parseJson);
         Fluttertoast.showToast(
             msg: "Đăng nhập thành công",
             toastLength: Toast.LENGTH_SHORT,
