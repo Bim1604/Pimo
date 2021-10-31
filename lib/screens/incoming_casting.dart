@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class IncomingCastingPage extends StatelessWidget {
       child: Scaffold(
           appBar: AppBar(
             title: Text('Booking'),
+            backgroundColor: MaterialColors.mainColor,
             actions: [
               // Padding(
               //   padding: EdgeInsets.symmetric(horizontal: 20),
