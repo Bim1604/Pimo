@@ -18,6 +18,11 @@ class CollectionProjectViewModel  {
   List<ModelImage> get listImage {
     return _listCollectionProject.imageList;
   }
+
+  int get listImageLength {
+    return _listCollectionProject.imageList.length;
+  }
+
   Object get project {
     return _listCollectionProject.project;
   }

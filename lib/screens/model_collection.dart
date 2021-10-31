@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/screens/model_image.dart';
+import 'package:pimo/screens/model_collection_project.dart';
 import 'package:pimo/services/image_collection_service.dart';
 import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
@@ -170,15 +170,15 @@ class _ModelImagePageState extends State<ModelCollection> {
               MaterialPageRoute(
                   builder: (context) => MultiProvider(
                       providers: [
-                        // ChangeNotifierProvider(create: (_) => CollectionListViewModel()),
-                        // ChangeNotifierProvider(
-                        //     create: (_) => ImageCollectionListViewModel()),
                         ChangeNotifierProvider(
                             create: (_) => ListCollectionProjectListViewModel()),
+                        // ChangeNotifierProvider(
+                        //     create: (_) => ImageCollectionListViewModel()),
                       ],
                       child: FutureBuilder(
                         builder: (context, snapshot) {
-                          return ModelImagePage(
+                          print('Anh oi den day di');
+                          return ModelCollectionProject(
                             modelId: snapshot.data.toString(),
                           );
                         },

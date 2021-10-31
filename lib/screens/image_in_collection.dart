@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/services/collection_service.dart';
 import 'package:pimo/services/image_collection_service.dart';
 import 'package:pimo/services/image_service.dart';
+import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
+import 'package:pimo/viewmodels/collection_project_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
 import 'package:pimo/viewmodels/model_image_view_model.dart';
@@ -12,7 +15,8 @@ import 'intro_image.dart';
 
 
 class ImageInCollectionPage extends StatefulWidget {
-  final ImageCollectionViewModel collection;
+  // final ImageCollectionViewModel collection;
+  final CollectionProjectViewModel collection;
   final int index;
   const ImageInCollectionPage({Key key, this.collection, this.index})
       : super(key: key);
@@ -35,6 +39,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          title: Text("Chi tiết"),
           actions: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -57,10 +62,11 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                   // if (check) {
                   //  Body of image
                   // }
-                  var collection = ImageCollectionViewModel(
-                      imageCollection:
+
+                  var collection = CollectionProjectViewModel(
+                      listCollectionProject:
                       (await ImageCollectionService()
-                          .getImageCollectionList())
+                          .getImageInCollectionList(widget.collection.idCollection))
                           .elementAt(widget.index));
                   Navigator.pushReplacement(
                     context,
@@ -69,10 +75,14 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                             providers: [
                               ChangeNotifierProvider(
                                   create: (_) =>
-                                      ImageListViewModel()),
+                                      ImageListViewModel()
+                                  // create: (_) =>
+                                  //     ListCollectionProjectListViewModel()
+                              ),
                             ],
                             child: FutureBuilder(
                               builder: (context, snapshot) {
+                                print('Xem gi hay ne: ImageIncollection');
                                 return ImageInCollectionPage(
                                   collection: collection,
                                 );
@@ -125,7 +135,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                 child:  FutureBuilder<ImageListViewModel>(
                       future: Provider.of<ImageListViewModel>(context,
                           listen: false)
-                          .getImageList(widget.collection.id),
+                          .getImageList(widget.collection.idCollection),
                       builder: (context, data) {
                         if (data.connectionState ==
                             ConnectionState.waiting) {
@@ -139,6 +149,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                           );
                         } else {
                           if (data.error == null) {
+                            print('Chayj den day r');
                             return Consumer<ImageListViewModel>(
                               builder: (ctx, data, child) =>
                                   StaggeredGridView.countBuilder(
@@ -224,13 +235,13 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                 builder: (context) => MultiProvider(
                     providers: [
                       ChangeNotifierProvider(
-                          create: (_) => ImageListViewModel()),
+                          create: (_) => ListCollectionProjectListViewModel()),
                     ],
                     child: FutureBuilder(
                       builder: (context, snapshot) {
                         return IntroImagePage(
                           beginIndex: index,
-                          collectionId: widget.collection.id,
+                          collectionId: widget.collection.idCollection,
                         );
                       },
                     ))),
@@ -278,7 +289,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
       MaterialPageRoute(
           builder: (context) => MultiProvider(
               providers: [
-                ChangeNotifierProvider(create: (_) => ImageListViewModel()),
+                ChangeNotifierProvider(create: (_) => ListCollectionProjectListViewModel()),
               ],
               child: FutureBuilder(
                 builder: (context, snapshot) {

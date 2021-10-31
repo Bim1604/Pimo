@@ -1,20 +1,34 @@
 import 'dart:convert';
 
 import 'package:pimo/constants/Images.dart';
+import 'package:pimo/models/collection_project.dart';
 import 'package:pimo/models/image.dart';
 import 'package:http/http.dart' as http;
 
 
 
 class ImageService {
+
   List<ModelImage> parseImageList(String responseBody) {
     int count = 0;
     var list = jsonDecode(responseBody);
     List<ModelImage> imageList = new List<ModelImage>();
-    var fetchList = list['listCollectionProject'][0]['imageList'];
-    fetchList.map((e) => count++).toList();
+    List<ListCollectionProject> collectionListProject = new List<ListCollectionProject>();
+    list['listCollectionProject'].map((e) => count++).toList();
     for (int i = 0; i < count; i++) {
-      imageList.add(ModelImage.fromJson(list['listCollectionProject'][0]['imageList'][i]));
+      collectionListProject.add(ListCollectionProject.fromJson(list['listCollectionProject'][i]));
+    }
+    // print(list['listCollectionProject'][0]['imageList'][1]);
+    // print(collectionListProject.elementAt(i).imageList.elementAt(i).fileName);
+    // print(collectionListProject.elementAt(1).imageList.toList());
+    for (int i = 0; i < collectionListProject.length; i++) {
+      var lengthOfImageList = collectionListProject.elementAt(i).imageList.toList().length;
+      for (int j = 0; j < lengthOfImageList; j++) {
+        // print(i.toString() + ' '+ j.toString());
+        // print(list['listCollectionProject'][i]['imageList'][j]);
+        imageList.add(ModelImage.fromJson(list['listCollectionProject'][i]['imageList'][j]));
+      }
+      break;
     }
     return imageList;
   }
@@ -36,6 +50,36 @@ class ImageService {
       throw Exception('Failed to load');
     }
   }
+  // List<ModelImage> parseImageList(String responseBody) {
+  //   int count = 0;
+  //   var list = jsonDecode(responseBody);
+  //   List<ModelImage> imageList = new List<ModelImage>();
+  //   var fetchList = list['listCollectionProject'];
+  //   fetchList.map((e) => count++).toList();
+  //   for (int i = 0; i < count; i++) {
+  //     print('Gia tri count :'+ list['listCollectionProject']);
+  //     imageList.add(ModelImage.fromJson(list['listCollectionProject']));
+  //   }
+  //   return imageList;
+  // }
+  //
+  // Future<List<ModelImage>> getImageList(int collectionId) async {
+  //   //var token = (await FlutterSession().get("token")).toString();
+  //   // Map<String, String> heads = Map<String, String>();
+  //   // heads['Content-Type'] = 'application/json';
+  //   // heads['Accept'] = 'application/json';
+  //   // heads['Authorization'] = 'Bearer $token';
+  //   // final response = await http.get(
+  //   //     Uri.parse(baseUrl + "api/v1/images/$collectionId"),
+  //   //    headers: heads);
+  //   final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+  //   if (response.statusCode == 200) {
+  //     var list = parseImageList(response.body);
+  //     return list;
+  //   } else {
+  //     throw Exception('Failed to load');
+  //   }
+  // }
 
 
 

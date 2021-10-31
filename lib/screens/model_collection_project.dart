@@ -7,21 +7,20 @@ import 'package:pimo/services/image_collection_service.dart';
 import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_project_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
-import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'image_in_collection.dart';
 
-class ModelImagePage extends StatefulWidget {
+class ModelCollectionProject extends StatefulWidget {
   final String modelId;
-  const ModelImagePage({Key key, this.modelId}) : super(key: key);
+  const ModelCollectionProject({Key key, this.modelId}) : super(key: key);
 
   @override
-  _ModelImagePageState createState() => _ModelImagePageState();
+  _ModelCollectionProjectState createState() => _ModelCollectionProjectState();
 }
 
-class _ModelImagePageState extends State<ModelImagePage> {
+class _ModelCollectionProjectState extends State<ModelCollectionProject> {
   @override
   void initState() {
     super.initState();
@@ -166,24 +165,27 @@ class _ModelImagePageState extends State<ModelImagePage> {
             await _showDeleteDialog(context, collection.idCollection);
           },
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //       builder: (context) => MultiProvider(
-            //           providers: [
-            //             ChangeNotifierProvider(
-            //                 create: (_) => ImageListViewModel()),
-            //           ],
-            //           child: FutureBuilder(
-            //             builder: (context, snapshot) {
-            //               //Chọn 1 bộ sưu tập, sau đó xuất hiện hình ảnh ở đây!
-            //               return ImageInCollectionPage(
-            //                 collection: collection.,
-            //                 index: index,
-            //               );
-            //             },
-            //           ))),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider(
+                            create: (_) => ImageListViewModel()
+                          ),
+                      ],
+                      child: FutureBuilder(
+                        builder: (context, snapshot) {
+                          //Chọn 1 bộ sưu tập, sau đó xuất hiện hình ảnh ở đây!
+                          //Gia tri collection ID dung.
+                          print('Roi sao den day chua?');
+                          return ImageInCollectionPage(
+                            collection: collection,
+                            index: index,
+                          );
+                        },
+                      ))),
+            );
           },
           child: Row(
             children: [
@@ -218,7 +220,7 @@ class _ModelImagePageState extends State<ModelImagePage> {
               ],
               child: FutureBuilder(
                 builder: (context, snapshot) {
-                  return ModelImagePage(
+                  return ModelCollectionProject(
                     modelId: widget.modelId,
                   );
                 },

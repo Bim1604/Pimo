@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/services/image_collection_service.dart';
+import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
+import 'package:pimo/viewmodels/collection_project_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
@@ -52,10 +54,10 @@ class _ModelImagePageState extends State<ModelCollection> {
               Expanded(
                 child: Padding(
                     padding: EdgeInsets.only(left: 5, right: 5),
-                    child: FutureBuilder<ImageCollectionListViewModel>(
-                      future: Provider.of<ImageCollectionListViewModel>(context,
+                    child: FutureBuilder<ListCollectionProjectListViewModel>(
+                      future: Provider.of<ListCollectionProjectListViewModel>(context,
                           listen: false)
-                          .getImageCollectionList(),
+                          .getListCollectionProject(),
                       builder: (context, data) {
                         if (data.connectionState == ConnectionState.waiting) {
                           return Column(
@@ -68,15 +70,12 @@ class _ModelImagePageState extends State<ModelCollection> {
                           );
                         } else {
                           if (data.error == null) {
-                            return Consumer<ImageCollectionListViewModel>(
+                            return Consumer<ListCollectionProjectListViewModel>(
                               builder: (ctx, data, child) => ListView.builder(
                                 itemCount: 2,
                                 itemBuilder: (BuildContext context, int index) {
-                                  // print(context);
-                                  print(index);
-                                  // print(data.imageCollections[index]);
                                   return _buildImageCollectList((context),
-                                      data.imageCollections[index], index);
+                                      data.listCollectionProject[index], index);
                                 },
                               ),
                             );
@@ -97,7 +96,7 @@ class _ModelImagePageState extends State<ModelCollection> {
   }
 
   Widget _buildImageCollectList(
-      BuildContext context, ImageCollectionViewModel collection, int index) {
+      BuildContext context, CollectionProjectViewModel collection, int index) {
     // Size size = MediaQuery.of(context).size;
     Future _showDeleteDialog(BuildContext context, int id) {
       return showDialog(
@@ -164,7 +163,7 @@ class _ModelImagePageState extends State<ModelCollection> {
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           color: Colors.white,
           onLongPress: () async {
-            await _showDeleteDialog(context, collection.id);
+            await _showDeleteDialog(context, collection.idCollection);
           },
           onPressed: () {
             (index == 0
@@ -174,7 +173,7 @@ class _ModelImagePageState extends State<ModelCollection> {
                   builder: (context) => MultiProvider(
                       providers: [
                         ChangeNotifierProvider(
-                            create: (_) => ImageListViewModel()),
+                            create: (_) => ListCollectionProjectListViewModel()),
                       ],
                       child: FutureBuilder(
                         builder: (context, snapshot) {

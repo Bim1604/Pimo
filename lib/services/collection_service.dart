@@ -6,15 +6,12 @@ import 'package:pimo/constants/Images.dart';
 import 'package:http/http.dart' as http;
 import 'package:pimo/models/collection_project.dart';
 class CollectionService {
-  List<ListCollectionProject> parseImageCollectionList(String responseBody) {
+  List<ListCollectionProject> parseListCollectionList(String responseBody) {
     int count = 0;
     var list = jsonDecode(responseBody);
-    print(list);
     List<ListCollectionProject> collectionListProject = new List<ListCollectionProject>();
-    print('Đang ở giá trị parsing nè');
     list['listCollectionProject'].map((e) => count++).toList();
     for (int i = 0; i < count; i++) {
-      print(list['listCollectionProject'][i]);
       collectionListProject.add(ListCollectionProject.fromJson(list['listCollectionProject'][i]));
     }
     return collectionListProject;
@@ -22,15 +19,14 @@ class CollectionService {
 
   Future<List<ListCollectionProject>> fetchListCollectionProject() async {
     final response = await http.get(Uri.parse(url + "api/v1/models/1"));
-    print(response.body);
     if (response.statusCode == 200) {
-      var list = parseImageCollectionList(response.body);
-      print('HIhi xong r ne');
+      var list = parseListCollectionList(response.body);
       return list;
     } else {
       throw Exception("Request API error");
     }
   }
+
 
   // List<Collection> parseCollectionBodyList(String responseBody) {
   //   int count = 0;

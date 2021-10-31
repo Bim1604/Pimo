@@ -9,11 +9,11 @@ class ListCollectionProjectListViewModel with ChangeNotifier {
   List<CollectionProjectViewModel> listCollectionProject = new List<CollectionProjectViewModel>();
 
   Future<ListCollectionProjectListViewModel> getListCollectionProject() async {
-    print('Lits Collection Project');
     List<ListCollectionProject> collectionProject = await CollectionService().fetchListCollectionProject();
     notifyListeners();
     this.listCollectionProject = collectionProject.map((value) => CollectionProjectViewModel(listCollectionProject: value)).toList();
   }
+
 
   // Future<ImageListViewModel> getImageList(int collectionId) async {
   //   List<ModelImage> list = await ImageService().getImageList(collectionId);

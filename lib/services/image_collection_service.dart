@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Images.dart';
+import 'package:pimo/models/collection_project.dart';
 import 'package:pimo/models/image_collection.dart';
 import 'package:http/http.dart' as http;
 import 'package:pimo/models/image_collection_gif.dart';
@@ -11,6 +12,31 @@ import 'package:pimo/models/test.dart';
 import 'image_service.dart';
 
 class ImageCollectionService {
+
+  List<ListCollectionProject> parseImageInCollectionList(String responseBody, int index) {
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<ListCollectionProject> imageList = new List<ListCollectionProject>();
+    list['listCollectionProject'][index]['imageList'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      imageList.add(ListCollectionProject.fromJson(list['listCollectionProject'][i]['imageList']));
+    }
+    return imageList;
+  }
+
+  Future<List<ListCollectionProject>> getImageInCollectionList(int index) async {
+    final response = await http
+        .get(Uri.parse(url + "api/v1/models/1"));
+    print('Hihi da fetch Image');
+    print(index);
+    if (response.statusCode == 200) {
+      var list = parseImageInCollectionList(response.body, index);
+      return list;
+    } else {
+      throw Exception('Unable to fetch image Collection from the REST API');
+    }
+  }
+
   List<ImageCollectionTest> parseImageCollectionList(String responseBody) {
     int count = 0;
     var list = jsonDecode(responseBody);
@@ -23,30 +49,13 @@ class ImageCollectionService {
   }
 
   Future<List<ImageCollectionTest>> fetchImageCollection() async {
-    final response = await http.get(Uri.parse(url + "api/v1/products/1"));
+    final response = await http.get(Uri.parse(url + "api/v1/projects/1"));
     // print(response.body);
     if (response.statusCode == 200) {
       var list = parseImageCollectionList(response.body);
       return list;
     } else {
       throw Exception("Request API error");
-    }
-  }
-
-  Future<List<ImageCollectionTest>> getImageCollectionList() async {
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-    // String modelId = (await FlutterSession().get('modelId')).toString();
-    final response = await http
-        .get(Uri.parse(url + "api/v1/products/1"));
-    if (response.statusCode == 200) {
-      var list = parseImageCollectionList(response.body);
-      return list;
-    } else {
-      throw Exception('Unable to fetch image Collection from the REST API');
     }
   }
 
@@ -90,6 +99,8 @@ class ImageCollectionService {
       return null;
     }
   }
+
+
 
   // Future<bool> convertToGif(int collectionId) async {
   //   var images = await ImageService().getImageList(collectionId);

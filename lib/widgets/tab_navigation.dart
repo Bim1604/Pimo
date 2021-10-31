@@ -4,7 +4,7 @@ import 'package:pimo/screens/cart.dart';
 import 'package:pimo/screens/home.dart';
 import 'package:pimo/screens/home_page.dart';
 import 'package:pimo/screens/model_collection.dart';
-import 'package:pimo/screens/model_image.dart';
+import 'package:pimo/screens/model_collection_project.dart';
 import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/screens/new_collection.dart';
 import 'package:pimo/viewmodels/collection_list_view_model.dart';
