@@ -135,7 +135,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                 child:  FutureBuilder<ImageListViewModel>(
                       future: Provider.of<ImageListViewModel>(context,
                           listen: false)
-                          .getImageList(widget.collection.idCollection),
+                          .getImageList(widget.collection.idCollection, widget.index),
                       builder: (context, data) {
                         if (data.connectionState ==
                             ConnectionState.waiting) {

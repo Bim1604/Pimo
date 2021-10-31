@@ -27,7 +27,7 @@ class _IntroImagePageState extends State<IntroImagePage> {
             size: const Size.fromHeight(500.0),
             child: FutureBuilder<ImageListViewModel>(
               future: Provider.of<ImageListViewModel>(context, listen: false)
-                  .getImageList(widget.collectionId),
+                  .getImageList(widget.collectionId, widget.beginIndex),
               builder: (context, data) {
                 if (data.connectionState == ConnectionState.waiting) {
                   return Column(

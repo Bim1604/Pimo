@@ -9,8 +9,8 @@ import 'model_image_view_model.dart';
 class ImageListViewModel with ChangeNotifier {
   List<ModelImageViewModel> images = List<ModelImageViewModel>();
 
-  Future<ImageListViewModel> getImageList(int collectionId) async {
-    List<ModelImage> list = await ImageService().getImageList(collectionId);
+  Future<ImageListViewModel> getImageList(int collectionId, int index) async {
+    List<ModelImage> list = await ImageService().getImageList(collectionId, index);
     notifyListeners();
     this.images =
         list.map((images) => ModelImageViewModel(image: images)).toList();
