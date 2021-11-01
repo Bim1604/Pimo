@@ -10,14 +10,8 @@ class BodyPartListViewModel with ChangeNotifier {
   Future<BodyPartListViewModel> getListBodyPart() async {
     List<BodyPart> list = await BodyPartService().getBodyPartList();
     notifyListeners();
-    this.listBodyPart = list.map((value)
-        => BodyPartViewModel(bodyPart: value)).toList();
+    this.listBodyPart = list.map((value) =>
+        BodyPartViewModel(bodyPart: value)).toList();
   }
 
-  // Future<BodyPartListViewModel> updateAtt(List<Map<String, dynamic>> params) async {
-  //   return Future.delayed(const Duration(seconds: 1), () async {
-  //     await ModelAttributeService().updateAttsList(params);
-  //     notifyListeners();
-  //   });
-  // }
 }

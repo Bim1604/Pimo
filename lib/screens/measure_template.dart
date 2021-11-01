@@ -43,17 +43,17 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                 }
                 else {
                   if (prevData.error == null) {
-                    print('Chay den day r ne');
                     return Consumer<BodyPartListViewModel>(
                       builder: (ctx, data, child) => Center(
                           child: ListView.builder(
                               padding: EdgeInsets.only(top: 30),
                               itemCount: data.listBodyPart.length,
                               itemBuilder: (context, index) {
-                                print(context.toString());
-                                print('Hello world');
+                                print(data.listBodyPart.length);
                                 return CompButton(
-                                  temp: data.listBodyPart[index].measure,
+                                  temp: data.listBodyPart[index].name,
+                                  value: data.listBodyPart[index].quantity.toString(),
+                                  measure: data.listBodyPart[index].measure,
                                   // bodyPartId: data.listBodyAttribute[index].id,
                                   // modelId: widget.modelId,
                                 );
@@ -70,10 +70,12 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
 
 class CompButton extends StatelessWidget {
   final String temp;
+  final String value;
+  final String measure;
   // final String modelId;
   // final int bodyPartId;
   // const CompButton({Key key, this.temp, this.modelId, this.bodyPartId}) : super(key: key);
-  const CompButton({Key key, this.temp}) : super(key: key);
+  const CompButton({Key key, this.value, this.measure, this.temp}) : super(key: key);
 
 
   @override
@@ -118,12 +120,9 @@ class CompButton extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  temp,
+                  temp + ' - ' + value + ' ' + measure,
                   style: TextStyle(fontSize: 16),
                 ),
-              ),
-              Icon(
-                Icons.navigate_next,
               ),
               SizedBox(
                 width: 30,

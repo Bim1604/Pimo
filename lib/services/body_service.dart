@@ -9,8 +9,11 @@ class BodyPartService {
     int count = 0;
     var list = jsonDecode(responseBody);
     List<BodyPart> collectionListProject = new List<BodyPart>();
-    for (int i = 0; i < 6; i++) {
-      print(list['listBodyPart'][i]);
+    list['listBodyPart'].map((e) => count++).toList();
+    // var list = jsonDecode(responseBody)['listBodyPart']
+    //     .map((data) => BodyPart.fromJson(data))
+    //     .toList();
+    for (int i = 0; i < count; i++) {
       collectionListProject.add(BodyPart.fromJson(list['listBodyPart'][i]));
     }
     return collectionListProject;
@@ -23,10 +26,10 @@ class BodyPartService {
     // heads['Accept'] = 'application/json';
     // heads['Authorization'] = 'Bearer $token';
     // String modelId = (await FlutterSession().get('modelId')).toString();
-    final response = await http
-        .get(Uri.parse(url + "api/v1/models/1"));
+    final response = await http.get(Uri.parse(url + "api/v1/models/1"));
     if (response.statusCode == 200) {
       var list = parseBodyPartList(response.body);
+      print('Xong r nè');
       return list;
     } else {
       throw Exception("Cannot fetch body ");

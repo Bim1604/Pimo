@@ -17,7 +17,7 @@ class BodyPartViewModel {
     return _bodyPart.value.textValue;
   }
 
-  int get quantity {
+  double get quantity {
     return _bodyPart.value.quantityValue;
   }
 
