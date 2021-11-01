@@ -5,8 +5,6 @@ import 'package:pimo/models/collection_project.dart';
 import 'package:pimo/models/image.dart';
 import 'package:http/http.dart' as http;
 
-
-
 class ImageService {
 
   List<ModelImage> parseImageList(String responseBody, int index) {

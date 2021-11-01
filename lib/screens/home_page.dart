@@ -65,10 +65,10 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                       Padding(
                         padding: EdgeInsets.only(bottom: 10),
                         child: CardHorizontal(
-                            cta: "${snapshot.data.description}",
                             title: "${snapshot.data.name}",
                             openTime: getFormattedDate("${snapshot.data.openTime}"),
                             closeTime: getFormattedDate("${snapshot.data.closeTime}"),
+                            cta: "${snapshot.data.address}",
                             img: homeCards["Ice Cream"]['image'],
                             tap: () {
                               Navigator.push(
@@ -85,10 +85,10 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                         text: "Casting mới",
                       ),
                       CardHorizontal(
-                          cta: "${snapshot.data.description}",
                           title: "${snapshot.data.name}",
                           openTime: getFormattedDate("${snapshot.data.openTime}"),
                           closeTime: getFormattedDate("${snapshot.data.closeTime}"),
+                          cta: "${snapshot.data.address}",
                           img: homeCards["Makeup"]['image'],
                           tap: () {
                             Navigator.push(
@@ -105,7 +105,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                         text: "Tốt nhất dành cho bạn",
                       ),
                       CardHorizontal(
-                          cta: "${snapshot.data.description}",
+                          // cta: "${snapshot.data.description}",
                           title: "${snapshot.data.name}",
                           openTime: getFormattedDate("${snapshot.data.openTime}"),
                           closeTime: getFormattedDate("${snapshot.data.closeTime}"),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/viewmodels/body_attribute_list_view_model.dart';
-import 'package:pimo/viewmodels/body_attribute_view_model.dart';
+import 'package:pimo/viewmodels/body_list_view_model.dart';
 import 'package:provider/provider.dart';
 
 class UpdateMeasurePage extends StatefulWidget {
@@ -31,9 +30,9 @@ class _UpdateMeasurePageState extends State<UpdateMeasurePage> {
               title: Text(widget.template),
             ),
             body: FutureBuilder(
-                future: Provider.of<BodyAttributeListViewModel>(context,
+                future: Provider.of<BodyPartListViewModel>(context,
                     listen: false)
-                    .getAttList(widget.bodyPartId),
+                    .getListBodyPart(),
                 builder: (ctx, prevData) {
                   if (prevData.connectionState == ConnectionState.waiting) {
                     return Column(
@@ -46,7 +45,7 @@ class _UpdateMeasurePageState extends State<UpdateMeasurePage> {
                     );
                   } else {
                     if (prevData.error == null) {
-                      return Consumer<BodyAttributeListViewModel>(
+                      return Consumer<BodyPartListViewModel>(
                           builder: (ctx, data, child) => Center(
                             child: AttView(context: ctx, atts: data),
                           ));
@@ -59,7 +58,7 @@ class _UpdateMeasurePageState extends State<UpdateMeasurePage> {
 
 class AttView extends StatefulWidget {
   final BuildContext context;
-  final BodyAttributeListViewModel atts;
+  final BodyPartListViewModel atts;
   final List<TextEditingController> list = [];
   AttView({Key key, this.context, this.atts}) : super(key: key);
 
@@ -69,25 +68,25 @@ class AttView extends StatefulWidget {
 
 class _AttViewState extends State<AttView> {
   @override
-  void dispose() {
-    for (int i = 0; i < widget.atts.atts.length; i++) {
-      widget.list.elementAt(i).dispose();
-    }
-    super.dispose();
-  }
+  // void dispose() {
+  //   for (int i = 0; i < widget.atts.atts.length; i++) {
+  //     widget.list.elementAt(i).dispose();
+  //   }
+  //   super.dispose();
+  // }
 
-  void _loadData() {
-    for (int i = 0; i < widget.atts.atts.length; i++) {
-      TextEditingController controller = TextEditingController()
-        ..text = widget.atts.atts.elementAt(i).quantityValue.toString();
-      widget.list.add(controller);
-    }
-  }
+  // void _loadData() {
+  //   for (int i = 0; i < widget.atts.atts.length; i++) {
+  //     TextEditingController controller = TextEditingController()
+  //       ..text = widget.atts.atts.elementAt(i).quantityValue.toString();
+  //     widget.list.add(controller);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-    _loadData();
+    // _loadData();
   }
 
   @override
@@ -99,11 +98,11 @@ class _AttViewState extends State<AttView> {
               child: new ListView.builder(
                 shrinkWrap: true,
                 padding: EdgeInsets.all(30),
-                itemCount: widget.atts.atts.length,
+                // itemCount: widget.atts.atts.length,
                 itemBuilder: (context, index) {
                   return MeasureComponent(
-                    model: widget.atts.atts[index],
-                    controller: widget.list?.elementAt(index) ?? '',
+                    // model: widget.atts.atts[index],
+                    // controller: widget.list?.elementAt(index) ?? '',
                   );
                 },
               )
@@ -111,22 +110,22 @@ class _AttViewState extends State<AttView> {
           ),
           ElevatedButton(
             child: Text('UPDATE', style: TextStyle(color: Colors.black)),
-            onPressed: () async {
-              List<Map<String, dynamic>> params = [];
-              for (int i = 0; i < widget.list.length; i++) {
-                Map<String, dynamic> param = Map<String, dynamic>();
-                param['id'] = widget.atts.atts.elementAt(i).id;
-                param['value'] = double.parse(widget.list.elementAt(i).text);
-                param['bodyAttTypeId'] =
-                    widget.atts.atts.elementAt(i).bodyAttTypeId;
-                param['bodyPartId'] = widget.atts.atts.elementAt(i).bodyPartId;
-                params.add(param);
-              }
-              var provider = Provider.of<BodyAttributeListViewModel>(context,
-                  listen: false);
-              provider.updateAtt(params);
-              Navigator.pop(context);
-            },
+            // onPressed: () async {
+            //   List<Map<String, dynamic>> params = [];
+            //   for (int i = 0; i < widget.list.length; i++) {
+            //     Map<String, dynamic> param = Map<String, dynamic>();
+            //     param['id'] = widget.atts.atts.elementAt(i).id;
+            //     param['value'] = double.parse(widget.list.elementAt(i).text);
+            //     param['bodyAttTypeId'] =
+            //         widget.atts.atts.elementAt(i).bodyAttTypeId;
+            //     param['bodyPartId'] = widget.atts.atts.elementAt(i).bodyPartId;
+            //     params.add(param);
+            //   }
+            //   var provider = Provider.of<BodyAttributeListViewModel>(context,
+            //       listen: false);
+            //   provider.updateAtt(params);
+            //   Navigator.pop(context);
+            // },
             style: ElevatedButton.styleFrom(
               primary: MaterialColors.mainColor,
               elevation: 0,
@@ -140,9 +139,11 @@ class _AttViewState extends State<AttView> {
 }
 
 class MeasureComponent extends StatelessWidget {
-  final ModelAttributeViewModel model;
+  // final ModelAttributeViewModel model;
   final TextEditingController controller;
-  const MeasureComponent({Key key, this.model, this.controller})
+  // const MeasureComponent({Key key, this.model, this.controller})
+  //     : super(key: key);
+  const MeasureComponent({Key key, this.controller})
       : super(key: key);
 
   @override
@@ -151,14 +152,14 @@ class MeasureComponent extends StatelessWidget {
       keyboardType: TextInputType.number,
       cursorColor: MaterialColors.mainColor,
       controller: controller,
-      decoration: InputDecoration(
-        icon: Icon(Icons.drive_file_rename_outline),
-        labelText: model.bodyPartName +
-            ' (' +
-            model.bodyAttName +
-            ') ' +
-            model.measure,
-      ),
+      // decoration: InputDecoration(
+      //   icon: Icon(Icons.drive_file_rename_outline),
+      //   labelText: model.bodyPartName +
+      //       ' (' +
+      //       model.bodyAttName +
+      //       ') ' +
+      //       model.measure,
+      // ),
     );
   }
 }

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/screens/update_profile.dart';
 import 'package:pimo/utils/google_sign_in.dart';
-import 'package:pimo/viewmodels/body_part_list_view_model.dart';
+import 'package:pimo/viewmodels/body_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'measure_template.dart';
 import 'onboarding.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ModelProfilePage extends StatefulWidget {
   final String modelId;
   const ModelProfilePage({Key key, this.modelId}) : super(key: key);
@@ -45,7 +46,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                           ),
                         ));
                   } else {
-                    return Text('Error');
+                    return Text('Lỗi');
                   }
                 }
               },
@@ -124,7 +125,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
           child: Column(
             children: [
               SizedBox(
-                height: 50,
+                height: 10,
               ),
               Center(
                 child: Text(
@@ -133,14 +134,51 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                 ),
               ),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
-              Center(
-                child: Text(
-                  modelDetail.description ?? '',
-                  style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                    // horizontal: 4.0, vertical: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    RawMaterialButton(
+                      onPressed: () {},
+                      elevation: 4.0,
+                      fillColor: MaterialColors.socialFacebook,
+                      child: Icon(FontAwesomeIcons.facebook,
+                          size: 24.0, color: Colors.white),
+                      padding: EdgeInsets.all(15.0),
+                      shape: CircleBorder(),
+                    ),
+                    RawMaterialButton(
+                      onPressed: () {},
+                      elevation: 4.0,
+                      fillColor: MaterialColors.socialTwitter,
+                      child: Icon(FontAwesomeIcons.twitter,
+                          size: 24.0, color: Colors.white),
+                      padding: EdgeInsets.all(15.0),
+                      shape: CircleBorder(),
+                    ),
+                    RawMaterialButton(
+                      onPressed: () {},
+                      elevation: 4.0,
+                      fillColor: MaterialColors.socialDribbble,
+                      child: Icon(FontAwesomeIcons.instagram,
+                          size: 24.0, color: Colors.white),
+                      padding: EdgeInsets.all(15.0),
+                      shape: CircleBorder(),
+                    )
+                  ],
                 ),
               ),
+              // Center(
+              //   child: Text(
+              //     modelDetail.description ?? '',
+              //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
+              //   ),
+              // ),
               SizedBox(
                 height: 30,
               ),
@@ -223,12 +261,14 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                                 providers: [
                                   ChangeNotifierProvider(
                                       create: (_) =>
-                                          BodyPartListViewModel()),
+                                          // BodyPartListViewModel()
+                                      BodyPartListViewModel()
+                                  ),
                                 ],
                                 child: FutureBuilder(
                                   builder: (context, snapshot) {
                                     return MeasureTemplatePage(
-                                      modelId: widget.modelId,
+                                      // modelId: widget.modelId,
                                     );
                                   },
                                 )
@@ -245,7 +285,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                         ),
                         Expanded(
                           child: Text(
-                            'Số đo cơ thể',
+                            'Số đo cá nhân',
                             style: TextStyle(fontSize: 16),
                           ),
                         )

@@ -190,7 +190,7 @@ class _ModelImagePageState extends State<ModelCollection> {
             children: [
               Expanded(
                 child: Text(
-                  (index == 0 ? 'Bộ sưu tập dự án' : 'Bộ sưu tập cơ thể'),
+                  (index == 0 ? 'Bộ sưu tập dự án' : 'Bộ sưu tập cá nhân'),
                   style: TextStyle(fontSize: 16),
                 ),
               ),

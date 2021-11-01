@@ -6,12 +6,14 @@ import 'package:pimo/constants/Images.dart';
 import 'package:http/http.dart' as http;
 import 'package:pimo/models/collection_project.dart';
 class CollectionService {
+
   List<ListCollectionProject> parseListCollectionList(String responseBody) {
     int count = 0;
     var list = jsonDecode(responseBody);
     List<ListCollectionProject> collectionListProject = new List<ListCollectionProject>();
     list['listCollectionProject'].map((e) => count++).toList();
     for (int i = 0; i < count; i++) {
+      print(i);
       collectionListProject.add(ListCollectionProject.fromJson(list['listCollectionProject'][i]));
     }
     return collectionListProject;

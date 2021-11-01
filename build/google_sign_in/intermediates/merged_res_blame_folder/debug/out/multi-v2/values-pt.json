@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\values-pt\\values-pt.xml",
+            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\google_sign_in\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt\\values-pt.xml",
             "map": [
                 {
                     "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\3c8fd1bfddb99a7a7e21faa1397acdb4\\core-1.1.0\\res\\values-pt\\values-pt.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\google_sign_in\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-pt\\values-pt.xml",
+            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\values-pt\\values-pt.xml",
             "map": [
                 {
                     "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\3c8fd1bfddb99a7a7e21faa1397acdb4\\core-1.1.0\\res\\values-pt\\values-pt.xml",

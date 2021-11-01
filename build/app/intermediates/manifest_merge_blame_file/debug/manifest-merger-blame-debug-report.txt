@@ -12,41 +12,41 @@
 12         to allow setting breakpoints, to provide hot reload, etc.
 13    -->
 14    <uses-permission android:name="android.permission.INTERNET" />
-14-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:4:5-67
-14-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:4:22-64
+14-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:4:5-67
+14-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:4:22-64
 15    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-15-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
-15-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
+15-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-80
+15-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:7:22-77
 16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-16-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
-16-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
+16-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:5-81
+16-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:8:22-78
 17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 17-->[com.google.firebase:firebase-auth:21.0.1] C:\Users\WIN\.gradle\caches\transforms-2\files-2.1\cb85e813550ceb859d5d8655b705694f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:24:5-79
 17-->[com.google.firebase:firebase-auth:21.0.1] C:\Users\WIN\.gradle\caches\transforms-2\files-2.1\cb85e813550ceb859d5d8655b705694f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:24:22-76
 18
 19    <application
-19-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:5:5-42:19
+19-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:5:5-42:19
 20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 20-->[androidx.core:core:1.1.0] C:\Users\WIN\.gradle\caches\transforms-2\files-2.1\3c8fd1bfddb99a7a7e21faa1397acdb4\core-1.1.0\AndroidManifest.xml:24:18-86
 21        android:debuggable="true"
 22        android:icon="@mipmap/ic_launcher"
-22-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:7:9-43
+22-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:7:9-43
 23        android:label="pimo" >
-23-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:6:9-29
+23-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:6:9-29
 24        <activity
-24-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:8:9-36:20
+24-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:8:9-36:20
 25            android:name="com.example.pimo.MainActivity"
-25-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:9:13-41
+25-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:9:13-41
 26            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-26-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:12:13-163
+26-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:12:13-163
 27            android:hardwareAccelerated="true"
-27-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:13:13-47
+27-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:13:13-47
 28            android:launchMode="singleTop"
-28-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:10:13-43
+28-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:10:13-43
 29            android:theme="@style/LaunchTheme"
-29-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:11:13-47
+29-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:11:13-47
 30            android:windowSoftInputMode="adjustResize" >
-30-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:14:13-55
+30-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:14:13-55
 31
 32            <!--
 33                 Specifies an Android theme to apply to this Activity as soon as
@@ -55,11 +55,11 @@
 36                 to determine the Window background behind the Flutter UI.
 37            -->
 38            <meta-data
-38-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:19:13-22:17
+38-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:19:13-22:17
 39                android:name="io.flutter.embedding.android.NormalTheme"
-39-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:20:15-70
+39-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:20:15-70
 40                android:resource="@style/NormalTheme" />
-40-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:21:15-52
+40-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:21:15-52
 41            <!--
 42                 Displays an Android View that continues showing the launch screen
 43                 Drawable until Flutter paints its first frame, then this splash
@@ -68,21 +68,21 @@
 46                 Flutter's first frame.
 47            -->
 48            <meta-data
-48-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:28:13-31:17
+48-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:28:13-31:17
 49                android:name="io.flutter.embedding.android.SplashScreenDrawable"
-49-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:29:15-79
+49-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:29:15-79
 50                android:resource="@drawable/launch_background" />
-50-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:30:15-61
+50-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:30:15-61
 51
 52            <intent-filter>
-52-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:32:13-35:29
+52-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:32:13-35:29
 53                <action android:name="android.intent.action.MAIN" />
-53-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:33:17-68
-53-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:33:25-66
+53-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:33:17-68
+53-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:33:25-66
 54
 55                <category android:name="android.intent.category.LAUNCHER" />
-55-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:34:17-76
-55-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:34:27-74
+55-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:34:17-76
+55-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:34:27-74
 56            </intent-filter>
 57        </activity>
 58        <!--
@@ -90,32 +90,32 @@
 60             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 61        -->
 62        <meta-data
-62-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:39:9-41:33
+62-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:39:9-41:33
 63            android:name="flutterEmbedding"
-63-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:40:13-44
+63-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:40:13-44
 64            android:value="2" />
-64-->E:\LapTrinh\AndroidProject\SWD\Project\Pimo\android\app\src\main\AndroidManifest.xml:41:13-30
+64-->E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\android\app\src\main\AndroidManifest.xml:41:13-30
 65
 66        <service
-66-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
+66-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:9-12:19
 67            android:name="com.google.firebase.components.ComponentDiscoveryService"
-67-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
+67-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:8:18-89
 68            android:directBootAware="true"
 68-->[com.google.firebase:firebase-common:20.0.0] C:\Users\WIN\.gradle\caches\transforms-2\files-2.1\e8c12af64c0d197211b7d090cb61cdf8\jetified-firebase-common-20.0.0\AndroidManifest.xml:35:13-43
 69            android:exported="false" >
 69-->[com.google.firebase:firebase-auth:21.0.1] C:\Users\WIN\.gradle\caches\transforms-2\files-2.1\cb85e813550ceb859d5d8655b705694f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:76:13-37
 70            <meta-data
-70-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+70-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
 71                android:name="com.google.firebase.components:io.flutter.plugins.firebase.auth.FlutterFirebaseAuthRegistrar"
-71-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
+71-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
 72                android:value="com.google.firebase.components.ComponentRegistrar" />
-72-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+72-->[:firebase_auth] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_auth\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
 73            <meta-data
-73-->[:firebase_core] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
+73-->[:firebase_core] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:9:13-11:85
 74                android:name="com.google.firebase.components:io.flutter.plugins.firebase.core.FlutterFirebaseCoreRegistrar"
-74-->[:firebase_core] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
+74-->[:firebase_core] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:10:17-124
 75                android:value="com.google.firebase.components.ComponentRegistrar" />
-75-->[:firebase_core] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
+75-->[:firebase_core] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\firebase_core\intermediates\library_manifest\debug\AndroidManifest.xml:11:17-82
 76            <meta-data
 76-->[com.google.firebase:firebase-auth:21.0.1] C:\Users\WIN\.gradle\caches\transforms-2\files-2.1\cb85e813550ceb859d5d8655b705694f\jetified-firebase-auth-21.0.1\AndroidManifest.xml:77:13-79:85
 77                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
@@ -125,21 +125,21 @@
 79        </service>
 80
 81        <provider
-81-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
+81-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:11:9-19:20
 82            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-82-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
+82-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-82
 83            android:authorities="com.example.pimo.flutter.image_provider"
-83-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
+83-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-74
 84            android:exported="false"
-84-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
+84-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-37
 85            android:grantUriPermissions="true" >
-85-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
+85-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-47
 86            <meta-data
-86-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
+86-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:16:13-18:75
 87                android:name="android.support.FILE_PROVIDER_PATHS"
-87-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
+87-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-67
 88                android:resource="@xml/flutter_image_picker_file_paths" />
-88-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Project\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
+88-->[:image_picker] E:\LapTrinh\AndroidProject\SWD\Pimo_official\Pimo\build\image_picker\intermediates\library_manifest\debug\AndroidManifest.xml:18:17-72
 89        </provider>
 90
 91        <activity

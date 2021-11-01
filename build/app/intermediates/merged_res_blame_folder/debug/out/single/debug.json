@@ -1,26 +1,26 @@
 [
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
-        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
+        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\android\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\drawable-v21_launch_background.xml.flat",
+        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\android\\app\\src\\main\\res\\drawable-v21\\launch_background.xml"
     },
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
-        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
     },
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
-        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\android\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\app\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\android\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     }
 ]

@@ -33,6 +33,7 @@ class CardHorizontal extends StatelessWidget {
       description: json['casting']['description'],
       openTime: json['casting']['openTime'],
       closeTime: json['casting']['closeTime'],
+      address: json['casting']['address'],
     );
   }
 

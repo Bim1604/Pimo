@@ -8,9 +8,6 @@ import 'image_collection_view_model.dart';
 class CollectionListViewModel with ChangeNotifier {
 
 
-
-
-
   // List<CollectionViewModel> collectionsBody = List<CollectionViewModel>();
   // Future<CollectionListViewModel> getCollectionBodyList() async {
   //   print("Future Collection Body List View");

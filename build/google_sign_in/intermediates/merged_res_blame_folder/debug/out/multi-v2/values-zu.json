@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\values-zu\\values-zu.xml",
+            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\values-zu\\values-zu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\65940f81551bcfdf40fab991708fb984\\jetified-play-services-basement-16.0.1\\res\\values-zu\\values.xml",
@@ -57,7 +57,7 @@
             ]
         },
         {
-            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\google_sign_in\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zu\\values-zu.xml",
+            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\google_sign_in\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-zu\\values-zu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\65940f81551bcfdf40fab991708fb984\\jetified-play-services-basement-16.0.1\\res\\values-zu\\values.xml",

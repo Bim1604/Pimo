@@ -11,7 +11,8 @@ class ListCollectionProjectListViewModel with ChangeNotifier {
   Future<ListCollectionProjectListViewModel> getListCollectionProject() async {
     List<ListCollectionProject> collectionProject = await CollectionService().fetchListCollectionProject();
     notifyListeners();
-    this.listCollectionProject = collectionProject.map((value) => CollectionProjectViewModel(listCollectionProject: value)).toList();
+    this.listCollectionProject = collectionProject.map((value)
+      => CollectionProjectViewModel(listCollectionProject: value)).toList();
   }
 
 

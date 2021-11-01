@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Project\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
+            "outputFile": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\9e3408f3cfba0d30e4aa3a48bccd2dc0\\jetified-play-services-auth-16.0.1\\res\\values-watch-v20\\values.xml",

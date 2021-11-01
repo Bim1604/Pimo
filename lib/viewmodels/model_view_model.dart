@@ -117,7 +117,6 @@ class ModelViewModel with ChangeNotifier {
   }
 
 
-
   Future<ModelViewModel> getModel() async {
     return Future.delayed(const Duration(seconds: 1), () async {
       Model model = await ModelServices().getModelDetail();
