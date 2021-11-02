@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
+import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'incoming_casting_list.dart';
+import '../utils/incoming_casting_list_component.dart';
+import 'model_schedule.dart';
 
 class IncomingCastingPage extends StatelessWidget {
   const IncomingCastingPage({Key key}) : super(key: key);
@@ -19,29 +21,29 @@ class IncomingCastingPage extends StatelessWidget {
             title: Text('Booking'),
             backgroundColor: MaterialColors.mainColor,
             actions: [
-              // Padding(
-              //   padding: EdgeInsets.symmetric(horizontal: 20),
-              //   child: GestureDetector(
-              //     child: Icon(Icons.schedule),
-              //     onTap: () {
-              //       Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => MultiProvider(
-              //                 providers: [
-              //                   ChangeNotifierProvider(
-              //                       create: (_) => TaskListViewModel()),
-              //                 ],
-              //                 child: FutureBuilder(
-              //                   builder: (context, snapshot) {
-              //                     return ModelSchedulePage(
-              //                     );
-              //                   },
-              //                 ))),
-              //       );
-              //     },
-              //   ),
-              // )
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: GestureDetector(
+                  child: Icon(Icons.schedule),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MultiProvider(
+                              providers: [
+                                ChangeNotifierProvider(
+                                    create: (_) => TaskListViewModel()),
+                              ],
+                              child: FutureBuilder(
+                                builder: (context, snapshot) {
+                                  return ModelSchedulePage(
+                                  );
+                                },
+                              ))),
+                    );
+                  },
+                ),
+              )
             ],
           ),
           body: SingleChildScrollView(

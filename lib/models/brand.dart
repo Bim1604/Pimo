@@ -8,7 +8,7 @@ class Brand {
   String address;
   String phone;
   String logo;
-  Null brandCate;
+  String brandCate;
 
   Brand({this.id,
     this.name,
