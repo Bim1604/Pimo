@@ -11,8 +11,8 @@ import 'package:intl/intl.dart';
 class MainScreen extends StatelessWidget with ChangeNotifier {
 
   Future<CardHorizontal> fetchCasting() async {
-    final response = await http.get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/1'));
-
+    final response = await http
+        .get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/1'));
     if (response.statusCode == 200) {
       return CardHorizontal.fromJson(jsonDecode(response.body));
     } else {
@@ -69,57 +69,28 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                             openTime: getFormattedDate("${snapshot.data.openTime}"),
                             closeTime: getFormattedDate("${snapshot.data.closeTime}"),
                             cta: "${snapshot.data.address}",
-                            img: homeCards["Ice Cream"]['image'],
+                            img: "${snapshot.data.img}",
                             tap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => Product(
-                                      title: homeCards["Ice Cream"]['title'],
-                                      urlImg: homeCards["Ice Cream"]['image'],
+                                      title: "${snapshot.data.name}",
+                                      urlImg: "${snapshot.data.img}",
+                                      brandName: "${snapshot.data.brandName}",
+                                      logo: "${snapshot.data.logo}",
+                                      address: "${snapshot.data.address}",
+                                      salary: "${snapshot.data.salary}",
+                                      openTime: getFormattedDate("${snapshot.data.openTime}"),
+                                      closeTime: getFormattedDate("${snapshot.data.closeTime}"),
+                                      description: "${snapshot.data.description}",
+                                      gender: "${snapshot.data.gender}",
+                                      style: "${snapshot.data.style}",
+                                      request: "${snapshot.data.request}",
                                     ),
                                   ));
                             }),
                       ),
-                      const TitleWithButton(
-                        text: "Casting mới",
-                      ),
-                      CardHorizontal(
-                          title: "${snapshot.data.name}",
-                          openTime: getFormattedDate("${snapshot.data.openTime}"),
-                          closeTime: getFormattedDate("${snapshot.data.closeTime}"),
-                          cta: "${snapshot.data.address}",
-                          img: homeCards["Makeup"]['image'],
-                          tap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Product(
-                                    title: homeCards["Ice Cream"]['title'],
-                                    urlImg: homeCards["Ice Cream"]['image'],
-                                  ),
-                                ));
-                          }),
-                      // Casting(typeView: 2),
-                      const TitleWithButton(
-                        text: "Tốt nhất dành cho bạn",
-                      ),
-                      CardHorizontal(
-                          // cta: "${snapshot.data.description}",
-                          title: "${snapshot.data.name}",
-                          openTime: getFormattedDate("${snapshot.data.openTime}"),
-                          closeTime: getFormattedDate("${snapshot.data.closeTime}"),
-                          img: homeCards["Coffee"]['image'],
-                          tap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Product(
-                                    title: homeCards["Ice Cream"]['title'],
-                                    urlImg: homeCards["Ice Cream"]['image'],
-                                  ),
-                                ));
-                          }),
                       // Casting(typeView: 3),
                     ]),
                   ));

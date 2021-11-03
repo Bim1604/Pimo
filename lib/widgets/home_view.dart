@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/models/brand.dart';
+import 'package:pimo/models/casting_info.dart';
 
 class CardHorizontal extends StatelessWidget {
   //Khai báo những thuộc tính có trong 1 object
@@ -12,10 +14,17 @@ class CardHorizontal extends StatelessWidget {
         this.address,
         this.closeTime,
         this.description,
+        this.brandName,
+        this.salary,
+        this.logo,
+        this.gender,
+        this.style,
+        this.request,
         this.img = "https://via.placeholder.com/200",
         this.tap = defaultFunc});
 
   final String name;
+  final String salary;
   final String address;
   final String openTime;
   final String closeTime;
@@ -25,15 +34,26 @@ class CardHorizontal extends StatelessWidget {
   final int id;
   final Function tap;
   final String title;
-
+  final String brandName;
+  final String logo;
+  final String gender;
+  final String style;
+  final String request;
   factory CardHorizontal.fromJson(Map<String, dynamic> json) {
     return CardHorizontal(
       name: json['casting']['name'],
+      img: json['casting']['poster'],
       id: json['casting']['id'],
       description: json['casting']['description'],
       openTime: json['casting']['openTime'],
       closeTime: json['casting']['closeTime'],
       address: json['casting']['address'],
+      brandName: json['casting']['brand']['name'],
+      logo: json['casting']['brand']['logo'],
+      salary: json['casting']['salary'].toString(),
+      request: json['casting']['request'],
+      style: json['listStyle'][0]['name'],
+      gender: json['listGender'][0]['genderName'],
     );
   }
 

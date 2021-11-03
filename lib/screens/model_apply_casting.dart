@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/utils/casting_card.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,7 @@ class _ModelApplyCastingPageState extends State<ModelApplyCastingPage> {
           length: 2,
           child: Scaffold(
               appBar: AppBar(
+                backgroundColor: MaterialColors.mainColor,
                 bottom: TabBar(
                   tabs: [
                     Tab(text: 'Tới bạn'),

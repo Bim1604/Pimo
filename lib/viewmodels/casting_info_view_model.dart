@@ -50,17 +50,4 @@ class CastingInfoViewModel {
   DateTime get closeTimeDateTime {
     return parseDatetime(_castingInfo.casting.closeTime);
   }
-  // String get address {
-  //   return _castingInfo.casting.address;
-  // }
-  // String get request {
-  //   return _castingInfo.casting.request;
-  // }
-  // int get brandID {
-  //   return _castingInfo.casting.brandId;
-  // }
-  // String get nameBrand {
-  //   return _castingInfo.brand.name;
-  // }
-  // String
 }

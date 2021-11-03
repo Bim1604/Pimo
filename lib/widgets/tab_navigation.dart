@@ -4,6 +4,7 @@ import 'package:pimo/screens/cart.dart';
 import 'package:pimo/screens/home.dart';
 import 'package:pimo/screens/home_page.dart';
 import 'package:pimo/screens/incoming_casting.dart';
+import 'package:pimo/screens/model_apply_casting.dart';
 import 'package:pimo/screens/model_collection.dart';
 import 'package:pimo/screens/model_collection_project.dart';
 import 'package:pimo/screens/model_profile.dart';
@@ -51,9 +52,24 @@ class TabNavigator extends StatelessWidget {
 class Page1 extends StatelessWidget {
   const Page1({Key key}) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context) {
-    return MainScreen();
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+              create: (_) => CastingInfoListViewModel()
+          ),
+        ],
+        child: FutureBuilder(
+          // future: FlutterSession().get('modelId'),
+          builder: (context, snapshot) {
+            return MainScreen();
+          },
+        ));
+
+    // return MainScreen();
   }
 }
 
@@ -87,8 +103,8 @@ class Page3 extends StatelessWidget {
         ],
         child: FutureBuilder(
           builder: (context, snapshot) {
-            return Container();
-            // return ModelApplyCastingPage();
+            // return Container();
+            return ModelApplyCastingPage();
           },
         ));
   }

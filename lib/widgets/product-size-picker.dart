@@ -23,13 +23,13 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      isSelected = "XS";
+                      isSelected = "Gợi cảm";
                     });
                   },
                   child: Container(
                       padding: EdgeInsets.only(top: 16, bottom: 16),
                       decoration: BoxDecoration(
-                          color: isSelected == "XS"
+                          color: isSelected == "Gợi cảm"
                               ? MaterialColors.priceColor
                               : Colors.transparent,
                           border: Border(
@@ -45,9 +45,9 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                           borderRadius:
                               BorderRadius.only(topLeft: Radius.circular(4.0))),
                       child: Center(
-                        child: Text("XS",
+                        child: Text("Gợi cảm",
                             style: TextStyle(
-                                color: isSelected == "XS"
+                                color: isSelected == "Gợi cảm"
                                     ? MaterialColors.primary
                                     : Colors.black,
                                 fontSize: 14.0,
@@ -59,7 +59,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      isSelected = "S";
+                      isSelected = "Đường phố";
                     });
                   },
                   child: Container(
@@ -68,7 +68,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                         bottom: 16,
                       ),
                       decoration: BoxDecoration(
-                          color: isSelected == "S"
+                          color: isSelected == "Đường phố"
                               ? MaterialColors.priceColor
                               : Colors.transparent,
                           border: Border(
@@ -78,9 +78,9 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                                 color: MaterialColors.border, width: 0.5),
                           )),
                       child: Center(
-                        child: Text("S",
+                        child: Text("Đường phố",
                             style: TextStyle(
-                                color: isSelected == "S"
+                                color: isSelected == "Đường phố"
                                     ? MaterialColors.primary
                                     : Colors.black,
                                 fontSize: 14.0,
@@ -92,7 +92,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                 child: GestureDetector(
                   onTap: () {
                     setState(() {
-                      isSelected = "M";
+                      isSelected = "Tự Do";
                     });
                   },
                   child: Container(
@@ -101,7 +101,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                         bottom: 16,
                       ),
                       decoration: BoxDecoration(
-                          color: isSelected == "M"
+                          color: isSelected == "Tự Do"
                               ? MaterialColors.priceColor
                               : Colors.transparent,
                           border: Border(
@@ -117,9 +117,9 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                           borderRadius: BorderRadius.only(
                               topRight: Radius.circular(4.0))),
                       child: Center(
-                        child: Text("M",
+                        child: Text("Tự Do",
                             style: TextStyle(
-                                color: isSelected == "M"
+                                color: isSelected == "Tự Do"
                                     ? MaterialColors.primary
                                     : Colors.black,
                                 fontSize: 14.0,
@@ -134,13 +134,13 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    isSelected = "L";
+                    isSelected = "Tối giản";
                   });
                 },
                 child: Container(
                     padding: EdgeInsets.only(top: 16, bottom: 16),
                     decoration: BoxDecoration(
-                        color: isSelected == "L"
+                        color: isSelected == "Tối giản"
                             ? MaterialColors.priceColor
                             : Colors.transparent,
                         border: Border(
@@ -156,9 +156,9 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(4.0))),
                     child: Center(
-                      child: Text("L",
+                      child: Text("Tối giản",
                           style: TextStyle(
-                              color: isSelected == "L"
+                              color: isSelected == "Tối giản"
                                   ? MaterialColors.primary
                                   : Colors.black,
                               fontSize: 14.0,
@@ -170,7 +170,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    isSelected = "XL";
+                    isSelected = "Cổ điển";
                   });
                 },
                 child: Container(
@@ -179,7 +179,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                       bottom: 16,
                     ),
                     decoration: BoxDecoration(
-                        color: isSelected == "XL"
+                        color: isSelected == "Cổ điển"
                             ? MaterialColors.priceColor
                             : Colors.transparent,
                         border: Border(
@@ -189,9 +189,9 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                               color: MaterialColors.border, width: 0.5),
                         )),
                     child: Center(
-                      child: Text("XL",
+                      child: Text("Cổ điển",
                           style: TextStyle(
-                              color: isSelected == "XL"
+                              color: isSelected == "Cổ điển"
                                   ? MaterialColors.primary
                                   : Colors.black,
                               fontSize: 14.0,
@@ -203,7 +203,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    isSelected = "2XL";
+                    isSelected = "Hoang dã";
                   });
                 },
                 child: Container(
@@ -212,7 +212,7 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                       bottom: 16,
                     ),
                     decoration: BoxDecoration(
-                        color: isSelected == "2XL"
+                        color: isSelected == "Hoang dã"
                             ? MaterialColors.priceColor
                             : Colors.transparent,
                         border: Border(
@@ -228,9 +228,9 @@ class _ProductSizePickerState extends State<ProductSizePicker> {
                         borderRadius: BorderRadius.only(
                             bottomRight: Radius.circular(4.0))),
                     child: Center(
-                      child: Text("2XL",
+                      child: Text("Hoang dã",
                           style: TextStyle(
-                              color: isSelected == "2XL"
+                              color: isSelected == "Hoang dã"
                                   ? MaterialColors.primary
                                   : Colors.black,
                               fontSize: 14.0,

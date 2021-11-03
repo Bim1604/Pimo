@@ -31,8 +31,11 @@ class GoogleSignInProvider extends ChangeNotifier {
       await FirebaseAuth.instance.signInWithCredential(credential);
       var idToken = await FirebaseAuth.instance.currentUser.getIdToken();
       var mail = await FirebaseAuth.instance.currentUser.email;
-      print(FirebaseAuth.instance.currentUser.email + ' *****' + idToken);
       var token = {"token": idToken, "mail": mail};
+      await FlutterSession().set("token", idToken);
+      await FlutterSession().set("modelId", 1);
+      print(token);
+
       HttpClient client = HttpClient();
       client.badCertificateCallback =
           ((X509Certificate cert, String host, int port) => true);
