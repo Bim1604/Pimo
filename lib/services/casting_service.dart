@@ -3,13 +3,33 @@ import 'dart:convert';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/casting.dart';
 import 'package:http/http.dart' as http;
+import 'package:pimo/models/casting_info.dart';
 import 'package:pimo/viewmodels/casting_view_model.dart';
 class CastingService {
   List<Casting> parseCastingList(String responseBody) {
-    final parsed = jsonDecode(responseBody).cast<Map<String, dynamic>>();
-    return parsed.map<Casting>((json) => Casting.fromJson(json)).toList();
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<Casting> castingInfoList = new List<Casting>();
+
+    list['castings'].map((e) => count++).toList();
+    // for (int i = 0; i < count; i++) {
+    //   print(i);
+    //   castingInfoList.add(ListCollectionProject.fromJson(list['listCollectionProject'][i]));
+    // }
+    return castingInfoList;
+
   }
 
+  List<CastingInfo> parseCastingInfoList(String responseBody) {
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<CastingInfo> castingInfoList = new List<CastingInfo>();
+    list['castings'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      castingInfoList.add(CastingInfo.fromJson(list['castings'][i]));
+    }
+    return castingInfoList;
+  }
   Future<List<Casting>> getCastingList() async {
     // var token = (await FlutterSession().get("token")).toString();
     // Map<String, String> heads = Map<String, String>();
@@ -80,7 +100,7 @@ class CastingService {
     //     Uri.parse(url + 'api/v1/castings/$modelId/incoming'),
     //     headers: heads);
     final response = await http.get(
-          Uri.parse(url + 'api/v1/castings/1/incoming'));
+          Uri.parse(url + 'api/v1/castings'));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
       return list;
@@ -132,6 +152,16 @@ class CastingService {
     }
   }
 
+  
+  Future<List<CastingInfo>> getCastingInfoList() async {
+    final response = await http.get(Uri.parse(url + "api/v1/castings"));
+    if (response.statusCode == 200) {
+      var list = parseCastingInfoList(response.body);
+      return list;
+    } else {
+      throw Exception("Request API error");
+    }
+  }
 // Future startThread() async {
 //   var modelId = (await FlutterSession().get("modelId")).toString();
 

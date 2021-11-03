@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/screens/incoming_task_in_casting.dart';
-import 'package:pimo/viewmodels/casting_list_view_model.dart';
-import 'package:pimo/viewmodels/casting_view_model.dart';
-import 'package:pimo/viewmodels/task_list_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_info_view_model.dart';
 
 class IncomingCastingListComponent extends StatefulWidget {
-  final CastingListViewModel list;
+  final CastingInfoListViewModel list;
   IncomingCastingListComponent({Key key, this.list}) : super(key: key);
 
   @override
@@ -19,16 +17,17 @@ class  IncomingCastingListComponentState extends State<IncomingCastingListCompon
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: widget.list.castings.length,
+      itemCount: widget.list.listCastingInfo.length,
       itemBuilder: (context, index) {
-        return CastingCard(casting: widget.list.castings[index]);
+        print(widget.list.listCastingInfo[index].castingDetail.id);
+        return CastingCard(casting: widget.list.listCastingInfo[index]);
       },
     );
   }
 }
 
 class CastingCard extends StatelessWidget {
-  final CastingViewModel casting;
+  final CastingInfoViewModel casting;
   const CastingCard({Key key, this.casting}) : super(key: key);
 
   @override
@@ -73,7 +72,7 @@ class CastingCard extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
-                    casting.name?? '',
+                    casting.castingDetail.name?? '',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -86,7 +85,7 @@ class CastingCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  casting.salary?? '',
+                  casting.castingDetail.salary.toString() + 'VNĐ'?? '',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -96,7 +95,7 @@ class CastingCard extends StatelessWidget {
             ),
             Container(
               child: Text(
-                casting.description?? '',
+                casting.castingDetail.description?? '',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 softWrap: false,
@@ -105,11 +104,11 @@ class CastingCard extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('Next task: '),
-                // Text(
-                //   '${casting.incomingTaskTime} ${casting.incomingTaskDate}'?? '',
-                //   style: TextStyle(fontWeight: FontWeight.bold),
-                // ),
+                Text('Thời gian: '),
+                Text(
+                  '${casting.closeTime}'?? '',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ],
             ),
           ],

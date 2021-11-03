@@ -51,10 +51,10 @@ class TaskService {
     if (response.statusCode == 200) {
       // var responseBody = Task.fromJson(jsonDecode(response.body));
       // return responseBody;
-      Fluttertoast.showToast(msg: 'Create success');
+      Fluttertoast.showToast(msg: 'Tạo lịch thành công');
       return true;
     } else {
-      Fluttertoast.showToast(msg: 'Can not create');
+      Fluttertoast.showToast(msg: 'Tạo lịch thất bại');
       return false;
     }
   }

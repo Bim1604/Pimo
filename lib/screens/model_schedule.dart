@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/services/task_service.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
@@ -18,7 +19,10 @@ class _ModelSchedulePageState extends State<ModelSchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+          title: Text('Lịch'),
+          backgroundColor: MaterialColors.mainColor
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         backgroundColor: Colors.black,
@@ -59,17 +63,6 @@ class _ModelSchedulePageState extends State<ModelSchedulePage> {
     Size size = MediaQuery.of(context).size;
     return ListView(
       children: [
-        Center(
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Text(
-              'Schedule',
-              style: TextStyle(
-                  color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-
         Container(
           height: size.height - 165,
           child: SfCalendar(
@@ -88,10 +81,10 @@ class _ModelSchedulePageState extends State<ModelSchedulePage> {
   TextEditingController fromController, toController, desController;
   void _showDateTimePicker(BuildContext context) {
     return DateTimeRangePicker(
-        startText: "From",
-        endText: "To",
-        doneText: "Yes",
-        cancelText: "Cancel",
+        startText: "Từ ngày",
+        endText: "Đến ngày",
+        doneText: "Xác nhận",
+        cancelText: "Hủy",
         initialStartTime: DateTime.now(),
         initialEndTime: DateTime.now(),
         mode: DateTimeRangePickerMode.dateAndTime,
@@ -125,7 +118,7 @@ class _ModelSchedulePageState extends State<ModelSchedulePage> {
               );
             }
           } else {
-            Fluttertoast.showToast(msg: 'Incorrect date');
+            Fluttertoast.showToast(msg: 'Ngày không dúng');
           }
         }).showPicker(context);
   }

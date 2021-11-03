@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class IncomingCastingPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Booking'),
+            title: Text('Casting'),
             backgroundColor: MaterialColors.mainColor,
             actions: [
               Padding(
@@ -53,10 +54,10 @@ class IncomingCastingPage extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 100),
                     child: SizedBox(
                       height: height - 162,
-                      child: FutureBuilder<CastingListViewModel>(
-                          future: Provider.of<CastingListViewModel>(context,
+                      child: FutureBuilder<CastingInfoListViewModel>(
+                          future: Provider.of<CastingInfoListViewModel>(context,
                               listen: false)
-                              .imcomingCasting(),
+                              .getCastingInfoList(),
                           builder: (context, data) {
                             if (data.connectionState == ConnectionState.waiting) {
                               return Column(
@@ -69,7 +70,7 @@ class IncomingCastingPage extends StatelessWidget {
                               );
                             } else {
                               if (data.error == null) {
-                                return Consumer<CastingListViewModel>(
+                                return Consumer<CastingInfoListViewModel>(
                                     builder: (ctx, data, child) =>
                                         IncomingCastingListComponent(
                                           list: data,
@@ -77,7 +78,7 @@ class IncomingCastingPage extends StatelessWidget {
                               } else {
                                 return Center(
                                   child: SizedBox(
-                                    child: Center(child: Text('Not have any booking'),),
+                                    child: Center(child: Text('Không có lịch đặt'),),
                                   ),
                                 );
                               }

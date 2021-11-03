@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:pimo/models/casting.dart';
+import 'package:pimo/models/casting_info.dart';
 import 'package:pimo/services/apply_casting_service.dart';
 import 'package:pimo/services/casting_service.dart';
 import 'package:pimo/utils/common.dart';
@@ -51,7 +52,7 @@ class CastingListViewModel with ChangeNotifier {
     });
   }
 
-  Future<CastingListViewModel> imcomingCasting() async {
+  Future<CastingListViewModel> incomingCasting() async {
     return Future.delayed(const Duration(seconds: 1), () async {
       List<Casting> list = await CastingService().getIncomingCasting();
       notifyListeners();
@@ -60,6 +61,7 @@ class CastingListViewModel with ChangeNotifier {
       this.castings.sort((a, b) => a.openDate.compareTo(b.openDate));
     });
   }
+
 
   // Future<CastingListViewModel> applyCasting(int castingId) async {
   //   return Future.delayed(const Duration(seconds: 1), () async {

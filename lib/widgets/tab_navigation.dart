@@ -8,6 +8,7 @@ import 'package:pimo/screens/model_collection.dart';
 import 'package:pimo/screens/model_collection_project.dart';
 import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/screens/new_collection.dart';
+import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
@@ -62,7 +63,9 @@ class Page2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => CastingListViewModel()),
+          ChangeNotifierProvider(
+              create: (_) => CastingInfoListViewModel()
+          ),
         ],
         child: FutureBuilder(
           // future: FlutterSession().get('modelId'),
