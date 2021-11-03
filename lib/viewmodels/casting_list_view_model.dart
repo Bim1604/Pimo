@@ -63,15 +63,15 @@ class CastingListViewModel with ChangeNotifier {
   }
 
 
-  // Future<CastingListViewModel> applyCasting(int castingId) async {
-  //   return Future.delayed(const Duration(seconds: 1), () async {
-  //     List<Casting> list = await ApplyCastingService().createApplyCasting(castingId);
-  //     notifyListeners();
-  //     this.castings =
-  //         list.map((casting) => CastingViewModel(casting: casting)).toList();
-  //     this.castings.sort((a, b) => a.openDate.compareTo(b.openDate));
-  //   });
-  // }
+  Future<CastingListViewModel> applyCasting(int castingId) async {
+    return Future.delayed(const Duration(seconds: 1), () async {
+      List<Casting> list = await ApplyCastingService().createApplyCasting(castingId);
+      notifyListeners();
+      this.castings =
+          list.map((casting) => CastingViewModel(casting: casting)).toList();
+      this.castings.sort((a, b) => a.openDate.compareTo(b.openDate));
+    });
+  }
 
   // Future<CastingListViewModel> cancelCasting(int castingId) async {
   //   return Future.delayed(const Duration(seconds: 1), () async {

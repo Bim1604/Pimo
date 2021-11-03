@@ -76,9 +76,26 @@ class Page2 extends StatelessWidget {
   }
 }
 
-
 class Page3 extends StatelessWidget {
   const Page3({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => CastingListViewModel()),
+        ],
+        child: FutureBuilder(
+          builder: (context, snapshot) {
+            return Container();
+            // return ModelApplyCastingPage();
+          },
+        ));
+  }
+}
+
+class Page4 extends StatelessWidget {
+  const Page4({Key key}) : super(key: key);
 
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -97,8 +114,8 @@ class Page3 extends StatelessWidget {
   }
 }
 
-class Page4 extends StatelessWidget {
-  const Page4({Key key}) : super(key: key);
+class Page5 extends StatelessWidget {
+  const Page5({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -118,16 +135,6 @@ class Page4 extends StatelessWidget {
   }
 }
 
-class Page5 extends StatelessWidget {
-  const Page5({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white54,
-    );
-  }
-}
 
 
 
