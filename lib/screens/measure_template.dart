@@ -49,7 +49,6 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                               padding: EdgeInsets.only(top: 30),
                               itemCount: data.listBodyPart.length,
                               itemBuilder: (context, index) {
-                                print(data.listBodyPart.length);
                                 return CompButton(
                                   temp: data.listBodyPart[index].name,
                                   value: data.listBodyPart[index].quantity.toString(),
@@ -120,7 +119,10 @@ class CompButton extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  temp + ' - ' + value + ' ' + measure,
+                  temp
+                      + ' - '
+                      + ((value.contains("null")) ? 'Không có' : value)
+                      + ' ' + measure,
                   style: TextStyle(fontSize: 16),
                 ),
               ),

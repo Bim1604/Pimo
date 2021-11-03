@@ -9,6 +9,7 @@ import 'measure_template.dart';
 import 'onboarding.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ModelProfilePage extends StatefulWidget {
+
   final String modelId;
   const ModelProfilePage({Key key, this.modelId}) : super(key: key);
 

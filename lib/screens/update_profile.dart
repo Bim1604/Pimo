@@ -70,7 +70,7 @@ class _UpdateModelProfilePageState extends State<UpdateModelProfilePage> {
                   //     modelDetail:
                   //         Provider.of<ModelViewModel>(context, listen: false));
                 } else {
-                  return Text('Error');
+                  return Text('Lỗi');
                 }
               }
             },
@@ -96,6 +96,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
       dobController,
       phoneController,
       addressController,
+      descriptionController,
       giftedController;
 
   GlobalKey<FormState> _profileKey = GlobalKey<FormState>();
@@ -106,6 +107,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
     dobController.dispose();
     phoneController.dispose();
     addressController.dispose();
+    descriptionController.dispose();
     giftedController.dispose();
     super.dispose();
   }
@@ -146,12 +148,14 @@ class _ModelUpdateState extends State<ModelUpdate> {
     // genderController = widget.modelDetail.gender;
     dobController = TextEditingController()
       ..text = formatDate(widget.modelDetail.dateOfBirth);
+    descriptionController = TextEditingController()..text = widget.modelDetail.description;
     phoneController = TextEditingController()..text = widget.modelDetail.phone;
     addressController = TextEditingController()
       ..text = widget.modelDetail.country;
     giftedController = TextEditingController()
       ..text = widget.modelDetail.gifted;
     _date = DateTime.parse(widget.modelDetail.dateOfBirth);
+
   }
 
   String formatDate(String date) {
@@ -193,18 +197,22 @@ class _ModelUpdateState extends State<ModelUpdate> {
                   value: genderController,
                   decoration: InputDecoration(
                     icon: Icon(Icons.drive_file_rename_outline),
-                    labelText: 'Gender',
+                    labelText: 'Giới tính',
                     // suffixIcon: Icon(
                     //   Icons.check_circle,
                     // ),
                   ),
                   items: [
                     DropdownMenuItem(
-                      child: Text("Male"),
+                      child: Text("Không rõ"),
+                      value: null,
+                    ),
+                    DropdownMenuItem(
+                      child: Text("Nam"),
                       value: 0,
                     ),
                     DropdownMenuItem(
-                      child: Text("Female"),
+                      child: Text("Nữ"),
                       value: 1,
                     )
                   ],
@@ -226,7 +234,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
                           enabled: false,
                           decoration: InputDecoration(
                             icon: Icon(Icons.cake_outlined),
-                            labelText: 'Date of birth',
+                            labelText: 'Ngày sinh',
                           ),
                         ),
                       ),
@@ -236,12 +244,20 @@ class _ModelUpdateState extends State<ModelUpdate> {
                     ],
                   ),
                 ),
+                // TextFormField(
+                //   cursorColor: MaterialColors.mainColor,
+                //   controller: descriptionController,
+                //   decoration: InputDecoration(
+                //     icon: Icon(Icons.description),
+                //     labelText: 'Mô tả',
+                //   ),
+                // ),
                 TextFormField(
                   cursorColor: MaterialColors.mainColor,
                   controller: phoneController,
                   decoration: InputDecoration(
                     icon: Icon(Icons.phone),
-                    labelText: 'Phone number',
+                    labelText: 'Số điện thoại',
                   ),
                 ),
                 TextFormField(
@@ -249,14 +265,14 @@ class _ModelUpdateState extends State<ModelUpdate> {
                     controller: addressController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.home_work_outlined),
-                      labelText: 'Address',
+                      labelText: 'Địa chỉ',
                     )),
                 TextFormField(
                     cursorColor: MaterialColors.mainColor,
                     controller: giftedController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.star_outline),
-                      labelText: 'Gifted',
+                      labelText: 'Tài năng',
                     )),
                 SizedBox(
                   height: 30,
@@ -265,12 +281,13 @@ class _ModelUpdateState extends State<ModelUpdate> {
             ),
           ),
           ElevatedButton(
-            child: Text('UPDATE', style: TextStyle(color: Colors.black)),
+            child: Text('Cập nhật', style: TextStyle(color: Colors.black)),
             onPressed: () async {
               Map<String, dynamic> params = Map<String, dynamic>();
               params['id'] = widget.modelDetail.id;
               params['name'] = nameController.text;
               params['gender'] = genderController;
+              params['description'] = descriptionController.text;
               params['dateOfBirth'] = _date.toString();
               params['country'] = addressController.text;
               params['phone'] = phoneController.text;

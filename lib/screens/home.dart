@@ -27,12 +27,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   //List page Routers
   String _currentPage = "Page1";
-  List<String> pageKeys = ["Page1", "Page2", "Page3", "Page4"];
+  List<String> pageKeys = ["Page1", "Page2", "Page3", "Page4", "Page5"];
   final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
     "Page1": GlobalKey<NavigatorState>(),
     "Page2": GlobalKey<NavigatorState>(),
     "Page3": GlobalKey<NavigatorState>(),
     "Page4": GlobalKey<NavigatorState>(),
+    "Page5": GlobalKey<NavigatorState>(),
   };
   int _selectedIndex = 0;
   @override
@@ -71,6 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
           _buildOffstageNavigator("Page2"),
           _buildOffstageNavigator("Page3"),
           _buildOffstageNavigator("Page4"),
+          _buildOffstageNavigator("Page5")
         ]),
         bottomNavigationBar: CurvedNavigationBar(
           height: 50,
@@ -118,6 +120,23 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   Icon(
                     Icons.list_alt,
+                    color: Colors.black,
+                  ),
+                  Center(
+                    child: Text(
+                      'Yêu cầu',
+                      style: TextStyle(fontSize: 10),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 38,
+              child: Column(
+                children: [
+                  Icon(
+                    Icons.image,
                     color: Colors.black,
                   ),
                   Center(

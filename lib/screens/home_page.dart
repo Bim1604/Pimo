@@ -11,8 +11,8 @@ import 'package:intl/intl.dart';
 class MainScreen extends StatelessWidget with ChangeNotifier {
 
   Future<CardHorizontal> fetchCasting() async {
-    final response = await http
-        .get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/1'));
+    final response = await http.get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/1'));
+
     if (response.statusCode == 200) {
       return CardHorizontal.fromJson(jsonDecode(response.body));
     } else {
@@ -25,7 +25,6 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
 
   String getFormattedDate(String date) {
     var localDate = DateTime.parse(date).toLocal();
-
     /// inputFormat - format getting from api or other func.
     /// e.g If 2021-05-27 9:34:12.781341 then format should be yyyy-MM-dd HH:mm
     /// If 27/05/2021 9:34:12.781341 then format should be dd/MM/yyyy HH:mm
@@ -38,6 +37,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
 
     return outputDate.toString();
   }
+
   @override
   Widget build(BuildContext context) {
     Size size =

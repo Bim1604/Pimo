@@ -10,7 +10,10 @@ class BodyPartViewModel {
   }
 
   String get measure {
-    return _bodyPart.value.measure;
+    if (_bodyPart.value.measure == null) {
+      return 'Không có';
+    }
+    return _bodyPart.value.measure ;
   }
 
   String get textValue {
