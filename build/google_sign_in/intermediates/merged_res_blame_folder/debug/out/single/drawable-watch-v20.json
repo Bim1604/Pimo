@@ -1,14 +1,14 @@
 [
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\drawable-watch-v20\\common_google_signin_btn_text_light_normal.xml",
-        "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\9e3408f3cfba0d30e4aa3a48bccd2dc0\\jetified-play-services-auth-16.0.1\\res\\drawable-watch-v20\\common_google_signin_btn_text_light_normal.xml"
+        "merged": "/Volumes/HN 1/SWDMobile/Pimo/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml",
+        "source": "/Users/hoangnhi/.gradle/caches/transforms-2/files-2.1/f16eaf133ec1cc5a973a10d5e26c9b44/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_dark_normal.xml"
     },
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\drawable-watch-v20\\common_google_signin_btn_text_dark_normal.xml",
-        "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\9e3408f3cfba0d30e4aa3a48bccd2dc0\\jetified-play-services-auth-16.0.1\\res\\drawable-watch-v20\\common_google_signin_btn_text_dark_normal.xml"
+        "merged": "/Volumes/HN 1/SWDMobile/Pimo/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_disabled.xml",
+        "source": "/Users/hoangnhi/.gradle/caches/transforms-2/files-2.1/f16eaf133ec1cc5a973a10d5e26c9b44/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_disabled.xml"
     },
     {
-        "merged": "E:\\LapTrinh\\AndroidProject\\SWD\\Pimo_official\\Pimo\\build\\google_sign_in\\intermediates\\res\\merged\\debug\\drawable-watch-v20\\common_google_signin_btn_text_disabled.xml",
-        "source": "C:\\Users\\WIN\\.gradle\\caches\\transforms-2\\files-2.1\\9e3408f3cfba0d30e4aa3a48bccd2dc0\\jetified-play-services-auth-16.0.1\\res\\drawable-watch-v20\\common_google_signin_btn_text_disabled.xml"
+        "merged": "/Volumes/HN 1/SWDMobile/Pimo/build/google_sign_in/intermediates/res/merged/debug/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml",
+        "source": "/Users/hoangnhi/.gradle/caches/transforms-2/files-2.1/f16eaf133ec1cc5a973a10d5e26c9b44/jetified-play-services-auth-16.0.1/res/drawable-watch-v20/common_google_signin_btn_text_light_normal.xml"
     }
 ]

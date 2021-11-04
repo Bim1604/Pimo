@@ -12,7 +12,7 @@ class CardHorizontal extends StatelessWidget {
         this.address,
         this.closeTime,
         this.description,
-        this.img = "https://via.placeholder.com/200",
+        this.img,
         this.tap = defaultFunc});
 
   final String name;
@@ -34,6 +34,7 @@ class CardHorizontal extends StatelessWidget {
       openTime: json['casting']['openTime'],
       closeTime: json['casting']['closeTime'],
       address: json['casting']['address'],
+      img: json['casting']['poster'],
     );
   }
 
@@ -100,7 +101,7 @@ class CardHorizontal extends StatelessWidget {
                       padding: EdgeInsets.only(
                           left: 16.0, right: 16, bottom: 0, top: 16),
                       height: 127,
-                      width: MediaQuery.of(context).size.width / 2.5,
+                      width: MediaQuery.of(context).size.width / 3,
                       decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(

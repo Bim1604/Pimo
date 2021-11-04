@@ -7,24 +7,27 @@ import 'package:pimo/screens/components.dart';
 import 'package:pimo/screens/product.dart';
 import 'package:pimo/widgets/home_view.dart';
 import 'package:intl/intl.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class MainScreen extends StatelessWidget with ChangeNotifier {
-
-  Future<CardHorizontal> fetchCasting() async {
-    final response = await http.get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/1'));
-
+  List data;
+  Future<List> fetchCasting() async {
+    final response =
+        await http.get(Uri.parse('https://api.pimo.studio/api/v1/castings'));
     if (response.statusCode == 200) {
-      return CardHorizontal.fromJson(jsonDecode(response.body));
+      var test = json.decode(response.body);
+      data = test["castings"];
+      return data;
     } else {
       throw Exception('Failed to load album');
     }
   }
 
-
-  Future<CardHorizontal> getEvents;
-
+  Future<List> getEvents;
+  DateTime now = new DateTime.now();
   String getFormattedDate(String date) {
     var localDate = DateTime.parse(date).toLocal();
+
     /// inputFormat - format getting from api or other func.
     /// e.g If 2021-05-27 9:34:12.781341 then format should be yyyy-MM-dd HH:mm
     /// If 27/05/2021 9:34:12.781341 then format should be dd/MM/yyyy HH:mm
@@ -41,92 +44,190 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     Size size =
-        MediaQuery
-            .of(context)
-            .size; //Total height and width of the screen
-    var height = MediaQuery
-        .of(context)
-        .size
-        .height;
+        MediaQuery.of(context).size; //Total height and width of the screen
+    var height = MediaQuery.of(context).size.height;
+    var width = size.width;
     getEvents = fetchCasting();
     return SafeArea(
-      child: FutureBuilder<CardHorizontal>(
-          future: getEvents,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return Scaffold(
-                  body: SingleChildScrollView(
-                    child: Column(children: <Widget>[
-                      HeaderWithSearchBox(size: size),
-                      const TitleWithButton(
-                        text: "Sự kiện sắp tới",
-                        isBooking: true,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 10),
-                        child: CardHorizontal(
-                            title: "${snapshot.data.name}",
-                            openTime: getFormattedDate("${snapshot.data.openTime}"),
-                            closeTime: getFormattedDate("${snapshot.data.closeTime}"),
-                            cta: "${snapshot.data.address}",
-                            img: homeCards["Ice Cream"]['image'],
-                            tap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => Product(
-                                      title: homeCards["Ice Cream"]['title'],
-                                      urlImg: homeCards["Ice Cream"]['image'],
-                                    ),
-                                  ));
-                            }),
-                      ),
-                      const TitleWithButton(
+      child: Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              HeaderWithSearchBox(size: size),
+              const TitleWithButton(
+                text: "Sự kiện sắp tới",
+                isBooking: true,
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 10),
+                child: FutureBuilder<List>(
+                    future: getEvents,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List listUpcoming = snapshot.data.where(
+                          (element) => 
+                          DateTime.parse(element["casting"]["closeTime"]).isAfter(now)
+                        ).toList();
+
+                        return CarouselSlider(
+                          options: CarouselOptions(
+                            height: height / 5,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 0.8,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: const Duration(seconds: 3),
+                            autoPlayAnimationDuration:
+                                const Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            scrollDirection: Axis.horizontal,
+                          ),
+                          items: listUpcoming.map((i) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return CardHorizontal(
+                                        title: "${i["casting"]["name"]}",
+                                        openTime: getFormattedDate(
+                                            "${i["casting"]["openTime"]}"),
+                                        closeTime: getFormattedDate(
+                                            "${i["casting"]["closeTime"]}"),
+                                        img: i["casting"]["poster"],
+                                        tap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => Product(
+                                                  id: i["casting"]["id"],
+                                                ),
+                                              ));
+                                        });
+                              },
+                            );
+                          }).toList(),
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    }),
+              ),
+              const TitleWithButton(
                         text: "Casting mới",
                       ),
-                      CardHorizontal(
-                          title: "${snapshot.data.name}",
-                          openTime: getFormattedDate("${snapshot.data.openTime}"),
-                          closeTime: getFormattedDate("${snapshot.data.closeTime}"),
-                          cta: "${snapshot.data.address}",
-                          img: homeCards["Makeup"]['image'],
-                          tap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Product(
-                                    title: homeCards["Ice Cream"]['title'],
-                                    urlImg: homeCards["Ice Cream"]['image'],
-                                  ),
-                                ));
-                          }),
-                      // Casting(typeView: 2),
-                      const TitleWithButton(
+               FutureBuilder<List>(
+                    future: getEvents,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List listUpcoming = snapshot.data.where(
+                          (element) => 
+                          DateTime.parse(element["casting"]["closeTime"]).isAfter(now)
+                        ).toList();
+
+                        return CarouselSlider(
+                          options: CarouselOptions(
+                            height: height / 5,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 0.8,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: const Duration(seconds: 3),
+                            autoPlayAnimationDuration:
+                                const Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            //enlargeCenterPage: true,
+                            scrollDirection: Axis.horizontal,
+                          ),
+                          items: listUpcoming.map((i) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return CardHorizontal(
+                                        // cta: "${snapshot.data.description}",
+                                        title: "${i["casting"]["name"]}",
+                                        openTime: getFormattedDate(
+                                            "${i["casting"]["openTime"]}"),
+                                        closeTime: getFormattedDate(
+                                            "${i["casting"]["closeTime"]}"),
+                                        img: i["casting"]["poster"],
+                                        tap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => Product(
+                                                  id: i["casting"]["id"],
+                                                ),
+                                              ));
+                                        });
+                              },
+                            );
+                          }).toList(),
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    }),   
+                    const TitleWithButton(
                         text: "Tốt nhất dành cho bạn",
                       ),
-                      CardHorizontal(
-                          // cta: "${snapshot.data.description}",
-                          title: "${snapshot.data.name}",
-                          openTime: getFormattedDate("${snapshot.data.openTime}"),
-                          closeTime: getFormattedDate("${snapshot.data.closeTime}"),
-                          img: homeCards["Coffee"]['image'],
-                          tap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Product(
-                                    title: homeCards["Ice Cream"]['title'],
-                                    urlImg: homeCards["Ice Cream"]['image'],
-                                  ),
-                                ));
-                          }),
-                      // Casting(typeView: 3),
-                    ]),
-                  ));
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-          }),
+               FutureBuilder<List>(
+                    future: getEvents,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        List list = snapshot.data.where(
+                          (element) => 
+                          DateTime.parse(element["casting"]["closeTime"]).isAfter(now)
+                        ).toList();
+
+                        return CarouselSlider(
+                          options: CarouselOptions(
+                            height: height / 5,
+                            aspectRatio: 16 / 9,
+                            viewportFraction: 0.8,
+                            initialPage: 0,
+                            enableInfiniteScroll: true,
+                            reverse: false,
+                            autoPlay: true,
+                            autoPlayInterval: const Duration(seconds: 3),
+                            autoPlayAnimationDuration:
+                                const Duration(milliseconds: 800),
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            //enlargeCenterPage: true,
+                            scrollDirection: Axis.horizontal,
+                          ),
+                          items: list.map((i) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return CardHorizontal(
+                                        // cta: "${snapshot.data.description}",
+                                        title: "${i["casting"]["name"]}",
+                                        openTime: getFormattedDate(
+                                            "${i["casting"]["openTime"]}"),
+                                        closeTime: getFormattedDate(
+                                            "${i["casting"]["closeTime"]}"),
+                                        img: i["casting"]["poster"],
+                                        tap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => Product(
+                                                  id: i["casting"]["id"],
+                                                ),
+                                              ));
+                                        });
+                              },
+                            );
+                          }).toList(),
+                        );
+                      } else {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                    }),    
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -167,11 +268,11 @@ class HeaderWithSearchBox extends StatelessWidget {
                           return Text(
                             'Xin chào ' + 'Lisa' + '!',
                             style:
-                            Theme.of(context).textTheme.headline5.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.0,
-                            ),
+                                Theme.of(context).textTheme.headline5.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1.0,
+                                    ),
                           );
                         },
                       ),
@@ -299,7 +400,8 @@ void _showDialog(BuildContext context) {
             style: ElevatedButton.styleFrom(
               primary: Colors.white,
               elevation: 0,
-            ), onPressed: () {  },
+            ),
+            onPressed: () {},
             // onPressed: () {
             //   Navigator.push(
             //     context,
@@ -345,7 +447,7 @@ class TitleWithButton extends StatelessWidget {
         Spacer(),
         FlatButton(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             color: const Color(0xFFf5a6b9),
             // onPressed: () {
             //   if (text == 'Notification') {
