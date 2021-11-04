@@ -30,4 +30,5 @@ class MaterialColors {
 
   static const Color textColor = Colors.black;
   static const mainColor = Color(0xffff9bb7);
+  static const buttonColor = Color(0xffff819c);
 }

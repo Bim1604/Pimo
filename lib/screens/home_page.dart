@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/components.dart';
 import 'package:pimo/screens/product.dart';
 import 'package:pimo/widgets/home_view.dart';
@@ -133,10 +134,10 @@ class HeaderWithSearchBox extends StatelessWidget {
                     child: SizedBox(
                       width: 300,
                       child: FutureBuilder(
-                        // future: FlutterSession().get('modelName'),
+                        future: FlutterSession().get('modelName'),
                         builder: (context, snapshot) {
                           return Text(
-                            'Xin chào ' + 'Lisa' + '!',
+                            'Xin chào ' + snapshot.data.toString() + '!',
                             style:
                             Theme.of(context).textTheme.headline5.copyWith(
                               color: Colors.black,
