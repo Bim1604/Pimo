@@ -12,7 +12,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
 
   Future<CardHorizontal> fetchCasting() async {
     final response = await http
-        .get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/1'));
+        .get(Uri.parse('https://api.pimo.studio/api/v1/castings/information/4'));
     if (response.statusCode == 200) {
       return CardHorizontal.fromJson(jsonDecode(response.body));
     } else {
