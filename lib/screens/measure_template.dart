@@ -4,9 +4,8 @@ import 'package:pimo/viewmodels/body_list_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
 class MeasureTemplatePage extends StatefulWidget {
-  // final String modelId;
-  // MeasureTemplatePage({Key key, this.modelId}) : super(key: key);
-  MeasureTemplatePage({Key key}) : super(key: key);
+  final int modelId;
+  MeasureTemplatePage({Key key, this.modelId}) : super(key: key);
   @override
   _MeasureTemplatePageState createState() => _MeasureTemplatePageState();
 }

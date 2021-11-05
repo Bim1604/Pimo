@@ -1,9 +1,45 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/collection_project.dart';
 import 'package:pimo/models/image.dart';
 import 'package:http/http.dart' as http;
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
+
+
+Future<String> uploadFireBase(String path, int modelId) async {
+  var token = (await FlutterSession().get("jwt")).toString();
+  Map<String, String> heads = Map<String, String>();
+  heads['Content-Type'] = 'application/json';
+  heads['Accept'] = 'application/json';
+  heads['Authorization'] = 'Bearer $token';
+  final _firebaseStorage = FirebaseStorage.instance;
+
+  var file = File(path);
+
+  var snapshot = await _firebaseStorage
+      .ref()
+      .child('models/' + '$modelId' + "/avatar/images.jpg")
+      .putFile(file);
+  var downloadUrl = await snapshot.ref.getDownloadURL();
+
+  Map<String, dynamic> params = Map<String, dynamic>();
+  params['id'] = modelId;
+  params['avatar'] = downloadUrl;
+
+  final message = jsonEncode(params);
+  final response = await http.put(
+      Uri.parse(url + 'api/v1/models/${params["id"]}/avatar'),
+      body: message,
+      headers: heads);
+  if (response.statusCode == 200) {
+    return downloadUrl;
+  } else {
+    throw Exception('Failed to load');
+  }
+}
 
 class ImageService {
 

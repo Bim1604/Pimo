@@ -51,7 +51,7 @@ class ApplyCastingService {
   //     throw Exception('Failed to load');
   //   }
   // }
-  //
+
   Future<bool> isApply(int castingId) async {
     // var modelId = (await FlutterSession().get("modelId")).toString();
     // var token = (await FlutterSession().get("token")).toString();

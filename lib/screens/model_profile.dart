@@ -5,13 +5,15 @@ import 'package:pimo/viewmodels/body_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'avatar_page.dart';
 import 'measure_template.dart';
 import 'onboarding.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ModelProfilePage extends StatefulWidget {
 
-  final String modelId;
-  const ModelProfilePage({Key key, this.modelId}) : super(key: key);
+  final int modelId;
+  final String oldImage;
+  const ModelProfilePage({Key key, this.modelId, this.oldImage}) : super(key: key);
 
   @override
   _ModelProfilePageState createState() => _ModelProfilePageState();
@@ -26,7 +28,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
           child: Scaffold(
             body: FutureBuilder<ModelViewModel>(
               future: Provider.of<ModelViewModel>(context, listen: false)
-                  .getModel(),
+                  .getModel(widget.modelId),
               builder: (ctx, prevData) {
                 if (prevData.connectionState == ConnectionState.waiting) {
                   return Column(
@@ -89,21 +91,23 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       ],
                       borderRadius: BorderRadius.circular(80),
                       image: DecorationImage(
-                          image: NetworkImage(modelDetail.avatar ?? ''),
+                        // null tại đây
+                        //   image: NetworkImage(modelDetail.avatar ?? ''),
+                          image: NetworkImage(widget.oldImage),
                           fit: BoxFit.cover)),
                 )),
             Positioned(
                 bottom: 5,
                 right: 125,
                 child: GestureDetector(
-                  // onTap: () {
-                  //   Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) =>
-                  //             CameraWidget(modelId: modelDetail.id),
-                  //       ));
-                  // },
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CameraWidget(modelId: modelDetail.id),
+                        ));
+                  },
                   child: ClipOval(
                       child: Container(
                           padding: EdgeInsets.all(3),
@@ -211,6 +215,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                           ChangeNotifierProvider<ModelViewModel>.value(
                               value: modelDetail,
                               child: UpdateModelProfilePage(
+                                modelId: widget.modelId,
                                   ))));
                     },
                     child: Row(
@@ -269,7 +274,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                                 child: FutureBuilder(
                                   builder: (context, snapshot) {
                                     return MeasureTemplatePage(
-                                      // modelId: widget.modelId,
+                                      modelId: widget.modelId,
                                     );
                                   },
                                 )
