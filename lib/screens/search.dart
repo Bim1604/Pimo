@@ -204,10 +204,10 @@ class _SearchState extends State<Search> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) => Product(
-                                                title: productCards["Places"][2]
-                                                    ["title"],
-                                                urlImg: productCards["Places"]
-                                                    [2]["image"],
+                                                // title: productCards["Places"][2]
+                                                //     ["title"],
+                                                // urlImg: productCards["Places"]
+                                                //     [2]["image"],
                                               ),
                                             ));
                                       }),
@@ -219,10 +219,10 @@ class _SearchState extends State<Search> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) => Product(
-                                                title: productCards["Places"][1]
-                                                    ["title"],
-                                                urlImg: productCards["Places"]
-                                                    [1]["image"],
+                                                // title: productCards["Places"][1]
+                                                //     ["title"],
+                                                // urlImg: productCards["Places"]
+                                                //     [1]["image"],
                                               ),
                                             ));
                                       })
@@ -237,10 +237,10 @@ class _SearchState extends State<Search> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => Product(
-                                            title: productCards["Places"][0]
-                                                ["title"],
-                                            urlImg: productCards["Places"][0]
-                                                ["image"],
+                                            // title: productCards["Places"][0]
+                                            //     ["title"],
+                                            // urlImg: productCards["Places"][0]
+                                            //     ["image"],
                                           ),
                                         ));
                                   })

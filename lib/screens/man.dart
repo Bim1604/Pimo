@@ -74,8 +74,8 @@ class Man extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => Product(
-                                title: homeCards["Ice Cream"]['title'],
-                                urlImg: homeCards["Ice Cream"]['image'],
+                                // title: homeCards["Ice Cream"]['title'],
+                                // urlImg: homeCards["Ice Cream"]['image'],
                               ),
                             ));
                       }),
@@ -93,8 +93,8 @@ class Man extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Product(
-                                  title: homeCards["Makeup"]['title'],
-                                  urlImg: homeCards["Makeup"]['image'],
+                                  // title: homeCards["Makeup"]['title'],
+                                  // urlImg: homeCards["Makeup"]['image'],
                                 ),
                               ));
                         }),
@@ -107,8 +107,8 @@ class Man extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Product(
-                                  title: homeCards["Coffee"]['title'],
-                                  urlImg: homeCards["Coffee"]['image'],
+                                  // title: homeCards["Coffee"]['title'],
+                                  // urlImg: homeCards["Coffee"]['image'],
                                 ),
                               ));
                         })
@@ -124,8 +124,8 @@ class Man extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => Product(
-                              title: homeCards["Fashion"]['title'],
-                              urlImg: homeCards["Fashion"]['image'],
+                              // title: homeCards["Fashion"]['title'],
+                              // urlImg: homeCards["Fashion"]['image'],
                             ),
                           ));
                     }),
@@ -141,8 +141,8 @@ class Man extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => Product(
-                                title: homeCards["Argon"]['title'],
-                                urlImg: homeCards["Argon"]['image'],
+                                // title: homeCards["Argon"]['title'],
+                                // urlImg: homeCards["Argon"]['image'],
                               ),
                             ));
                       }),

@@ -46,8 +46,8 @@ class Category extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Product(
-                                  title: suggestionsArray[0]['title'],
-                                  urlImg: suggestionsArray[0]['img'],
+                                  // title: suggestionsArray[0]['title'],
+                                  // urlImg: suggestionsArray[0]['img'],
                                 ),
                               ));
                         }),
@@ -59,8 +59,8 @@ class Category extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Product(
-                                  title: suggestionsArray[1]['title'],
-                                  urlImg: suggestionsArray[1]['img'],
+                                  // title: suggestionsArray[1]['title'],
+                                  // urlImg: suggestionsArray[1]['img'],
                                 ),
                               ));
                         }),

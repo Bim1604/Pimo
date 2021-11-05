@@ -154,8 +154,8 @@ class _BestDealsState extends State<BestDeals> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Product(
-                                  title: dealsCards[currentTag][0]['title'],
-                                  urlImg: dealsCards[currentTag][0]['image'],
+                                  // title: dealsCards[currentTag][0]['title'],
+                                  // urlImg: dealsCards[currentTag][0]['image'],
                                 ),
                               ));
                         }),
@@ -172,8 +172,8 @@ class _BestDealsState extends State<BestDeals> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Product(
-                                    title: dealsCards[currentTag][1]['title'],
-                                    urlImg: dealsCards[currentTag][1]['image'],
+                                    // title: dealsCards[currentTag][1]['title'],
+                                    // urlImg: dealsCards[currentTag][1]['image'],
                                   ),
                                 ));
                           }),
@@ -186,8 +186,8 @@ class _BestDealsState extends State<BestDeals> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Product(
-                                    title: dealsCards[currentTag][2]['title'],
-                                    urlImg: dealsCards[currentTag][2]['image'],
+                                    // title: dealsCards[currentTag][2]['title'],
+                                    // urlImg: dealsCards[currentTag][2]['image'],
                                   ),
                                 ));
                           })
@@ -203,8 +203,8 @@ class _BestDealsState extends State<BestDeals> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => Product(
-                                title: dealsCards[currentTag][3]['title'],
-                                urlImg: dealsCards[currentTag][3]['image'],
+                                // title: dealsCards[currentTag][3]['title'],
+                                // urlImg: dealsCards[currentTag][3]['image'],
                               ),
                             ));
                       }),
@@ -220,8 +220,8 @@ class _BestDealsState extends State<BestDeals> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => Product(
-                                  title: dealsCards[currentTag][4]['title'],
-                                  urlImg: dealsCards[currentTag][4]['image'],
+                                  // title: dealsCards[currentTag][4]['title'],
+                                  // urlImg: dealsCards[currentTag][4]['image'],
                                 ),
                               ));
                         }),
