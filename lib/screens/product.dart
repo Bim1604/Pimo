@@ -403,7 +403,7 @@ class Casting extends StatelessWidget {
                           ),
                           // ProductSizePicker(),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
+                            padding: const EdgeInsets.only(top: 20.0, bottom: 10 ),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Row(
@@ -466,7 +466,7 @@ class Casting extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10.0),
+                            padding: const EdgeInsets.only(top: 20.0, bottom: 10),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Row(
