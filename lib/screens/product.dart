@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/models/brand.dart';
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 
 //widgets
 import 'package:pimo/widgets/navbar.dart';
@@ -64,8 +65,8 @@ class Casting extends StatelessWidget with ChangeNotifier {
   }
 
   applyCasting(String id) async {
-    String accessToken =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaGlzSXNKd3RTdWJqZWN0IiwianRpIjoiNDc4NDdhMTYtMjZjZS00MDVmLThkNDMtM2FlNDY3MTQ0MTE2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiaG9hbmduaGluZ3V5ZW4zM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNb2RlbCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMjgiLCJleHAiOjE2MzYxNzUxMTksImlzcyI6IlBpbW8uc3R1ZGlvbiIsImF1ZCI6IlBpbW8uc3R1ZGlvbiJ9.54ekP6h4WIGvk7VKcWA7DSJ4eFhwJlLX-2kp4Ll9bLo";
+
+    String accessToken = (await FlutterSession().get('jwt')).toString();
     var headers = {
       'Content-Type': 'application/json;charset=UTF-8',
       "Access-Control-Allow-Origin": "*",
@@ -76,18 +77,21 @@ class Casting extends StatelessWidget with ChangeNotifier {
         headers: headers,
         body: jsonEncode(id));
 
+    var msg = "Ứng tuyển thất bại"; 
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       if (body["success"]) {
-        Fluttertoast.showToast(
-            msg: "Ứng tuyển thành công",
+        msg = "Ứng tuyển thành công";
+      }
+    } else {
+      msg = "Ứng tuyển thất bại";
+      //throw Exception('Failed');
+    }
+    return Fluttertoast.showToast(
+            msg: msg,
             toastLength: Toast.LENGTH_LONG,
             gravity: ToastGravity.BOTTOM);
-      }
-      return body;
-    } else {
-      throw Exception('Failed');
-    }
+
   }
 
   @override
