@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/models/brand.dart';
 
@@ -14,7 +15,7 @@ import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
 
-class Casting extends StatelessWidget {
+class Casting extends StatelessWidget with ChangeNotifier {
   final double height = window.physicalSize.height;
   final String urlImg;
   final String title;
@@ -60,6 +61,33 @@ class Casting extends StatelessWidget {
         title: json["casting"]["name"],
         urlImg: json["casting"]["poster"],
         id: json["casting"]["id"].toString());
+  }
+
+  applyCasting(String id) async {
+    String accessToken =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJUaGlzSXNKd3RTdWJqZWN0IiwianRpIjoiNDc4NDdhMTYtMjZjZS00MDVmLThkNDMtM2FlNDY3MTQ0MTE2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvZW1haWxhZGRyZXNzIjoiaG9hbmduaGluZ3V5ZW4zM0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNb2RlbCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiMjgiLCJleHAiOjE2MzYxNzUxMTksImlzcyI6IlBpbW8uc3R1ZGlvbiIsImF1ZCI6IlBpbW8uc3R1ZGlvbiJ9.54ekP6h4WIGvk7VKcWA7DSJ4eFhwJlLX-2kp4Ll9bLo";
+    var headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer ' + accessToken
+    };
+    var response = await http.post(
+        Uri.parse('https://api.pimo.studio/api/v1/applies'),
+        headers: headers,
+        body: jsonEncode(id));
+
+    if (response.statusCode == 200) {
+      var body = jsonDecode(response.body);
+      if (body["success"]) {
+        Fluttertoast.showToast(
+            msg: "Ứng tuyển thành công",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM);
+      }
+      return body;
+    } else {
+      throw Exception('Failed');
+    }
   }
 
   @override
@@ -167,7 +195,8 @@ class Casting extends StatelessWidget {
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 10.0,bottom: 10),
+                            padding:
+                                const EdgeInsets.only(top: 10.0, bottom: 10),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Row(
@@ -403,7 +432,8 @@ class Casting extends StatelessWidget {
                           ),
                           // ProductSizePicker(),
                           Padding(
-                            padding: const EdgeInsets.only(top: 20.0, bottom: 10 ),
+                            padding:
+                                const EdgeInsets.only(top: 20.0, bottom: 10),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Row(
@@ -466,7 +496,8 @@ class Casting extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                            padding:
+                                const EdgeInsets.only(top: 20.0, bottom: 10),
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Row(
@@ -550,7 +581,9 @@ class Casting extends StatelessWidget {
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               child: RaisedButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    applyCasting(id);
+                                  },
                                   textColor: Colors.white,
                                   color: MaterialColors.mainColor,
                                   padding: const EdgeInsets.symmetric(
@@ -598,22 +631,22 @@ class Product extends StatelessWidget with ChangeNotifier {
               extendBodyBehindAppBar: true,
               appBar: AppBar(
                 leading: Padding(
-                  padding: EdgeInsets.only(left: 18, top:18),
+                  padding: EdgeInsets.only(left: 18, top: 18),
                   child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(100),
-                      boxShadow: [
-                        BoxShadow(
-                          color: MaterialColors.mainColor.withOpacity(0.5),
-                          offset: Offset(0, 5),
-                          blurRadius: 10,
-                        )
-                      ]),
-                  child: const BackButton(
-                    color: MaterialColors.mainColor,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: [
+                          BoxShadow(
+                            color: MaterialColors.mainColor.withOpacity(0.5),
+                            offset: Offset(0, 5),
+                            blurRadius: 10,
+                          )
+                        ]),
+                    child: const BackButton(
+                      color: MaterialColors.mainColor,
+                    ),
                   ),
-                ),
                 ),
                 backgroundColor: Colors.transparent,
                 elevation: 0,
