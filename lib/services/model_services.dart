@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/model.dart';
 import 'package:http/http.dart' as http;
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 class ModelServices {
 
   Future<Model> updateModelDetail(Map<String, dynamic> params) async {
@@ -25,6 +26,8 @@ class ModelServices {
         .get(Uri.parse('https://api.pimo.studio/api/v1/models/1'));
     if (response.statusCode == 200) {
       var model = Model.fromJson(jsonDecode(response.body));
+      await FlutterSession().set("modelName", model.name);
+      await FlutterSession().set("modelId", model.id);
       return model;
     } else {
       throw Exception('Failed to load Model !');

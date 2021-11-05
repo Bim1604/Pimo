@@ -24,11 +24,11 @@ class _ImageSliderState extends State<ImageSlider> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(item),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                           alignment: Alignment.topCenter))))
               .toList(),
           options: CarouselOptions(
-              height: 700,
+              height: 400,
               autoPlay: false,
               enlargeCenterPage: false,
               // aspectRatio: 2.0,
@@ -41,7 +41,7 @@ class _ImageSliderState extends State<ImageSlider> {
         ),
         Container(
           alignment: Alignment.bottomCenter,
-          padding: EdgeInsets.only(bottom: 40),
+          padding: EdgeInsets.only(bottom: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: widget.imgArray.map((url) {

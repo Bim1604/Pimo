@@ -4,6 +4,7 @@ import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/casting.dart';
 import 'package:http/http.dart' as http;
 import 'package:pimo/models/casting_info.dart';
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/viewmodels/casting_view_model.dart';
 class CastingService {
   List<Casting> parseCastingList(String responseBody) {
@@ -152,6 +153,16 @@ class CastingService {
     }
   }
 
+
+  Future<List<CastingInfo>> getCastingInfoDetail(int castingId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/castings/information/${castingId}"));
+    if (response.statusCode == 200) {
+      var list = parseCastingInfoList(response.body);
+      return list;
+    } else {
+      throw Exception("Request API error");
+    }
+  }
   
   Future<List<CastingInfo>> getCastingInfoList() async {
     final response = await http.get(Uri.parse(url + "api/v1/castings"));

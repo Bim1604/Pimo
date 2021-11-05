@@ -79,28 +79,18 @@ class ListStyle {
 class ListGender {
   int id;
   String genderName;
-  List<Null> models;
 
-  ListGender({this.id, this.genderName, this.models});
+  ListGender({this.id, this.genderName});
 
   ListGender.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     genderName = json['genderName'];
-    if (json['models'] != null) {
-      models = new List<Null>();
-      json['models'].forEach((v) {
-        // models.add(new Null.fromJson(v));
-      });
-    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['genderName'] = this.genderName;
-    if (this.models != null) {
-      // data['models'] = this.models.map((v) => v.toJson()).toList();
-    }
     return data;
   }
 }

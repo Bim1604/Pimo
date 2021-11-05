@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'dart:convert';
 
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 
@@ -31,8 +30,11 @@ class GoogleSignInProvider extends ChangeNotifier {
       await FirebaseAuth.instance.signInWithCredential(credential);
       var idToken = await FirebaseAuth.instance.currentUser.getIdToken();
       var mail = await FirebaseAuth.instance.currentUser.email;
-      print(FirebaseAuth.instance.currentUser.email + ' *****' + idToken);
+
       var token = {"token": idToken, "mail": mail};
+      await FlutterSession().set("token", idToken);
+      print(token);
+
       HttpClient client = HttpClient();
       client.badCertificateCallback =
           ((X509Certificate cert, String host, int port) => true);
