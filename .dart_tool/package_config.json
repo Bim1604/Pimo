@@ -62,6 +62,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "dio",
+      "rootUri": "file:///usr/local/Caskroom/flutter/2.5.3/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "f_datetimerangepicker",
       "rootUri": "file:///usr/local/Caskroom/flutter/2.5.3/flutter/.pub-cache/hosted/pub.dartlang.org/f_datetimerangepicker-0.2.0",
       "packageUri": "lib/",
@@ -476,7 +482,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-11-06T05:54:45.238810Z",
+  "generated": "2021-11-06T11:01:05.382893Z",
   "generator": "pub",
   "generatorVersion": "2.14.4"
 }
