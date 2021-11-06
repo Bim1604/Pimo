@@ -178,7 +178,6 @@ class _ModelCollectionProjectState extends State<ModelCollectionProject> {
                         builder: (context, snapshot) {
                           //Chọn 1 bộ sưu tập, sau đó xuất hiện hình ảnh ở đây!
                           //Gia tri collection ID dung.
-                          print('Roi sao den day chua?');
                           return ImageInCollectionPage(
                             collection: collection,
                             index: index,

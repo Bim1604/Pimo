@@ -12,8 +12,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ModelProfilePage extends StatefulWidget {
 
   final int modelId;
-  final String oldImage;
-  const ModelProfilePage({Key key, this.modelId, this.oldImage}) : super(key: key);
+  // final String oldImage;
+  const ModelProfilePage({Key key, this.modelId}) : super(key: key);
 
   @override
   _ModelProfilePageState createState() => _ModelProfilePageState();
@@ -92,8 +92,8 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       borderRadius: BorderRadius.circular(80),
                       image: DecorationImage(
                         // null tại đây
-                        //   image: NetworkImage(modelDetail.avatar ?? ''),
-                          image: NetworkImage(widget.oldImage),
+                          image: NetworkImage(modelDetail.avatar ?? ''),
+                          // image: NetworkImage(widget.oldImage),
                           fit: BoxFit.cover)),
                 )),
             Positioned(

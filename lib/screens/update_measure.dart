@@ -14,7 +14,6 @@ class UpdateMeasurePage extends StatefulWidget {
 }
 
 class _UpdateMeasurePageState extends State<UpdateMeasurePage> {
-  List<String> bodyList = [];
 
   @override
   void initState() {

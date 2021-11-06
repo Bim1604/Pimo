@@ -303,7 +303,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
                               builder: (context, snapshot) {
                                 return ModelProfilePage(
                                   modelId: params['id'],
-                                  oldImage: params['linkAvatar'],
+                                  // oldImage: params['linkAvatar'],
                                 );
                               },
                             ))),

@@ -206,7 +206,7 @@ void _showDialog(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: const Text("Search"),
+        title: const Text("Tìm kiếm"),
         content: Builder(
           builder: (context) {
             // Get available height and width of the build area of this widget. Make a choice depending on the size.
@@ -223,7 +223,7 @@ void _showDialog(BuildContext context) {
                     controller: nameController,
                     decoration: const InputDecoration(
                       icon: Icon(Icons.drive_file_rename_outline),
-                      labelText: 'Name',
+                      labelText: 'Tên',
                     ),
                   ),
                   TextFormField(

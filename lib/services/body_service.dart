@@ -29,7 +29,6 @@ class BodyPartService {
     final response = await http.get(Uri.parse(url + "api/v1/models/1"));
     if (response.statusCode == 200) {
       var list = parseBodyPartList(response.body);
-      print('Xong r nè');
       return list;
     } else {
       throw Exception("Cannot fetch body ");
