@@ -21,6 +21,7 @@ class Model {
   final String linkIns;
   final String linkTwitter;
   final String linkAvatar;
+  final String imageAvatar;
 
   // final List<ModelStyle> modelStyle;
 
@@ -42,6 +43,7 @@ class Model {
       this.gifted,
       this.status,
         this.linkAvatar,
+        this.imageAvatar,
       this.description});
 
   //static method

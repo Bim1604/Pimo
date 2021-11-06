@@ -1,12 +1,17 @@
 
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pimo/constants/Images.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
+import 'package:pimo/services/model_services.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-
+import 'package:http/http.dart' as http;
 import 'model_profile.dart';
 
 class UpdateModelProfilePage extends StatefulWidget {
@@ -92,6 +97,55 @@ class _ModelUpdateState extends State<ModelUpdate> {
       giftedController;
 
   GlobalKey<FormState> _profileKey = GlobalKey<FormState>();
+
+  updateModelDetail(FormData params) async {
+    // final message = jsonEncode(params);
+    // print(message);
+    var jwt = (await FlutterSession().get("jwt")).toString();
+    var header = {
+      'Content-Type': "multipart/form-data; boundary=xxBOUNDARYxx",
+      'Accept': '*/*',
+      'Authorization':
+      "Bearer "+(jwt),
+      'Access-Control-Allow-Origin': "*",
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
+      'Access-Control-Allow-Headers': 'origin,X-Requested-With,content-type,accept',
+      'Access-Control-Allow-Credentials': 'true'};
+    // final response = await http.put(
+    //     Uri.parse(url + 'api/v1/models'),
+    //     body: message,
+    //     // headers: {
+    //     //   "Content-Type": "multipart/form-data; boundary=xxBOUNDARYxx",
+    //     //   "Accept": "application/json",
+    //     //   "Authorization": 'Bearer $jwt',
+    //     // }
+    //     headers: header,
+    // );
+    var dio = Dio();
+    var response = await dio.request((url + 'api/v1/models'),
+        options: Options(
+          method: "PUT",
+            headers: {
+              'Content-Type': "multipart/form-data",
+              "Authorization": 'Bearer $jwt',
+          }),
+        data: params,
+    );
+    print(response.statusCode);
+    // print(response.body);
+    try {
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(msg: 'Cập nhật thành công');
+      } else {
+        print(response.headers);
+      }
+    } on Exception catch (exception) {
+      print("Exception: "+ exception.toString());
+    } catch (error) {
+      print("ERROR: " + error.toString());
+    };
+
+  }
 
   @override
   void dispose() {
@@ -271,15 +325,16 @@ class _ModelUpdateState extends State<ModelUpdate> {
           ElevatedButton(
             child: Text('Cập nhật', style: TextStyle(color: Colors.black)),
             onPressed: () async {
-              Map<String, dynamic> params = Map<String, dynamic>();
               var link = "https://firebasestorage.googleapis.com/v0/b/pimo-fc268.appspot.com/o/images%2F12728867_446728072204323_8942144823096127805_n.jpg?alt=media&token=760d93c4-561e-45b7-9de6-67d5690a15bf";
-              params['id'] = widget.modelDetail.id;
+              Map<String, dynamic> params = Map<String, dynamic>();
+              // params['id'] = widget.modelDetail.id;
               params['name'] = nameController.text;
               // params['genderName'] = genderController;
               params['description'] = "HELLO WORLD";
-              params['genderId'] = 1;
+              params['genderId'] = 1.toString();
               params['dateOfBirth'] = _date.toString();
               params['country'] = addressController.text;
+              params['imageAvatar'] = '';
               params['province'] = "Gia Lai";
               params['district'] = "QUan 2";
               params['phone'] = phoneController.text;
@@ -288,8 +343,10 @@ class _ModelUpdateState extends State<ModelUpdate> {
               params['instagram'] = "string";
               params['twitter'] = "string";
               params['linkAvatar']  = link;
-              await Provider.of<ModelViewModel>(context, listen: false)
-                  .updateProfileModel(params);
+              var form = new FormData.fromMap(params);
+
+              updateModelDetail(form);
+
               await FlutterSession().set("modelName", nameController.text);
               Navigator.pushReplacement(
                 context,
@@ -302,7 +359,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
                             child: FutureBuilder(
                               builder: (context, snapshot) {
                                 return ModelProfilePage(
-                                  modelId: params['id'],
+                                  modelId: widget.modelDetail.id,
                                   // oldImage: params['linkAvatar'],
                                 );
                               },

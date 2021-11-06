@@ -7,22 +7,11 @@ import 'package:http/http.dart' as http;
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 
 class ModelServices {
-  Future<Model> updateModelDetail(Map<String, dynamic> params) async {
+   updateModelDetail(Map<String, dynamic> params) async {
     final message = jsonEncode(params);
 
     var jwt = (await FlutterSession().get("jwt")).toString();
     print("RESPONSE: " + params.toString());
-    Map<String, String> heads = Map<String, String>();
-    heads['Content-Type'] = "multipart/form-data; boundary=AaB03x" +
-        "--AaB03x" +
-        "Content-Disposition: file" +
-        "Content-Type: png" +
-        "Content-Transfer-Encoding: binary" +
-        "...data... " +
-        "--AaB03x--";
-    heads['Accept'] = 'application/json';
-    heads['type'] = "formData";
-    heads['Authorization'] = 'Bearer $jwt';
     final response = await http.put(
       Uri.parse(url + 'api/v1/models'),
       body: message,
