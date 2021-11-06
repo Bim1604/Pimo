@@ -72,6 +72,13 @@
             </list>
           </value>
         </entry>
+        <entry key="dio">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="f_datetimerangepicker">
           <value>
             <list>
@@ -561,6 +568,7 @@
       <root url="file://$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/cross_file-0.3.1+5/lib" />
       <root url="file://$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3/lib" />
       <root url="file://$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/curved_navigation_bar-1.0.1/lib" />
+      <root url="file://$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/dio-4.0.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/f_datetimerangepicker-0.2.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../../../Học/FPT/FPT Kỳ 7/HCI201/flutter/.pub-cache/hosted/pub.dartlang.org/ffi-1.1.2/lib" />
