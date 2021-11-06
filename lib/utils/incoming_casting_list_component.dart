@@ -19,7 +19,6 @@ class  IncomingCastingListComponentState extends State<IncomingCastingListCompon
     return ListView.builder(
       itemCount: widget.list.listCastingInfo.length,
       itemBuilder: (context, index) {
-        print(widget.list.listCastingInfo[index].castingDetail.id);
         return CastingCard(casting: widget.list.listCastingInfo[index]);
       },
     );

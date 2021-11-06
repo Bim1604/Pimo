@@ -4,13 +4,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/services/image_service.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 
 import 'model_profile.dart';
 
 class CameraWidget extends StatefulWidget {
-  final String modelId;
+  final int modelId;
   const CameraWidget({Key key, this.modelId}) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class CameraWidgetState extends State<CameraWidget> {
         builder: (BuildContext context) {
           return AlertDialog(
             title: Text(
-              "Choose option",
+              "Lựa chọn",
               style: TextStyle(color: MaterialColors.mainColor),
             ),
             content: SingleChildScrollView(
@@ -48,7 +49,7 @@ class CameraWidgetState extends State<CameraWidget> {
                     onTap: () {
                       _openGallery(context);
                     },
-                    title: Text("Gallery"),
+                    title: Text("Ảnh"),
                     leading: Icon(
                       Icons.image,
                       color: MaterialColors.mainColor,
@@ -79,7 +80,7 @@ class CameraWidgetState extends State<CameraWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Change avatar"),
+        title: Text("Thay avatar"),
         backgroundColor: MaterialColors.mainColor,
       ),
       body: Center(
@@ -103,7 +104,7 @@ class CameraWidgetState extends State<CameraWidget> {
                     child: Padding(
                       padding: EdgeInsets.all(20),
                       child: Text(
-                        "Choose Image",
+                        "Chọn ảnh",
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -124,7 +125,7 @@ class CameraWidgetState extends State<CameraWidget> {
               RaisedButton(
                 onPressed: () async {
                   if (imageFile != null) {
-                    // await uploadFireBase(imageFile.path, widget.modelId);
+                    await uploadFireBase(imageFile.path, widget.modelId);
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -143,7 +144,7 @@ class CameraWidgetState extends State<CameraWidget> {
                                   ))),
                     );
                   } else {
-                    Fluttertoast.showToast(msg: 'Please choose image');
+                    Fluttertoast.showToast(msg: 'Vui lòng chọn ảnh');
                   }
                   // Navigator.push(
                   //     context,
@@ -153,7 +154,7 @@ class CameraWidgetState extends State<CameraWidget> {
                 },
                 color: MaterialColors.mainColor,
                 child: Text(
-                  "Select Image",
+                  "Cập nhật",
                   style: TextStyle(color: Colors.black),
                 ),
               )

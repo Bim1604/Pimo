@@ -80,13 +80,12 @@ class CastingService {
     // heads['Accept'] = 'application/json';
     // heads['Authorization'] = 'Bearer $token';
     final response = await http.get(
-        Uri.parse(url + 'api/v1/castings/1/apply'));
+        Uri.parse(url + 'api/v1/castings/1/allpy'));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
       return list;
     } else {
-      // return null;
-      throw Exception('Failed to load');
+       return null;
     }
   }
 

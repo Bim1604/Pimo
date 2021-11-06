@@ -177,7 +177,6 @@ class _ModelImagePageState extends State<ModelCollection> {
                       ],
                       child: FutureBuilder(
                         builder: (context, snapshot) {
-                          print('Anh oi den day di');
                           return ModelCollectionProject(
                             modelId: snapshot.data.toString(),
                           );

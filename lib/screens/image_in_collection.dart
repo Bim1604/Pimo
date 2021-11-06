@@ -62,7 +62,6 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                   // if (check) {
                   //  Body of image
                   // }
-
                   var collection = CollectionProjectViewModel(
                       listCollectionProject:
                       (await ImageCollectionService()
@@ -82,7 +81,6 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                             ],
                             child: FutureBuilder(
                               builder: (context, snapshot) {
-                                print('Xem gi hay ne: ImageIncollection');
                                 return ImageInCollectionPage(
                                   collection: collection,
                                 );
@@ -149,7 +147,6 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                           );
                         } else {
                           if (data.error == null) {
-                            print('Chayj den day r');
                             return Consumer<ImageListViewModel>(
                               builder: (ctx, data, child) =>
                                   StaggeredGridView.countBuilder(

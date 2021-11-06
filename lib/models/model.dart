@@ -6,6 +6,7 @@ class Model {
   final int id;
   final String name;
   final int gender;
+  final String genderName;
   final String dateOfBirth;
   final String country;
   final String province;
@@ -16,6 +17,10 @@ class Model {
   final String gifted;
   final String description;
   final bool status;
+  final String linkFace;
+  final String linkIns;
+  final String linkTwitter;
+  final String linkAvatar;
 
   // final List<ModelStyle> modelStyle;
 
@@ -28,10 +33,15 @@ class Model {
       this.province,
       this.district,
       this.phone,
+        this.genderName,
       this.mail,
       this.avatar,
+        this.linkFace,
+        this.linkIns,
+        this.linkTwitter,
       this.gifted,
       this.status,
+        this.linkAvatar,
       this.description});
 
   //static method
@@ -53,21 +63,25 @@ class Model {
         avatar: json["model"][0]["model"]["avatar"],
         status: json["model"][0]["model"]["status"],
         description: json["model"][0]["model"]["description"],
+        genderName: json["model"][0]["genderName"],
+        linkFace: json["model"][0]["facebook"],
+        linkTwitter: json["model"][0]["twitter"],
+        linkIns: json["model"][0]["instagram"],
         );
   }
 
-  Future<Model> updateModelDetail(Map<String, dynamic> params) async {
-    final message = jsonEncode(params);
-    final response = await http.put(
-        Uri.parse(
-            url + 'api/v1/models/1/profile'),
-        body: message,
-       );
-    if (response.statusCode == 200) {
-      var responseBody = Model.fromJson(jsonDecode(response.body));
-      return responseBody;
-    } else {
-      throw Exception('Failed to load');
-    }
-  }
+  // Future<Model> updateModelDetail(Map<String, dynamic> params) async {
+  //   final message = jsonEncode(params);
+  //   final response = await http.put(
+  //       Uri.parse(
+  //           url + 'api/v1/models/1/profile'),
+  //       body: message,
+  //      );
+  //   if (response.statusCode == 200) {
+  //     var responseBody = Model.fromJson(jsonDecode(response.body));
+  //     return responseBody;
+  //   } else {
+  //     throw Exception('Failed to load');
+  //   }
+  // }
 }

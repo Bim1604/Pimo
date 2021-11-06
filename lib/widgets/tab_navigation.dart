@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/cart.dart';
 import 'package:pimo/screens/home.dart';
 import 'package:pimo/screens/home_page.dart';
@@ -138,13 +139,12 @@ class Page5 extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => ModelViewModel()),
-          // ChangeNotifierProvider(create: (_) => GoogleSignInProvider()),
         ],
         child: FutureBuilder(
-          // future: FlutterSession().get('modelId'),
+          future: FlutterSession().get('modelId'),
           builder: (context, snapshot) {
             return ModelProfilePage(
-              modelId: snapshot.data.toString(),
+              modelId: snapshot.data,
             );
           },
         ));

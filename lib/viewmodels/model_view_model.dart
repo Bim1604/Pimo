@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/models/model.dart';
+import 'package:pimo/services/image_service.dart';
 import 'package:pimo/services/model_services.dart';
 import 'package:pimo/utils/common.dart';
 
@@ -116,23 +117,30 @@ class ModelViewModel with ChangeNotifier {
     this.status = status;
   }
 
+  String get genderName {
+    return _model.genderName;
+  }
 
-  Future<ModelViewModel> getModel() async {
+  String get facebook {
+    return _model.linkFace;
+  }
+
+  String get insta {
+    return _model.linkIns;
+  }
+
+  String get twitter {
+    return _model.linkTwitter;
+  }
+
+  Future<ModelViewModel> getModel(int modelId) async {
     return Future.delayed(const Duration(seconds: 1), () async {
-      Model model = await ModelServices().getModelDetail();
+      Model model = await ModelServices().getModelDetail(modelId);
       notifyListeners();
       this._model = model;
     });
   }
 
-  // Future<ModelViewModel> getModel(String modelId) async {
-  //   return Future.delayed(const Duration(seconds: 1), () async {
-  //     Model model = await ModelServices().getModelDetail(modelId);
-  //     notifyListeners();
-  //     this._model = model;
-  //   });
-  // }
-  //
   Future<ModelViewModel> updateProfileModel(Map<String, dynamic> params) async {
     return Future.delayed(const Duration(seconds: 1), () async {
       Model model = await ModelServices().updateModelDetail(params);
@@ -140,12 +148,13 @@ class ModelViewModel with ChangeNotifier {
       this._model = model;
     });
   }
-  //
-  // Future<ModelViewModel> updateAvatar(String path, String modelId) async {
-  //   return Future.delayed(const Duration(seconds: 1), () async {
-  //     String avt = await uploadFireBase(path, modelId);
-  //     notifyListeners();
-  //     avatar = avt;
-  //   });
-  // }
+
+
+  Future<ModelViewModel> updateAvatar(String path, int modelId) async {
+    return Future.delayed(const Duration(seconds: 1), () async {
+      String avt = await uploadFireBase(path, modelId);
+      notifyListeners();
+      avatar = avt;
+    });
+  }
 }
