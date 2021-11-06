@@ -54,7 +54,8 @@ class GoogleSignInProvider extends ChangeNotifier {
         );
         return logout();
       } else {
-        print(parseJson);
+        print(parseJson["jwt"]);
+        await FlutterSession().set("jwt", parseJson["jwt"].toString());
         Fluttertoast.showToast(
             msg: "Đăng nhập thành công",
             toastLength: Toast.LENGTH_SHORT,

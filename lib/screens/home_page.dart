@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/components.dart';
 import 'package:pimo/screens/product.dart';
+import 'package:pimo/screens/search.dart';
 import 'package:pimo/widgets/home_view.dart';
 import 'package:intl/intl.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -65,11 +66,12 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                     future: getEvents,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        List listUpcoming = snapshot.data.where(
-                          (element) => 
-                          DateTime.parse(element["casting"]["closeTime"]).isAfter(now)
-                        ).toList();
-                        
+                        List listUpcoming = snapshot.data
+                            .where((element) =>
+                                DateTime.parse(element["casting"]["closeTime"])
+                                    .isAfter(now))
+                            .toList();
+
                         return CarouselSlider(
                           options: CarouselOptions(
                             height: height / 5,
@@ -89,21 +91,21 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                             return Builder(
                               builder: (BuildContext context) {
                                 return CardHorizontal(
-                                        title: "${i["casting"]["name"]}",
-                                        openTime: getFormattedDate(
-                                            "${i["casting"]["openTime"]}"),
-                                        closeTime: getFormattedDate(
-                                            "${i["casting"]["closeTime"]}"),
-                                        img: i["casting"]["poster"],
-                                        tap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => Product(
-                                                  id: i["casting"]["id"].toString(),
-                                                ),
-                                              ));
-                                        });
+                                    title: "${i["casting"]["name"]}",
+                                    openTime: getFormattedDate(
+                                        "${i["casting"]["openTime"]}"),
+                                    closeTime: getFormattedDate(
+                                        "${i["casting"]["closeTime"]}"),
+                                    img: i["casting"]["poster"],
+                                    tap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Product(
+                                              id: i["casting"]["id"].toString(),
+                                            ),
+                                          ));
+                                    });
                               },
                             );
                           }).toList(),
@@ -114,117 +116,119 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                     }),
               ),
               const TitleWithButton(
-                        text: "Casting mới",
-                      ),
-               FutureBuilder<List>(
-                    future: getEvents,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List listUpcoming = snapshot.data.where(
-                          (element) => 
-                          DateTime.parse(element["casting"]["closeTime"]).isAfter(now)
-                        ).toList();
+                text: "Casting mới",
+              ),
+              FutureBuilder<List>(
+                  future: getEvents,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List listUpcoming = snapshot.data
+                          .where((element) =>
+                              DateTime.parse(element["casting"]["closeTime"])
+                                  .isAfter(now))
+                          .toList();
 
-                        return CarouselSlider(
-                          options: CarouselOptions(
-                            height: height / 5,
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 0.8,
-                            initialPage: 0,
-                            enableInfiniteScroll: true,
-                            reverse: false,
-                            autoPlay: true,
-                            autoPlayInterval: const Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                const Duration(milliseconds: 800),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            //enlargeCenterPage: true,
-                            scrollDirection: Axis.horizontal,
-                          ),
-                          items: listUpcoming.map((i) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return CardHorizontal(
-                                        // cta: "${snapshot.data.description}",
-                                        title: "${i["casting"]["name"]}",
-                                        openTime: getFormattedDate(
-                                            "${i["casting"]["openTime"]}"),
-                                        closeTime: getFormattedDate(
-                                            "${i["casting"]["closeTime"]}"),
-                                        img: i["casting"]["poster"],
-                                        tap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => Product(
-                                                  id: i["casting"]["id"].toString(),
-                                                ),
-                                              ));
-                                        });
-                              },
-                            );
-                          }).toList(),
-                        );
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    }),   
-                    const TitleWithButton(
-                        text: "Tốt nhất dành cho bạn",
-                      ),
-               FutureBuilder<List>(
-                    future: getEvents,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        List list = snapshot.data.where(
-                          (element) => 
-                          DateTime.parse(element["casting"]["closeTime"]).isAfter(now)
-                        ).toList();
+                      return CarouselSlider(
+                        options: CarouselOptions(
+                          height: height / 5,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          //enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                        ),
+                        items: listUpcoming.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return CardHorizontal(
+                                  // cta: "${snapshot.data.description}",
+                                  title: "${i["casting"]["name"]}",
+                                  openTime: getFormattedDate(
+                                      "${i["casting"]["openTime"]}"),
+                                  closeTime: getFormattedDate(
+                                      "${i["casting"]["closeTime"]}"),
+                                  img: i["casting"]["poster"],
+                                  tap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Product(
+                                            id: i["casting"]["id"].toString(),
+                                          ),
+                                        ));
+                                  });
+                            },
+                          );
+                        }).toList(),
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  }),
+              const TitleWithButton(
+                text: "Tốt nhất dành cho bạn",
+              ),
+              FutureBuilder<List>(
+                  future: getEvents,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List list = snapshot.data
+                          .where((element) =>
+                              DateTime.parse(element["casting"]["closeTime"])
+                                  .isAfter(now))
+                          .toList();
 
-                        return CarouselSlider(
-                          options: CarouselOptions(
-                            height: height / 5,
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 0.8,
-                            initialPage: 0,
-                            enableInfiniteScroll: true,
-                            reverse: false,
-                            autoPlay: true,
-                            autoPlayInterval: const Duration(seconds: 3),
-                            autoPlayAnimationDuration:
-                                const Duration(milliseconds: 800),
-                            autoPlayCurve: Curves.fastOutSlowIn,
-                            //enlargeCenterPage: true,
-                            scrollDirection: Axis.horizontal,
-                          ),
-                          items: list.map((i) {
-                            return Builder(
-                              builder: (BuildContext context) {
-                                return CardHorizontal(
-                                        // cta: "${snapshot.data.description}",
-                                        title: "${i["casting"]["name"]}",
-                                        openTime: getFormattedDate(
-                                            "${i["casting"]["openTime"]}"),
-                                        closeTime: getFormattedDate(
-                                            "${i["casting"]["closeTime"]}"),
-                                        img: i["casting"]["poster"],
-                                        tap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => Product(
-                                                  id: i["casting"]["id"].toString(),
-                                                ),
-                                              ));
-                                        });
-                              },
-                            );
-                          }).toList(),
-                        );
-                      } else {
-                        return Center(child: CircularProgressIndicator());
-                      }
-                    }),    
+                      return CarouselSlider(
+                        options: CarouselOptions(
+                          height: height / 5,
+                          aspectRatio: 16 / 9,
+                          viewportFraction: 0.8,
+                          initialPage: 0,
+                          enableInfiniteScroll: true,
+                          reverse: false,
+                          autoPlay: true,
+                          autoPlayInterval: const Duration(seconds: 3),
+                          autoPlayAnimationDuration:
+                              const Duration(milliseconds: 800),
+                          autoPlayCurve: Curves.fastOutSlowIn,
+                          //enlargeCenterPage: true,
+                          scrollDirection: Axis.horizontal,
+                        ),
+                        items: list.map((i) {
+                          return Builder(
+                            builder: (BuildContext context) {
+                              return CardHorizontal(
+                                  // cta: "${snapshot.data.description}",
+                                  title: "${i["casting"]["name"]}",
+                                  openTime: getFormattedDate(
+                                      "${i["casting"]["openTime"]}"),
+                                  closeTime: getFormattedDate(
+                                      "${i["casting"]["closeTime"]}"),
+                                  img: i["casting"]["poster"],
+                                  tap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => Product(
+                                            id: i["casting"]["id"].toString(),
+                                          ),
+                                        ));
+                                  });
+                            },
+                          );
+                        }).toList(),
+                      );
+                    } else {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                  }),
             ],
           ),
         ),
@@ -241,10 +245,9 @@ class HeaderWithSearchBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      height: size.height * 0.2,
-      child: Stack(
-        children: <Widget>[
+        margin: EdgeInsets.only(bottom: 10),
+        height: size.height * 0.2,
+        child: Stack(children: <Widget>[
           Container(
             padding: const EdgeInsets.only(
               left: 20.0,
@@ -269,11 +272,11 @@ class HeaderWithSearchBox extends StatelessWidget {
                           return Text(
                             'Xin chào ' + snapshot.data.toString() + '!',
                             style:
-                            Theme.of(context).textTheme.headline5.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 1.0,
-                            ),
+                                Theme.of(context).textTheme.headline5.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1.0,
+                                    ),
                           );
                         },
                       ),
@@ -288,146 +291,48 @@ class HeaderWithSearchBox extends StatelessWidget {
             left: 0,
             right: 0,
             child: GestureDetector(
-              onTap: () {
-                _showDialog(context);
-              },
-              child: Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                height: 54,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                          offset: Offset(0, 10),
-                          blurRadius: 50,
-                          color: Color(0xFFf5a6b9).withOpacity(0.23))
-                    ]),
-                child: Row(
-                  children: const <Widget>[
-                    Icon(Icons.search),
-                    SizedBox(
-                      height: 5,
-                      width: 20,
-                    ),
-                    Text(
-                      'Tìm kiếm',
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                    )
-                  ],
-                ),
-              ),
-            ),
+                child: Container(
+                    alignment: Alignment.center,
+                    margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    height: 54,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 10),
+                              blurRadius: 50,
+                              color: Color(0xFFf5a6b9).withOpacity(0.23))
+                        ]),
+                    child: ElevatedButton(
+                      child: Row(
+                        children: const <Widget>[
+                          Icon(Icons.search, color: Colors.black,),
+                          SizedBox(
+                            height: 5,
+                            width: 20,
+                          ),
+                          Text(
+                            'Tìm kiếm',
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                        ],
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white,
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Search()));
+                      },
+                    ))),
           ),
-        ],
-      ),
-    );
+        ]));
   }
-}
-
-void _showDialog(BuildContext context) {
-  TextEditingController nameController, minController, maxController;
-  nameController = TextEditingController()..text = '';
-  minController = TextEditingController()..text = '';
-  maxController = TextEditingController()..text = '';
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text("Search"),
-        content: Builder(
-          builder: (context) {
-            // Get available height and width of the build area of this widget. Make a choice depending on the size.
-            // var height = MediaQuery.of(context).size.height;
-            // var width = MediaQuery.of(context).size.width;
-            return Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              height: 180,
-              width: 350,
-              child: ListView(
-                children: [
-                  TextFormField(
-                    cursorColor: const Color(0xFFf5a6b9),
-                    controller: nameController,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.drive_file_rename_outline),
-                      labelText: 'Name',
-                    ),
-                  ),
-                  TextFormField(
-                    cursorColor: Color(0xFFf5a6b9),
-                    controller: minController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      icon: const Icon(Icons.drive_file_rename_outline),
-                      labelText: 'Min salary',
-                    ),
-                  ),
-                  TextFormField(
-                    cursorColor: const Color(0xFFf5a6b9),
-                    controller: maxController,
-                    keyboardType: TextInputType.number,
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.drive_file_rename_outline),
-                      labelText: 'Max salary',
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-        actions: <Widget>[
-          ElevatedButton(
-            child: const Text(
-              'Cancel',
-              style: TextStyle(color: Colors.grey),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              elevation: 0,
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          ElevatedButton(
-            child: const Text(
-              'Search',
-              style: TextStyle(color: Color(0xFFf5a6b9)),
-            ),
-            style: ElevatedButton.styleFrom(
-              primary: Colors.white,
-              elevation: 0,
-            ),
-            onPressed: () {},
-            // onPressed: () {
-            //   Navigator.push(
-            //     context,
-            //     MaterialPageRoute(
-            //         builder: (context) => MultiProvider(
-            //             providers: [
-            //               ChangeNotifierProvider(
-            //                   create: (_) => CastingListViewModel()),
-            //             ],
-            //             child: FutureBuilder(
-            //               builder: (context, snapshot) {
-            //                 return SearchCastingPage(
-            //                   name: nameController.text.toString(),
-            //                   min: minController.text.toString(),
-            //                   max: maxController.text.toString(),
-            //                 );
-            //               },
-            //             ))),
-            //   );
-            // },
-          ),
-        ],
-      );
-    },
-  );
 }
 
 class TitleWithButton extends StatelessWidget {
