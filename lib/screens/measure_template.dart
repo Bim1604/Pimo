@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pimo/screens/measure_update.dart';
 import 'package:pimo/screens/update_measure.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
+import 'package:pimo/viewmodels/model_view_model.dart';
+import 'package:pimo/viewmodels/styles_list_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
+
 class MeasureTemplatePage extends StatefulWidget {
   final int modelId;
   MeasureTemplatePage({Key key, this.modelId}) : super(key: key);
@@ -20,49 +24,166 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return SafeArea(
-        child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: MaterialColors.mainColor,
-              title: Text('Số đo cá nhân'),
-            ),
-            body: FutureBuilder<BodyPartListViewModel>(
-              future: Provider.of<BodyPartListViewModel>(context, listen: false)
-                  .getListBodyPart(),
-              builder: (ctx, prevData) {
-                if (prevData.connectionState == ConnectionState.waiting) {
-                  return Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 150,
+        child: DefaultTabController(
+            length: 2,
+            child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: MaterialColors.mainColor,
+                  title: Text('Chi tiết cá nhân'),
+                  bottom: TabBar(
+                    tabs: const [Tab(text: 'Số đo'), Tab(text: 'Phong cách')],
+                    indicatorColor: Colors.black,
+                    indicatorWeight: 3,
+                    labelColor: Colors.black,
+                    unselectedLabelColor: Colors.black.withOpacity(0.8),
+                  ),
+                ),
+                body: TabBarView(
+                  children: [
+                    SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 0),
+                            child: SizedBox(
+                                height: height / 1.7,
+                                child: FutureBuilder<BodyPartListViewModel>(
+                                  future: Provider.of<BodyPartListViewModel>(
+                                          context,
+                                          listen: false)
+                                      .getListBodyPart(),
+                                  builder: (ctx, prevData) {
+                                    if (prevData.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Column(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            height: 150,
+                                          ),
+                                          Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                        ],
+                                      );
+                                    } else {
+                                      if (prevData.error == null) {
+                                        return Consumer<BodyPartListViewModel>(
+                                          builder: (ctx, data, child) => Center(
+                                              child: ListView.builder(
+                                                  padding:
+                                                      EdgeInsets.only(top: 30),
+                                                  itemCount:
+                                                      data.listBodyPart.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return CompButton(
+                                                      temp: data
+                                                          .listBodyPart[index]
+                                                          .name,
+                                                      value: data
+                                                          .listBodyPart[index]
+                                                          .quantity
+                                                          .toString(),
+                                                      measure: data
+                                                          .listBodyPart[index]
+                                                          .measure,
+                                                    );
+                                                  })),
+                                        );
+                                      } else {
+                                        return Text('Lỗi');
+                                      }
+                                    }
+                                  },
+                                )),
+                          ),
+                          ElevatedButton(
+                            child: Text('Cập nhật',
+                                style: TextStyle(color: Colors.black)),
+                            onPressed: () async {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => ChangeNotifierProvider<
+                                          BodyPartListViewModel>.value(
+                                      // value: modelDetail,
+                                      child: UpdateMeasureProfilePage(
+                                          // modelId: widget.modelId,
+                                          ))));
+                            },
+                            style: ElevatedButton.styleFrom(
+                                primary: MaterialColors.mainColor,
+                                elevation: 0,
+                                minimumSize: Size(width / 2, 40)),
+                          ),
+                        ],
                       ),
-                      Center(child: CircularProgressIndicator()),
-                    ],
-                  );
-                }
-                else {
-                  if (prevData.error == null) {
-                    return Consumer<BodyPartListViewModel>(
-                      builder: (ctx, data, child) => Center(
-                          child: ListView.builder(
-                              padding: EdgeInsets.only(top: 30),
-                              itemCount: data.listBodyPart.length,
-                              itemBuilder: (context, index) {
-                                return CompButton(
-                                  temp: data.listBodyPart[index].name,
-                                  value: data.listBodyPart[index].quantity.toString(),
-                                  measure: data.listBodyPart[index].measure,
-                                  // bodyPartId: data.listBodyAttribute[index].id,
-                                  // modelId: widget.modelId,
-                                );
-                              })),
-                    );
-                  } else {
-                    return Text('Lỗi');
-                  }
-                }
-              },
-            )));
+                    ),
+                    SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 0),
+                            child: SizedBox(
+                                height: height / 1.7,
+                                child: FutureBuilder<BodyPartListViewModel>(
+                                  future: Provider.of<BodyPartListViewModel>(
+                                          context,
+                                          listen: false)
+                                      .getListStyles(),
+                                  builder: (ctx, prevData) {
+                                    if (prevData.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return Column(
+                                        children: <Widget>[
+                                          SizedBox(
+                                            height: 150,
+                                          ),
+                                          Center(
+                                              child:
+                                                  CircularProgressIndicator()),
+                                        ],
+                                      );
+                                    } else {
+                                      if (prevData.error == null) {
+                                        return Consumer<BodyPartListViewModel>(
+                                          builder: (ctx, data, child) => Center(
+                                              child: ListView.builder(
+                                                  padding:
+                                                      EdgeInsets.only(top: 30),
+                                                  itemCount:
+                                                      data.listStyles.length,
+                                                  itemBuilder:
+                                                      (context, index) {
+                                                    return CompStyleButton(
+                                                      temp: data
+                                                          .listStyles[index]
+                                                          .name,
+                                                    );
+                                                  })),
+                                        );
+                                      } else {
+                                        return Text('Lỗi');
+                                      }
+                                    }
+                                  },
+                                )),
+                          ),
+                          ElevatedButton(
+                            child: Text('Cập nhật',
+                                style: TextStyle(color: Colors.black)),
+                            onPressed: () async {},
+                            style: ElevatedButton.styleFrom(
+                                primary: MaterialColors.mainColor,
+                                elevation: 0,
+                                minimumSize: Size(width / 2, 40)),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ))));
   }
 }
 
@@ -70,11 +191,8 @@ class CompButton extends StatelessWidget {
   final String temp;
   final String value;
   final String measure;
-  // final String modelId;
-  // final int bodyPartId;
-  // const CompButton({Key key, this.temp, this.modelId, this.bodyPartId}) : super(key: key);
-  const CompButton({Key key, this.value, this.measure, this.temp}) : super(key: key);
-
+  const CompButton({Key key, this.value, this.measure, this.temp})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +204,7 @@ class CompButton extends StatelessWidget {
             BoxShadow(
               offset: Offset(-2, 5),
               blurRadius: 10,
-              color: MaterialColors.mainColor.withOpacity(0.5),
+              color: Color(0xFFF0F0F0).withOpacity(0.5),
             )
           ],
           borderRadius: BorderRadius.circular(10),
@@ -96,33 +214,58 @@ class CompButton extends StatelessWidget {
           ),
         ),
         child: FlatButton(
-          padding: EdgeInsets.only(left: 30, top: 15, bottom: 15),
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: Color(0xFFF0F0F0),
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => MultiProvider(
-                  providers: [
-                    ChangeNotifierProvider(
-                        create: (_) => BodyPartListViewModel()),
-                  ],
-                  child: UpdateMeasurePage(
-                    // bodyPartId: bodyPartId,
-                    // modelId: modelId,
-                    template: temp,
-                  )),
-            ));
-          },
           child: Row(
             children: [
               Expanded(
                 child: Text(
-                  temp
-                      + ' - '
-                      + ((value.contains("null")) ? 'Không có' : value)
-                      + ' ' + measure,
-                  style: TextStyle(fontSize: 16),
+                  temp +
+                      ' - ' +
+                      ((value.contains("null")) ? 'Không có' : value) +
+                      ' ' +
+                      measure,
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ),
+              SizedBox(
+                width: 30,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CompStyleButton extends StatelessWidget {
+  final String temp;
+  const CompStyleButton({Key key, this.temp}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(-2, 5),
+              blurRadius: 10,
+              color: Color(0xFFF0F0F0).withOpacity(0.5),
+            )
+          ],
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: MaterialColors.mainColor,
+          ),
+        ),
+        child: FlatButton(
+          child: Row(
+            children: [
+              Expanded(
+                child: Text(
+                  (temp.contains("null")) ? 'Không chưa cập nhật' : temp,
+                  style: TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ),
               SizedBox(

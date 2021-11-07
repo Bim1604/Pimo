@@ -14,6 +14,7 @@ import 'package:pimo/screens/new_collection.dart';
 import 'package:pimo/screens/profile.dart';
 import 'package:pimo/screens/components.dart';
 import 'package:pimo/screens/onboarding.dart';
+
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext context) {
@@ -22,6 +23,7 @@ class MyHttpOverrides extends HttpOverrides {
           (X509Certificate cert, String host, int port) => true;
   }
 }
+
 void main() async {
   HttpOverrides.global = new MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,7 +43,8 @@ class MyApp extends StatelessWidget {
           routes: <String, WidgetBuilder>{
             "/onboarding": (BuildContext context) => new Onboarding(),
             "/home": (BuildContext context) => new Home(),
-            "/authentication": (BuildContext context) => new HomeAuthentication(),
+            "/authentication": (BuildContext context) =>
+                new HomeAuthentication(),
             "/woman": (BuildContext context) => new Woman(),
             "/components": (BuildContext context) => new Components(),
             "/newcollection": (BuildContext context) => new NewCollection(),
