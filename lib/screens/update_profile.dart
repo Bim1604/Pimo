@@ -332,7 +332,6 @@ class _ModelUpdateState extends State<ModelUpdate> {
               Map<String, dynamic> params = Map<String, dynamic>();
               // params['id'] = widget.modelDetail.id;
               params['name'] = nameController.text;
-              // params['genderName'] = genderController;
               params['description'] = descriptionController.text;
               params['genderId'] = 1.toString();
               params['dateOfBirth'] = _date.toString();
