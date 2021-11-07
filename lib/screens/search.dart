@@ -27,8 +27,10 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   final nameController = TextEditingController();
+  final addressController = TextEditingController();
   final openController = TextEditingController();
   final closeController = TextEditingController();
+
   Future<List> getAllStyles() async {
     final response =
         await http.get(Uri.parse('https://api.pimo.studio/api/v1/styles'));
@@ -42,8 +44,26 @@ class _SearchState extends State<Search> {
 
   DateTime _selectedDate;
   String name = "";
+  String address = "";
   String openTime = "";
   String closeTime = "";
+
+  // GenderChecked
+  bool isMaleChecked = false;
+  bool isFemaleChecked = false;
+  bool isAnotherSexChecked = false;
+
+// StyleChecked
+
+  bool isSexyChecked = false;
+  bool isClassesChecked = false;
+  bool isStreetChecked = false;
+  bool isSummerChecked = false;
+  bool isWinterChecked = false;
+  bool isPositiveChecked = false;
+  bool isNudeChecked = false;
+  bool isArtChecked = false;
+
   List sexList = [
     {"id": 1, "name": 'Nam'},
     {"id": 2, "name": 'Nữ'},
@@ -52,18 +72,41 @@ class _SearchState extends State<Search> {
 
   List<int> selectedGenders = List();
   List<int> selectedStyles = List();
+  // Change State Open Time
+  void _setOpenTimeValue() {
+    setState(() {
+      openTime = openController.text;
+    });
+  }
+
+  // Change State Close Time
+  void _setCloseTimeValue() {
+    setState(() {
+      closeTime = closeController.text;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Start listening to changes.
+    openController.addListener(_setOpenTimeValue);
+    closeController.addListener(_setCloseTimeValue);
+  }
+
+  @override
   void dispose() {
     nameController.dispose();
+    addressController.dispose();
     openController.dispose();
     closeController.dispose();
     super.dispose();
   }
 
-  bool isChecked = false;
   Future<List> getListStyles;
   @override
   Widget build(BuildContext context) {
-    getListStyles = getAllStyles();
     return Scaffold(
         appBar: AppBar(
           leading: const BackButton(
@@ -107,7 +150,14 @@ class _SearchState extends State<Search> {
                               children: <Widget>[
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10),
-                                  child: Text("Tên sự kiện"),
+                                  child: Text(
+                                    "Tên sự kiện",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.pinkAccent,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic),
+                                  ),
                                 ),
                                 TextField(
                                     controller: nameController,
@@ -122,15 +172,39 @@ class _SearchState extends State<Search> {
                                     )),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10),
-                                  child: Text("Thời gian bắt đầu"),
+                                  child: Text(
+                                    "Địa chỉ sự kiện",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.pinkAccent,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                ),
+                                TextField(
+                                    controller: addressController,
+                                    onChanged: (newText) {
+                                      setState(() {
+                                        address = newText;
+                                      });
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: UnderlineInputBorder(),
+                                      hintText: 'Nhập địa chỉ sự kiện',
+                                    )),
+                                const Padding(
+                                  padding: EdgeInsets.only(top: 10),
+                                  child: Text(
+                                    "Thời gian bắt đầu",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.pinkAccent,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic),
+                                  ),
                                 ),
                                 TextField(
                                   readOnly: true,
-                                  onChanged: (newText) {
-                                    setState(() {
-                                      openTime = newText;
-                                    });
-                                  },
                                   controller: openController,
                                   onTap: () {
                                     _selectOpenDate(context);
@@ -141,7 +215,14 @@ class _SearchState extends State<Search> {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10),
-                                  child: Text("Thời gian kết thúc"),
+                                  child: Text(
+                                    "Thời gian kết thúc",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.pinkAccent,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic),
+                                  ),
                                 ),
                                 TextField(
                                   readOnly: true,
@@ -155,7 +236,14 @@ class _SearchState extends State<Search> {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10),
-                                  child: Text("Giới tính"),
+                                  child: Text(
+                                    "Giới tính",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.pinkAccent,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic),
+                                  ),
                                 ),
                                 ListView.builder(
                                   scrollDirection: Axis.vertical,
@@ -169,12 +257,43 @@ class _SearchState extends State<Search> {
                                         fillColor:
                                             MaterialStateProperty.all<Color>(
                                                 MaterialColors.mainColor),
-                                        value: isChecked,
+                                        value: index == 0
+                                            ? isMaleChecked
+                                            : (index == 1
+                                                ? isFemaleChecked
+                                                : isAnotherSexChecked),
                                         onChanged: (bool value) {
                                           setState(() {
-                                            isChecked = value;
+                                            if (sexList[index]["name"] ==
+                                                "Nam") {
+                                              isMaleChecked = value;
+                                              if (value == true) {
+                                                selectedGenders.add(index + 1);
+                                              } else {
+                                                selectedGenders
+                                                    .remove(index + 1);
+                                              }
+                                            } else if (sexList[index]["name"] ==
+                                                "Nữ") {
+                                              isFemaleChecked = value;
+                                              if (value == true) {
+                                                selectedGenders.add(index + 1);
+                                              } else {
+                                                selectedGenders
+                                                    .remove(index + 1);
+                                              }
+                                            } else {
+                                              isAnotherSexChecked = value;
+                                              if (value == true) {
+                                                selectedGenders.add(index + 1);
+                                              } else {
+                                                selectedGenders
+                                                    .remove(index + 1);
+                                              }
+                                            }
                                           });
                                         },
+                                        activeColor: Colors.pinkAccent,
                                       ),
                                       Text(sexList[index]["name"])
                                     ],
@@ -182,7 +301,14 @@ class _SearchState extends State<Search> {
                                 ),
                                 const Padding(
                                   padding: EdgeInsets.only(top: 10),
-                                  child: Text("Phong cách"),
+                                  child: Text(
+                                    "Phong cách",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        color: Colors.pinkAccent,
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic),
+                                  ),
                                 ),
                                 Column(
                                   children: <Widget>[
@@ -190,6 +316,7 @@ class _SearchState extends State<Search> {
                                         future: getAllStyles(),
                                         builder: (context, snapshot) {
                                           if (snapshot.hasData) {
+                                            // print(snapshot.data);
                                             List list1 = snapshot.data
                                                 .getRange(0,
                                                     snapshot.data.length ~/ 2)
@@ -220,12 +347,84 @@ class _SearchState extends State<Search> {
                                                                       Color>(
                                                                   MaterialColors
                                                                       .mainColor),
-                                                          value: isChecked,
+                                                          value: index == 0
+                                                              ? isSexyChecked
+                                                              : (index == 1
+                                                                  ? isClassesChecked
+                                                                  : (index == 2
+                                                                      ? isStreetChecked
+                                                                      : isSummerChecked)),
                                                           onChanged:
                                                               (bool value) {
-                                                            print(value);
                                                             setState(() {
-                                                              isChecked = value;
+                                                              if (list1[index][
+                                                                      "name"] ==
+                                                                  "Gợi cảm") {
+                                                                print(value);
+                                                                isSexyChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          1);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              1);
+                                                                }
+                                                              } else if (list1[
+                                                                          index]
+                                                                      [
+                                                                      "name"] ==
+                                                                  "Cổ điển") {
+                                                                isClassesChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          1);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              1);
+                                                                }
+                                                              } else if (list1[
+                                                                          index]
+                                                                      [
+                                                                      "name"] ==
+                                                                  "Đường phố") {
+                                                                isStreetChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          1);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              1);
+                                                                }
+                                                              } else {
+                                                                isSummerChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          1);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              1);
+                                                                }
+                                                              }
                                                             });
                                                           },
                                                         ),
@@ -254,12 +453,84 @@ class _SearchState extends State<Search> {
                                                                       Color>(
                                                                   MaterialColors
                                                                       .mainColor),
-                                                          value: isChecked,
+                                                          value: index == 0
+                                                              ? isWinterChecked
+                                                              : (index == 1
+                                                                  ? isPositiveChecked
+                                                                  : (index == 2
+                                                                      ? isNudeChecked
+                                                                      : isArtChecked)),
                                                           onChanged:
                                                               (bool value) {
                                                             print(value);
                                                             setState(() {
-                                                              isChecked = value;
+                                                              if (list2[index][
+                                                                      "name"] ==
+                                                                  "Mùa đông") {
+                                                                isWinterChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          5);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              5);
+                                                                }
+                                                              } else if (list2[
+                                                                          index]
+                                                                      [
+                                                                      "name"] ==
+                                                                  "Năng động") {
+                                                                isPositiveChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          5);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              5);
+                                                                }
+                                                              } else if (list2[
+                                                                          index]
+                                                                      [
+                                                                      "name"] ==
+                                                                  "Nude") {
+                                                                isNudeChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          5);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              5);
+                                                                }
+                                                              } else {
+                                                                isArtChecked =
+                                                                    value;
+                                                                if (value ==
+                                                                    true) {
+                                                                  selectedStyles
+                                                                      .add(index +
+                                                                          5);
+                                                                } else {
+                                                                  selectedStyles
+                                                                      .remove(
+                                                                          index +
+                                                                              5);
+                                                                }
+                                                              }
                                                             });
                                                           },
                                                         ),
@@ -291,8 +562,13 @@ class _SearchState extends State<Search> {
                                                   builder: (context) =>
                                                       SearchResult(
                                                         name: name,
+                                                        address: address,
                                                         openDate: openTime,
                                                         closeDate: closeTime,
+                                                        selectedGenders:
+                                                            selectedGenders,
+                                                        selectedStyles:
+                                                            selectedStyles,
                                                       )));
                                         },
                                         textColor: Colors.white,
@@ -355,13 +631,12 @@ class _SearchState extends State<Search> {
             child: child,
           );
         });
-
     if (newSelectedDate != null) {
       setState(() {
         _selectedDate = newSelectedDate;
       });
       openController
-        ..text = DateFormat.yMMMd().format(_selectedDate)
+        ..text = _selectedDate.toString()
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: openController.text.length,
             affinity: TextAffinity.upstream));
@@ -394,7 +669,7 @@ class _SearchState extends State<Search> {
         _selectedDate = newSelectedDate;
       });
       closeController
-        ..text = DateFormat.yMMMd().format(_selectedDate)
+        ..text = _selectedDate.toString()
         ..selection = TextSelection.fromPosition(TextPosition(
             offset: closeController.text.length,
             affinity: TextAffinity.upstream));

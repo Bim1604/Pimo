@@ -10,10 +10,12 @@ class IncomingCastingListComponent extends StatefulWidget {
   IncomingCastingListComponent({Key key, this.list}) : super(key: key);
 
   @override
-  IncomingCastingListComponentState createState() =>  IncomingCastingListComponentState();
+  IncomingCastingListComponentState createState() =>
+      IncomingCastingListComponentState();
 }
 
-class  IncomingCastingListComponentState extends State<IncomingCastingListComponent> {
+class IncomingCastingListComponentState
+    extends State<IncomingCastingListComponent> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -32,24 +34,6 @@ class CastingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => MultiProvider(
-      //             providers: [
-      //               ChangeNotifierProvider(
-      //                   create: (_) => TaskListViewModel()),
-      //             ],
-      //             child: FutureBuilder(
-      //               builder: (context, snapshot) {
-      //                 return IncomingTaskInCastingPage(
-      //                   castingId: casting.id,
-      //                 );
-      //               },
-      //             ))),
-      //   );
-      // },
       child: Container(
         padding: EdgeInsets.all(10),
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -71,7 +55,7 @@ class CastingCard extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
-                    casting.castingDetail.name?? '',
+                    casting.castingDetail.name ?? '',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -84,7 +68,7 @@ class CastingCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  casting.castingDetail.salary.toString() + 'VNĐ'?? '',
+                  casting.castingDetail.salary.toString() + 'VNĐ' ?? '',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -94,7 +78,7 @@ class CastingCard extends StatelessWidget {
             ),
             Container(
               child: Text(
-                casting.castingDetail.description?? '',
+                casting.castingDetail.description ?? '',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 softWrap: false,
@@ -105,7 +89,7 @@ class CastingCard extends StatelessWidget {
               children: [
                 Text('Thời gian: '),
                 Text(
-                  '${casting.closeTime}'?? '',
+                  '${casting.closeTime}' ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

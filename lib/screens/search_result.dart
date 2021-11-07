@@ -20,34 +20,60 @@ import 'package:http/http.dart' as http;
 
 class SearchResult extends StatelessWidget with ChangeNotifier {
   final String name;
+  final String address;
   final String openDate;
   final String closeDate;
-  SearchResult({this.name = "", this.closeDate = "2021-12-02", this.openDate = "2021-10-02"});
+  final List<int> selectedGenders;
+  final List<int> selectedStyles;
+
+  SearchResult(
+      {this.name = "",
+      this.closeDate = "2021-12-02",
+      this.openDate = "2021-10-02",
+      this.selectedGenders,
+      this.selectedStyles,
+      this.address});
 
   List results = [];
-  Future<List> fetchCasting(String name, String openTime, String closeTime) async {
-    var now = DateTime.now();
-    if(openTime.isEmpty){
-      openTime = getFormattedDate(now.toString());
-    }else{
-      openTime = getFormattedDate(openTime);
+  Future<List> fetchCasting(
+      String name,
+      String address,
+      String openTime,
+      String closeTime,
+      List<int> selectedStyles,
+      List<int> selectedGenders) async {
+    var url = 'https://api.pimo.studio/api/v1/castings?';
+    if (openTime.isNotEmpty) {
+      url = url + '&StartTime=${openTime}';
+      openTime = DateTime.parse(openTime).toIso8601String();
     }
-    if(closeTime.isEmpty){
-      closeTime = getFormattedDate(now.toString());
-    }else{
-      closeTime = getFormattedDate(closeTime);
+    if (closeTime.isNotEmpty) {
+      url = url + '&EndTime=${closeTime}';
+      closeTime = DateTime.parse(closeTime).toIso8601String();
     }
-    if(name.isEmpty){
-      name = "";
+    if (name.isNotEmpty) {
+      url = url + '&Name=${name}';
     }
-    final response =
-        await http.get(Uri.parse(
-          'https://api.pimo.studio/api/v1/castings?StartTime=${openTime}&EndTime=${closeTime}&Name=${name}'
-          ));
+    if (address.isNotEmpty) {
+      url = url + '&Address=${address}';
+    }
+    if (selectedStyles.isNotEmpty) {
+      for (var i = 0; i < selectedStyles.length; i++) {
+        url = url + '&Styles=${selectedStyles[i]}';
+      }
+    }
+    if (selectedGenders.isNotEmpty) {
+      for (var i = 0; i < selectedGenders.length; i++) {
+        url = url + '&Genders=${selectedGenders[i]}';
+      }
+    }
+    print(url);
+    final response = await http.get(Uri.parse(url));
     print(response.statusCode);
+
     if (response.statusCode == 200) {
       var test = json.decode(response.body);
-      
+
       var b = test["castings"];
       return b;
     } else {
@@ -71,7 +97,8 @@ class SearchResult extends StatelessWidget with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    getEvents = fetchCasting(name, openDate, closeDate);
+    getEvents = fetchCasting(
+        name, address, openDate, closeDate, selectedStyles, selectedGenders);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -97,31 +124,32 @@ class SearchResult extends StatelessWidget with ChangeNotifier {
                       List list = snapshot.data;
                       return Container(
                         child: ListView.builder(
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: list.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) =>
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 8.0),
-                                child: CardHorizontal(
-                                    title: "${list[index]["casting"]["name"]}",
-                                    openTime: getFormattedDate(
-                                        "${list[index]["casting"]["openTime"]}"),
-                                    closeTime: getFormattedDate(
-                                        "${list[index]["casting"]["closeTime"]}"),
-                                    img: list[index]["casting"]["poster"],
-                                    tap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Product(
-                                              id: list[index]["casting"]["id"]
-                                                  .toString(),
-                                            ),
-                                          ));
-                                    }),
-                              )),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            itemCount: list.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) =>
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 8.0),
+                                  child: CardHorizontal(
+                                      title:
+                                          "${list[index]["casting"]["name"]}",
+                                      openTime: getFormattedDate(
+                                          "${list[index]["casting"]["openTime"]}"),
+                                      closeTime: getFormattedDate(
+                                          "${list[index]["casting"]["closeTime"]}"),
+                                      img: list[index]["casting"]["poster"],
+                                      tap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => Product(
+                                                id: list[index]["casting"]["id"]
+                                                    .toString(),
+                                              ),
+                                            ));
+                                      }),
+                                )),
                       );
                     } else {
                       return const Center(child: CircularProgressIndicator());
