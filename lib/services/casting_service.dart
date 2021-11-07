@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/casting.dart';
@@ -6,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:pimo/models/casting_info.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/viewmodels/casting_view_model.dart';
+
 class CastingService {
   List<Casting> parseCastingList(String responseBody) {
     int count = 0;
@@ -18,7 +18,6 @@ class CastingService {
     //   castingInfoList.add(ListCollectionProject.fromJson(list['listCollectionProject'][i]));
     // }
     return castingInfoList;
-
   }
 
   List<CastingInfo> parseCastingInfoList(String responseBody) {
@@ -31,6 +30,7 @@ class CastingService {
     }
     return castingInfoList;
   }
+
   Future<List<Casting>> getCastingList() async {
     // var token = (await FlutterSession().get("token")).toString();
     // Map<String, String> heads = Map<String, String>();
@@ -40,8 +40,7 @@ class CastingService {
     // var modelId = (await FlutterSession().get("modelId")).toString();
     // final response =
     // await http.get(Uri.parse(url + "api/v1/castings"), headers: heads);
-    final response =
-    await http.get(Uri.parse(url + "api/v1/castings"));
+    final response = await http.get(Uri.parse(url + "api/v1/castings"));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
       return list;
@@ -62,8 +61,7 @@ class CastingService {
     //         url + "api/v1/castings/search?name=$name&min=$min&max=$max"),
     //     headers: heads);
     final response = await http.get(
-        Uri.parse(
-            url + "api/v1/castings/search?name=$name&min=$min&max=$max"));
+        Uri.parse(url + "api/v1/castings/search?name=$name&min=$min&max=$max"));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
       return list;
@@ -79,13 +77,12 @@ class CastingService {
     // heads['Content-Type'] = 'application/json';
     // heads['Accept'] = 'application/json';
     // heads['Authorization'] = 'Bearer $token';
-    final response = await http.get(
-        Uri.parse(url + 'api/v1/castings/1/allpy'));
+    final response = await http.get(Uri.parse(url + 'api/v1/castings/1/allpy'));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
       return list;
     } else {
-       return null;
+      return null;
     }
   }
 
@@ -99,8 +96,7 @@ class CastingService {
     // final response = await http.get(
     //     Uri.parse(url + 'api/v1/castings/$modelId/incoming'),
     //     headers: heads);
-    final response = await http.get(
-          Uri.parse(url + 'api/v1/castings'));
+    final response = await http.get(Uri.parse(url + 'api/v1/castings'));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
       return list;
@@ -120,8 +116,8 @@ class CastingService {
 
     // final response = await http
     //     .get(Uri.parse(url + 'api/v1/castings/$castingId'), headers: heads);
-    final response = await http
-        .get(Uri.parse(url + 'api/v1/castings/$castingId'));
+    final response =
+        await http.get(Uri.parse(url + 'api/v1/castings/$castingId'));
     if (response.statusCode == 200) {
       var casting = CastingViewModel(
           casting: Casting.fromJson(jsonDecode(response.body)));
@@ -142,8 +138,8 @@ class CastingService {
     // heads['Authorization'] = 'Bearer $token';
 
     final message = jsonEncode(params);
-    final response = await http.post(Uri.parse(url + 'api/v1/castings'),
-        body: message);
+    final response =
+        await http.post(Uri.parse(url + 'api/v1/castings'), body: message);
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
       return list;
@@ -152,9 +148,9 @@ class CastingService {
     }
   }
 
-
   Future<List<CastingInfo>> getCastingInfoDetail(int castingId) async {
-    final response = await http.get(Uri.parse(url + "api/v1/castings/information/${castingId}"));
+    final response = await http
+        .get(Uri.parse(url + "api/v1/castings/information/${castingId}"));
     if (response.statusCode == 200) {
       var list = parseCastingInfoList(response.body);
       return list;
@@ -162,7 +158,7 @@ class CastingService {
       throw Exception("Request API error");
     }
   }
-  
+
   Future<List<CastingInfo>> getCastingInfoList() async {
     final response = await http.get(Uri.parse(url + "api/v1/castings"));
     if (response.statusCode == 200) {

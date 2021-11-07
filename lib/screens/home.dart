@@ -14,8 +14,6 @@ class Home extends StatelessWidget {
   }
 }
 
-
-
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key key}) : super(key: key);
 
@@ -24,7 +22,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   //List page Routers
   String _currentPage = "Page1";
   List<String> pageKeys = ["Page1", "Page2", "Page3", "Page4", "Page5"];
@@ -57,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab =
-        !await _navigatorKeys[_currentPage].currentState.maybePop();
+            !await _navigatorKeys[_currentPage].currentState.maybePop();
         if (isFirstRouteInCurrentTab) {
           if (_currentPage != "Page1") {
             _selectTab("Page1", 1);
@@ -124,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                      'Yêu cầu',
+                      'Nhiệm vụ',
                       style: TextStyle(fontSize: 10),
                     ),
                   )
@@ -184,4 +181,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
