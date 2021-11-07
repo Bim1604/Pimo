@@ -1,4 +1,3 @@
-import 'body_value.dart';
 class BodyPart {
   String text;
   Value value;
@@ -10,14 +9,14 @@ class BodyPart {
     value = json['value'] != null ? new Value.fromJson(json['value']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['text'] = this.text;
-    if (this.value != null) {
-      data['value'] = this.value.toJson();
-    }
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['text'] = this.text;
+  //   if (this.value != null) {
+  //     data['value'] = this.value.toJson();
+  //   }
+  //   return data;
+  // }
 }
 
 class Value {
@@ -41,4 +40,3 @@ class Value {
     return data;
   }
 }
-

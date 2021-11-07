@@ -4,7 +4,6 @@ import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/body.dart';
 
 class BodyPartService {
-
   List<BodyPart> parseBodyPartList(String responseBody) {
     int count = 0;
     var list = jsonDecode(responseBody);
@@ -18,7 +17,7 @@ class BodyPartService {
     }
     return collectionListProject;
   }
-  
+
   Future<List<BodyPart>> getBodyPartList() async {
     // var token = (await FlutterSession().get("token")).toString();
     // Map<String, String> heads = Map<String, String>();
@@ -35,4 +34,19 @@ class BodyPartService {
     }
   }
 
+  Future<List<BodyPart>> getBodyStylesList() async {
+    // var token = (await FlutterSession().get("token")).toString();
+    // Map<String, String> heads = Map<String, String>();
+    // heads['Content-Type'] = 'application/json';
+    // heads['Accept'] = 'application/json';
+    // heads['Authorization'] = 'Bearer $token';
+    // String modelId = (await FlutterSession().get('modelId')).toString();
+    final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+    if (response.statusCode == 200) {
+      var list = parseBodyPartList(response.body);
+      return list;
+    } else {
+      throw Exception("Cannot fetch body ");
+    }
+  }
 }

@@ -149,7 +149,6 @@ class ModelViewModel with ChangeNotifier {
     });
   }
 
-
   Future<ModelViewModel> updateAvatar(String path, int modelId) async {
     return Future.delayed(const Duration(seconds: 1), () async {
       String avt = await uploadFireBase(path, modelId);
