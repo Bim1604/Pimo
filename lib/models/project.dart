@@ -4,15 +4,13 @@ class Project {
   String description;
   int brandId;
   int modelId;
-  int collectionId;
 
   Project(
       {this.id,
         this.name,
         this.description,
         this.brandId,
-        this.modelId,
-        this.collectionId});
+        this.modelId});
 
   Project.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -20,7 +18,6 @@ class Project {
     description = json['description'];
     brandId = json['brandId'];
     modelId = json['modelId'];
-    collectionId = json['collectionId'];
   }
 
   Map<String, dynamic> toJson() {
@@ -30,7 +27,6 @@ class Project {
     data['description'] = this.description;
     data['brandId'] = this.brandId;
     data['modelId'] = this.modelId;
-    data['collectionId'] = this.collectionId;
     return data;
   }
 }

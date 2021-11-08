@@ -9,7 +9,8 @@ import 'image_item.dart';
 class IntroImagePage extends StatefulWidget {
   final int beginIndex;
   final int collectionId;
-  IntroImagePage({Key key, this.collectionId, this.beginIndex})
+  final String modelId;
+  const IntroImagePage({Key key, this.collectionId, this.beginIndex, this.modelId})
       : super(key: key);
 
   @override
@@ -27,7 +28,7 @@ class _IntroImagePageState extends State<IntroImagePage> {
             size: const Size.fromHeight(500.0),
             child: FutureBuilder<ImageListViewModel>(
               future: Provider.of<ImageListViewModel>(context, listen: false)
-                  .getImageList(widget.collectionId, widget.beginIndex),
+                  .getImageList(widget.collectionId, widget.beginIndex, widget.modelId),
               builder: (context, data) {
                 if (data.connectionState == ConnectionState.waiting) {
                   return Column(

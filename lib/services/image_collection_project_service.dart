@@ -11,7 +11,7 @@ import 'package:pimo/models/test.dart';
 
 import 'image_service.dart';
 
-class ImageCollectionService {
+class ImageCollectionProjectService {
 
   List<ListCollectionProject> parseImageInCollectionList(String responseBody, int index) {
     int count = 0;

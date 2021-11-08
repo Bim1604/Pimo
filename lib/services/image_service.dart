@@ -9,38 +9,37 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 
 
-  Future<String> uploadFireBase(String path, int modelId) async {
-      var token = (await FlutterSession().get("jwt")).toString();
-      Map<String, String> heads = Map<String, String>();
-      heads['Content-Type'] = 'application/json';
-      heads['Accept'] = 'application/json';
-      heads['Authorization'] = 'Bearer $token';
-      final _firebaseStorage = FirebaseStorage.instance;
+Future<String> uploadFireBase(String path, int modelId) async {
+  var token = (await FlutterSession().get("jwt")).toString();
+  Map<String, String> heads = Map<String, String>();
+  heads['Content-Type'] = 'application/json';
+  heads['Accept'] = 'application/json';
+  heads['Authorization'] = 'Bearer $token';
+  final _firebaseStorage = FirebaseStorage.instance;
 
-      var file = File(path);
+  var file = File(path);
 
-      var snapshot = await _firebaseStorage
-          .ref()
-          .child('models/' + '$modelId' + "/avatar/images.jpg")
-          .putFile(file);
-      var downloadUrl = await snapshot.ref.getDownloadURL();
+  var snapshot = await _firebaseStorage
+      .ref()
+      .child('models/' + '$modelId' + "/avatar/images.jpg")
+      .putFile(file);
+  var downloadUrl = await snapshot.ref.getDownloadURL();
 
-      Map<String, dynamic> params = Map<String, dynamic>();
-      params['id'] = modelId;
-      params['avatar'] = downloadUrl;
+  Map<String, dynamic> params = Map<String, dynamic>();
+  params['id'] = modelId;
+  params['avatar'] = downloadUrl;
 
-      final message = jsonEncode(params);
-      final response = await http.put(
-          Uri.parse(url + 'api/v1/models/${params["id"]}/avatar'),
-          body: message,
-          headers: heads);
-      if (response.statusCode == 200) {
-        return downloadUrl;
-      } else {
-        throw Exception('Failed to load');
-      }
-    }
-
+  final message = jsonEncode(params);
+  final response = await http.put(
+      Uri.parse(url + 'api/v1/models/${params["id"]}/avatar'),
+      body: message,
+      headers: heads);
+  if (response.statusCode == 200) {
+    return downloadUrl;
+  } else {
+    throw Exception('Failed to load');
+  }
+}
 
 class ImageService {
 
@@ -64,8 +63,8 @@ class ImageService {
     return imageList;
   }
 
-  Future<List<ModelImage>> getImageList(int collectionId, int index) async {
-    final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+  Future<List<ModelImage>> getImageList(int collectionId, int index, String modelId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
     if (response.statusCode == 200) {
       var list = parseImageList(response.body, index);
       return list;
@@ -73,6 +72,38 @@ class ImageService {
       throw Exception('Failed to load');
     }
   }
+  // List<ModelImage> parseImageList(String responseBody) {
+  //   int count = 0;
+  //   var list = jsonDecode(responseBody);
+  //   List<ModelImage> imageList = new List<ModelImage>();
+  //   var fetchList = list['listCollectionProject'];
+  //   fetchList.map((e) => count++).toList();
+  //   for (int i = 0; i < count; i++) {
+  //     print('Gia tri count :'+ list['listCollectionProject']);
+  //     imageList.add(ModelImage.fromJson(list['listCollectionProject']));
+  //   }
+  //   return imageList;
+  // }
+  //
+  // Future<List<ModelImage>> getImageList(int collectionId) async {
+  //   //var token = (await FlutterSession().get("token")).toString();
+  //   // Map<String, String> heads = Map<String, String>();
+  //   // heads['Content-Type'] = 'application/json';
+  //   // heads['Accept'] = 'application/json';
+  //   // heads['Authorization'] = 'Bearer $token';
+  //   // final response = await http.get(
+  //   //     Uri.parse(baseUrl + "api/v1/images/$collectionId"),
+  //   //    headers: heads);
+  //   final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+  //   if (response.statusCode == 200) {
+  //     var list = parseImageList(response.body);
+  //     return list;
+  //   } else {
+  //     throw Exception('Failed to load');
+  //   }
+  // }
+
+
 
 
 
@@ -178,6 +209,48 @@ class ImageService {
     }
   }
 
+  // List<int> generateGIF(Iterable<Image> images) async {
+  //   var token = (await FlutterSession().get("token")).toString();
+  //   Map<String, String> heads = Map<String, String>();
+  //   heads['Content-Type'] = 'application/json';
+  //   heads['Accept'] = 'application/json';
+  //   heads['Authorization'] = 'Bearer $token';
+  // }
+
+  Future<void> saveGif(ImageCollectionGif gif, int collecttionId) async {
+    String modelId = (await FlutterSession().get('modelId')).toString();
+    // final _firebaseStorage = FirebaseStorage.instance;
+
+    // File('assets/img/${gif.Url}').create();
+    // var file = File('assets/img/${gif.Url}');
+
+    // var snapshot = await _firebaseStorage
+    //     .ref()
+    //     .child('models/' + modelId + "/gif/${gif.FileName}")
+    //     .putString(gif.Url);
+
+    // var downloadUrl = await snapshot.ref.getDownloadURL();
+
+    Map<String, dynamic> params = Map<String, dynamic>();
+    params['collectionId'] = collecttionId;
+    params['gif'] = gif.Url;
+
+    var token = (await FlutterSession().get("token")).toString();
+    Map<String, String> heads = Map<String, String>();
+    heads['Content-Type'] = 'application/json';
+    heads['Accept'] = 'application/json';
+    heads['Authorization'] = 'Bearer $token';
+
+    final message = jsonEncode(params);
+    final response = await http.put(
+        Uri.parse(baseUrl + 'api/v1/collection-images/$modelId/gif'),
+        body: message,
+        headers: heads);
+    if (response.statusCode == 200) {
+    } else {
+      throw Exception('Failed to load');
+    }
+  }
 */
 
 }
