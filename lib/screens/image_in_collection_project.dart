@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/services/collection_service.dart';
-import 'package:pimo/services/image_collection_service.dart';
-import 'package:pimo/services/image_service.dart';
+import 'package:pimo/services/image_collection_project_service.dart';
 import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_project_view_model.dart';
-import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
 import 'package:pimo/viewmodels/model_image_view_model.dart';
 import 'package:provider/provider.dart';
@@ -14,18 +11,19 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'intro_image.dart';
 
 
-class ImageInCollectionPage extends StatefulWidget {
+class ImageInCollectionProjectPage extends StatefulWidget {
   // final ImageCollectionViewModel collection;
   final CollectionProjectViewModel collection;
   final int index;
-  const ImageInCollectionPage({Key key, this.collection, this.index})
+  final String modelId;
+  const ImageInCollectionProjectPage({Key key, this.collection, this.index, this.modelId})
       : super(key: key);
 
   @override
   _ImageInCollectionPageState createState() => _ImageInCollectionPageState();
 }
 
-class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
+class _ImageInCollectionPageState extends State<ImageInCollectionProjectPage> {
   @override
   void initState() {
     super.initState();
@@ -64,7 +62,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                   // }
                   var collection = CollectionProjectViewModel(
                       listCollectionProject:
-                      (await ImageCollectionService()
+                      (await ImageCollectionProjectService()
                           .getImageInCollectionList(widget.collection.idCollection))
                           .elementAt(widget.index));
                   Navigator.pushReplacement(
@@ -81,7 +79,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                             ],
                             child: FutureBuilder(
                               builder: (context, snapshot) {
-                                return ImageInCollectionPage(
+                                return ImageInCollectionProjectPage(
                                   collection: collection,
                                 );
                               },
@@ -133,7 +131,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
                 child:  FutureBuilder<ImageListViewModel>(
                       future: Provider.of<ImageListViewModel>(context,
                           listen: false)
-                          .getImageList(widget.collection.idCollection, widget.index),
+                          .getImageList(widget.collection.idCollection, widget.index, widget.modelId),
                       builder: (context, data) {
                         if (data.connectionState ==
                             ConnectionState.waiting) {
@@ -290,7 +288,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionPage> {
               ],
               child: FutureBuilder(
                 builder: (context, snapshot) {
-                  return ImageInCollectionPage(
+                  return ImageInCollectionProjectPage(
                     collection: widget.collection,
                   );
                 },

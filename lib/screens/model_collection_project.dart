@@ -3,14 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/services/image_collection_service.dart';
+import 'package:pimo/services/image_collection_project_service.dart';
 import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_project_view_model.dart';
-import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
+import 'package:pimo/viewmodels/image_collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'image_in_collection.dart';
+import 'image_in_collection_project.dart';
 
 class ModelCollectionProject extends StatefulWidget {
   final String modelId;
@@ -178,7 +178,7 @@ class _ModelCollectionProjectState extends State<ModelCollectionProject> {
                         builder: (context, snapshot) {
                           //Chọn 1 bộ sưu tập, sau đó xuất hiện hình ảnh ở đây!
                           //Gia tri collection ID dung.
-                          return ImageInCollectionPage(
+                          return ImageInCollectionProjectPage(
                             collection: collection,
                             index: index,
                           );
@@ -215,7 +215,7 @@ class _ModelCollectionProjectState extends State<ModelCollectionProject> {
           builder: (context) => MultiProvider(
               providers: [
                 ChangeNotifierProvider(
-                    create: (_) => ImageCollectionListViewModel()),
+                    create: (_) => ImageCollectionProjectListViewModel()),
               ],
               child: FutureBuilder(
                 builder: (context, snapshot) {
@@ -281,7 +281,7 @@ class _ModelCollectionProjectState extends State<ModelCollectionProject> {
               ),
               onPressed: () async {
                 if (nameController.text.isNotEmpty) {
-                  await ImageCollectionService()
+                  await ImageCollectionProjectService()
                       .createCollection(nameController.text);
                   Navigator.of(context).pop();
                   await _reloadPage();

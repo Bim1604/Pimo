@@ -13,7 +13,7 @@ import 'package:pimo/screens/new_collection.dart';
 import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_list_view_model.dart';
-import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
+import 'package:pimo/viewmodels/image_collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -117,7 +117,7 @@ class Page4 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => ImageCollectionListViewModel()),
+          ChangeNotifierProvider(create: (_) => ImageCollectionProjectListViewModel()),
           // ChangeNotifierProvider(create: (_) => CollectionListViewModel()),
         ],
         child: FutureBuilder(

@@ -63,16 +63,8 @@ class ImageService {
     return imageList;
   }
 
-  Future<List<ModelImage>> getImageList(int collectionId, int index) async {
-    //var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-    // final response = await http.get(
-    //     Uri.parse(baseUrl + "api/v1/images/$collectionId"),
-    //    headers: heads);
-    final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+  Future<List<ModelImage>> getImageList(int collectionId, int index, String modelId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
     if (response.statusCode == 200) {
       var list = parseImageList(response.body, index);
       return list;

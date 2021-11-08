@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/services/image_collection_service.dart';
+import 'package:pimo/services/image_collection_project_service.dart';
 import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_project_view_model.dart';
-import 'package:pimo/viewmodels/image_collection_list_view_model.dart';
+import 'package:pimo/viewmodels/image_collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'image_in_collection.dart';
+import 'image_in_collection_project.dart';
 
-class ModelCollection extends StatefulWidget {
+class ModelProjectCollection extends StatefulWidget {
   final String modelId;
-  const ModelCollection({Key key, this.modelId}) : super(key: key);
+  const ModelProjectCollection({Key key, this.modelId}) : super(key: key);
 
   @override
   _ModelImagePageState createState() => _ModelImagePageState();
 }
 
-class _ModelImagePageState extends State<ModelCollection> {
+class _ModelImagePageState extends State<ModelProjectCollection> {
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _ModelImagePageState extends State<ModelCollection> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
-          backgroundColor: Colors.black,
+          backgroundColor: MaterialColors.mainColor,
           onPressed: () async => {await _showDialog(context, widget.modelId)},
         ),
         backgroundColor: Colors.white,
@@ -177,7 +177,7 @@ class _ModelImagePageState extends State<ModelCollection> {
                       ],
                       child: FutureBuilder(
                         builder: (context, snapshot) {
-                          return ImageInCollectionPage(
+                          return ImageInCollectionProjectPage(
                             collection: collection,
                             index: index,
                           );
@@ -214,11 +214,11 @@ class _ModelImagePageState extends State<ModelCollection> {
           builder: (context) => MultiProvider(
               providers: [
                 ChangeNotifierProvider(
-                    create: (_) => ImageCollectionListViewModel()),
+                    create: (_) => ImageCollectionProjectListViewModel()),
               ],
               child: FutureBuilder(
                 builder: (context, snapshot) {
-                  return ModelCollection(
+                  return ModelProjectCollection(
                     modelId: widget.modelId,
                   );
                 },
@@ -233,7 +233,7 @@ class _ModelImagePageState extends State<ModelCollection> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text("Tạo bộ sưu tập"),
+          title: const Text("Tạo bộ sưu tập"),
           content: Builder(
             builder: (context) {
               return Container(
@@ -245,7 +245,7 @@ class _ModelImagePageState extends State<ModelCollection> {
                     TextFormField(
                       cursorColor: MaterialColors.mainColor,
                       controller: nameController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         icon: Icon(Icons.drive_file_rename_outline),
                         labelText: 'Tên',
                       ),
@@ -280,7 +280,7 @@ class _ModelImagePageState extends State<ModelCollection> {
               ),
               onPressed: () async {
                 if (nameController.text.isNotEmpty) {
-                  await ImageCollectionService()
+                  await ImageCollectionProjectService()
                       .createCollection(nameController.text);
                   Navigator.of(context).pop();
                   await _reloadPage();
