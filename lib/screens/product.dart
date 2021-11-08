@@ -612,7 +612,6 @@ class Product extends StatelessWidget with ChangeNotifier {
   Future<Casting> fetchCasting(String id) async {
     final response = await http.get(
         Uri.parse('https://api.pimo.studio/api/v1/castings/information/${id}'));
-
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       return Casting.fromJson(body);

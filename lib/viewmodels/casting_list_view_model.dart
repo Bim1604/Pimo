@@ -16,8 +16,8 @@ class CastingListViewModel with ChangeNotifier {
     notifyListeners();
     this.castings = list
         .where((item) =>
-        parseDatetime(item.openTime).isBefore(DateTime.now()) &&
-        parseDatetime(item.closeTime).isAfter(DateTime.now()))
+            parseDatetime(item.openTime).isBefore(DateTime.now()) &&
+            parseDatetime(item.closeTime).isAfter(DateTime.now()))
         .map((casting) => CastingViewModel(casting: casting))
         .toList();
     this.castings.sort((a, b) => a.openDate.compareTo(b.openDate));
@@ -27,7 +27,7 @@ class CastingListViewModel with ChangeNotifier {
       String name, String min, String max) async {
     return Future.delayed(const Duration(seconds: 1), () async {
       List<Casting> list =
-      await CastingService().searchCastingList(name, min, max);
+          await CastingService().searchCastingList(name, min, max);
       notifyListeners();
       this.castings =
           list.map((casting) => CastingViewModel(casting: casting)).toList();
@@ -43,14 +43,14 @@ class CastingListViewModel with ChangeNotifier {
     });
   }
 
-  Future<CastingListViewModel> castingByIds(List<int> castings) async {
-    return Future.delayed(const Duration(seconds: 1), () async {
-      List<Casting> list = await CastingService().getCastingByIds(castings);
-      notifyListeners();
-      this.castings =
-          list.map((casting) => CastingViewModel(casting: casting)).toList();
-    });
-  }
+  // Future<CastingListViewModel> castingByIds(List<int> castings) async {
+  //   return Future.delayed(const Duration(seconds: 1), () async {
+  //     List<Casting> list = await CastingService().getCastingByIds(castings);
+  //     notifyListeners();
+  //     this.castings =
+  //         list.map((casting) => CastingViewModel(casting: casting)).toList();
+  //   });
+  // }
 
   Future<CastingListViewModel> incomingCasting() async {
     return Future.delayed(const Duration(seconds: 1), () async {
@@ -62,10 +62,10 @@ class CastingListViewModel with ChangeNotifier {
     });
   }
 
-
   Future<CastingListViewModel> applyCasting(int castingId) async {
     return Future.delayed(const Duration(seconds: 1), () async {
-      List<Casting> list = await ApplyCastingService().createApplyCasting(castingId);
+      List<Casting> list =
+          await ApplyCastingService().createApplyCasting(castingId);
       notifyListeners();
       this.castings =
           list.map((casting) => CastingViewModel(casting: casting)).toList();

@@ -53,15 +53,11 @@ class TabNavigator extends StatelessWidget {
 class Page1 extends StatelessWidget {
   const Page1({Key key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-              create: (_) => CastingInfoListViewModel()
-          ),
+          ChangeNotifierProvider(create: (_) => CastingInfoListViewModel()),
         ],
         child: FutureBuilder(
           // future: FlutterSession().get('modelId'),
@@ -80,9 +76,7 @@ class Page2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(
-              create: (_) => CastingInfoListViewModel()
-          ),
+          ChangeNotifierProvider(create: (_) => CastingInfoListViewModel()),
         ],
         child: FutureBuilder(
           // future: FlutterSession().get('modelId'),
@@ -150,7 +144,3 @@ class Page5 extends StatelessWidget {
         ));
   }
 }
-
-
-
-

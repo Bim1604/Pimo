@@ -14,10 +14,11 @@ class CastingInfoListViewModel with ChangeNotifier {
         list.map((value) => CastingInfoViewModel(castingInfo: value)).toList();
   }
 
-  Future<CastingInfoListViewModel> getCastingInfoDetails(int castingId) async {
-    List<CastingInfo> list = await CastingService().getCastingInfoDetail(castingId);
-    notifyListeners();
-    this.listCastingInfo =
-        list.map((value) => CastingInfoViewModel(castingInfo: value)).toList();
-  }
+  // Future<CastingInfoListViewModel> getCastingInfoDetails(int castingId) async {
+  //   List<CastingInfo> list =
+  //       await CastingService().getCastingInfoDetail(castingId);
+  //   notifyListeners();
+  //   this.listCastingInfo =
+  //       list.map((value) => CastingInfoViewModel(castingInfo: value)).toList();
+  // }
 }

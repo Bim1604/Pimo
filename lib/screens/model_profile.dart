@@ -3,16 +3,17 @@ import 'package:pimo/screens/update_profile.dart';
 import 'package:pimo/utils/google_sign_in.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
+import 'package:pimo/viewmodels/styles_list_view_model.dart';
+import 'package:pimo/viewmodels/styles_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'avatar_page.dart';
 import 'measure_template.dart';
 import 'onboarding.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-class ModelProfilePage extends StatefulWidget {
 
+class ModelProfilePage extends StatefulWidget {
   final int modelId;
-  // final String oldImage;
   const ModelProfilePage({Key key, this.modelId}) : super(key: key);
 
   @override
@@ -43,11 +44,11 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                   if (prevData.error == null) {
                     return Consumer<ModelViewModel>(
                         builder: (ctx, data, child) => Center(
-                          child: modelBtn(
-                            context: ctx,
-                            modelDetail: data,
-                          ),
-                        ));
+                              child: modelBtn(
+                                context: ctx,
+                                modelDetail: data,
+                              ),
+                            ));
                   } else {
                     return Text('Lỗi');
                   }
@@ -68,7 +69,9 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
             child: Text(
               'Tài Khoản',
               style: TextStyle(
-                  color: Colors.black, fontSize: 25, fontWeight: FontWeight.bold),
+                  color: Colors.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -79,23 +82,21 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
           children: [
             Center(
                 child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          offset: Offset(-2, 5),
-                          blurRadius: 10,
-                          color: MaterialColors.mainColor.withOpacity(0.3),
-                        )
-                      ],
-                      borderRadius: BorderRadius.circular(80),
-                      image: DecorationImage(
-                        // null tại đây
-                          image: NetworkImage(modelDetail.avatar ?? ''),
-                          // image: NetworkImage(widget.oldImage),
-                          fit: BoxFit.cover)),
-                )),
+              height: 100,
+              width: 100,
+              decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(-2, 5),
+                      blurRadius: 10,
+                      color: MaterialColors.mainColor.withOpacity(0.3),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(80),
+                  image: DecorationImage(
+                      image: NetworkImage(modelDetail.avatar ?? ''),
+                      fit: BoxFit.cover)),
+            )),
             Positioned(
                 bottom: 5,
                 right: 125,
@@ -114,14 +115,14 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                           color: Colors.white,
                           child: ClipOval(
                               child: Container(
-                                padding: EdgeInsets.all(5),
-                                color: Colors.black,
-                                child: Icon(
-                                  Icons.edit,
-                                  color: Colors.white,
-                                  size: 15,
-                                ),
-                              )))),
+                            padding: EdgeInsets.all(5),
+                            color: Colors.black,
+                            child: Icon(
+                              Icons.edit,
+                              color: Colors.white,
+                              size: 15,
+                            ),
+                          )))),
                 )),
           ],
         ),
@@ -143,7 +144,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                    // horizontal: 4.0, vertical: 10.0),
+                // horizontal: 4.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -178,12 +179,6 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                   ],
                 ),
               ),
-              // Center(
-              //   child: Text(
-              //     modelDetail.description ?? '',
-              //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
-              //   ),
-              // ),
               SizedBox(
                 height: 30,
               ),
@@ -212,10 +207,10 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
-                          ChangeNotifierProvider<ModelViewModel>.value(
-                              value: modelDetail,
-                              child: UpdateModelProfilePage(
-                                modelId: widget.modelId,
+                              ChangeNotifierProvider<ModelViewModel>.value(
+                                  value: modelDetail,
+                                  child: UpdateModelProfilePage(
+                                    modelId: widget.modelId,
                                   ))));
                     },
                     child: Row(
@@ -228,7 +223,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                         ),
                         Expanded(
                           child: Text(
-                            'Chi tiết',
+                            'Thông tin cá nhân',
                             style: TextStyle(fontSize: 16),
                           ),
                         )
@@ -264,21 +259,18 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => MultiProvider(
-                                providers: [
-                                  ChangeNotifierProvider(
-                                      create: (_) =>
-                                          // BodyPartListViewModel()
-                                      BodyPartListViewModel()
-                                  ),
-                                ],
-                                child: FutureBuilder(
-                                  builder: (context, snapshot) {
-                                    return MeasureTemplatePage(
-                                      modelId: widget.modelId,
-                                    );
-                                  },
-                                )
-                            )),
+                                    providers: [
+                                      ChangeNotifierProvider(
+                                        create: (_) => BodyPartListViewModel(),
+                                      ),
+                                    ],
+                                    child: FutureBuilder(
+                                      builder: (context, snapshot) {
+                                        return MeasureTemplatePage(
+                                          modelId: widget.modelId,
+                                        );
+                                      },
+                                    ))),
                       );
                     },
                     child: Row(
@@ -291,7 +283,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                         ),
                         Expanded(
                           child: Text(
-                            'Số đo cá nhân',
+                            'Thông tin chi tiết',
                             style: TextStyle(fontSize: 16),
                           ),
                         )
@@ -329,11 +321,11 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       provider.logout();
                       Navigator.of(context, rootNavigator: true)
                           .pushReplacement(MaterialPageRoute(
-                          builder: (context) => MultiProvider(providers: [
-                            ChangeNotifierProvider(
-                              create: (_) => GoogleSignInProvider(),
-                            ),
-                          ], child: Onboarding())));
+                              builder: (context) => MultiProvider(providers: [
+                                    ChangeNotifierProvider(
+                                      create: (_) => GoogleSignInProvider(),
+                                    ),
+                                  ], child: Onboarding())));
                     },
                     child: Row(
                       children: [
@@ -360,5 +352,4 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
       ],
     );
   }
-
 }

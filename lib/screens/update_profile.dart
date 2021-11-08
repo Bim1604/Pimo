@@ -1,17 +1,15 @@
 
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
-import 'package:pimo/services/model_services.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import 'package:http/http.dart' as http;
 import 'model_profile.dart';
 
 class UpdateModelProfilePage extends StatefulWidget {
@@ -46,30 +44,32 @@ class _UpdateModelProfilePageState extends State<UpdateModelProfilePage> {
             ),
           ),
         ),
-        body: Center(
-          child: FutureBuilder<ModelViewModel>(
-            future: Provider.of<ModelViewModel>(context, listen: false)
-                .getModel(widget.modelId),
-            builder: (ctx, prevData) {
-              if (prevData.connectionState == ConnectionState.waiting) {
-                return Column(
-                  children: <Widget>[
-                    SizedBox(
-                      height: 150,
-                    ),
-                    Center(child: CircularProgressIndicator()),
-                  ],
-                );
-              } else {
-                if (prevData.error == null) {
-                  return ModelUpdate(
-                      modelDetail:
-                          Provider.of<ModelViewModel>(context, listen: false));
+        body: SingleChildScrollView(
+          child: Center(
+            child: FutureBuilder<ModelViewModel>(
+              future: Provider.of<ModelViewModel>(context, listen: false)
+                  .getModel(widget.modelId),
+              builder: (ctx, prevData) {
+                if (prevData.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 150,
+                      ),
+                      Center(child: CircularProgressIndicator()),
+                    ],
+                  );
                 } else {
-                  return Text('Lỗi');
+                  if (prevData.error == null) {
+                    return ModelUpdate(
+                        modelDetail:
+                            Provider.of<ModelViewModel>(context, listen: false));
+                  } else {
+                    return Text('Lỗi');
+                  }
                 }
-              }
-            },
+              },
+            ),
           ),
         ),
       ),
@@ -87,40 +87,20 @@ class ModelUpdate extends StatefulWidget {
 
 class _ModelUpdateState extends State<ModelUpdate> {
   DateTime _date;
-  // int genderController;
   String genderController;
   TextEditingController nameController,
       dobController,
       phoneController,
-      addressController,
+      countryController,
+      provinceController, 
+      districtController,
       descriptionController,
       giftedController;
 
   GlobalKey<FormState> _profileKey = GlobalKey<FormState>();
 
   updateModelDetail(FormData params) async {
-    // final message = jsonEncode(params);
-    // print(message);
     var jwt = (await FlutterSession().get("jwt")).toString();
-    var header = {
-      'Content-Type': "multipart/form-data; boundary=xxBOUNDARYxx",
-      'Accept': '*/*',
-      'Authorization':
-      "Bearer "+(jwt),
-      'Access-Control-Allow-Origin': "*",
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-      'Access-Control-Allow-Headers': 'origin,X-Requested-With,content-type,accept',
-      'Access-Control-Allow-Credentials': 'true'};
-    // final response = await http.put(
-    //     Uri.parse(url + 'api/v1/models'),
-    //     body: message,
-    //     // headers: {
-    //     //   "Content-Type": "multipart/form-data; boundary=xxBOUNDARYxx",
-    //     //   "Accept": "application/json",
-    //     //   "Authorization": 'Bearer $jwt',
-    //     // }
-    //     headers: header,
-    // );
     var dio = Dio();
     var response = await dio.request((url + 'api/v1/models'),
         options: Options(
@@ -131,20 +111,17 @@ class _ModelUpdateState extends State<ModelUpdate> {
           }),
         data: params,
     );
-    print(response.statusCode);
-    // print(response.body);
     try {
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: 'Cập nhật thành công');
       } else {
-        print(response.headers);
+        throw Exception("Something wrong in update profile");
       }
     } on Exception catch (exception) {
       print("Exception: "+ exception.toString());
     } catch (error) {
       print("ERROR: " + error.toString());
-    };
-
+    }
   }
 
   @override
@@ -152,8 +129,10 @@ class _ModelUpdateState extends State<ModelUpdate> {
     nameController.dispose();
     dobController.dispose();
     phoneController.dispose();
-    addressController.dispose();
-    // descriptionController.dispose();
+    countryController.dispose();
+    provinceController.dispose();
+    districtController.dispose();
+    descriptionController.dispose();
     giftedController.dispose();
     super.dispose();
   }
@@ -194,12 +173,13 @@ class _ModelUpdateState extends State<ModelUpdate> {
     genderController  = widget.modelDetail.genderName;
     dobController = TextEditingController()
       ..text = formatDate(widget.modelDetail.dateOfBirth);
-    // descriptionController = TextEditingController()..text = widget.modelDetail.description;
+    descriptionController = TextEditingController()..text = widget.modelDetail.description;
     phoneController = TextEditingController()..text = widget.modelDetail.phone;
-    addressController = TextEditingController()
+    countryController = TextEditingController()
       ..text = widget.modelDetail.country;
-    giftedController = TextEditingController()
-      ..text = widget.modelDetail.gifted;
+    districtController = TextEditingController()..text = widget.modelDetail.district;
+    provinceController = TextEditingController()..text = widget.modelDetail.province;
+    giftedController = TextEditingController()..text = widget.modelDetail.gifted;
     _date = DateTime.parse(widget.modelDetail.dateOfBirth);
 
   }
@@ -225,6 +205,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
         children: [
           Container(
             child: ListView(
+              physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               padding: EdgeInsets.all(30),
               children: [
@@ -257,14 +238,10 @@ class _ModelUpdateState extends State<ModelUpdate> {
                       child: Text("Nam"),
                       value: "Nam",
                     ),
-                    // DropdownMenuItem(
-                    //   child: Text("Nam"),
-                    //   value: "Nam",
-                    // ),
-                    // DropdownMenuItem(
-                    //   child: Text("Nữ"),
-                    //   value: "Nữ",
-                    // )
+                    DropdownMenuItem(
+                      child: Text("Nữ"),
+                      value: "Nữ",
+                    )
                   ],
                   onChanged: (String value) {
                     setState(() {
@@ -297,18 +274,36 @@ class _ModelUpdateState extends State<ModelUpdate> {
                 TextFormField(
                   cursorColor: MaterialColors.mainColor,
                   controller: phoneController,
+                  keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     icon: Icon(Icons.phone),
                     labelText: 'Số điện thoại',
                   ),
                 ),
                 TextFormField(
+                  cursorColor: MaterialColors.mainColor,
+                  controller: countryController,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.place),
+                    labelText: 'Đất nước',
+                  ),
+                ),
+                TextFormField(
                     cursorColor: MaterialColors.mainColor,
-                    controller: addressController,
+                    controller: provinceController,
                     decoration: InputDecoration(
                       icon: Icon(Icons.home_work_outlined),
-                      labelText: 'Địa chỉ',
+                      labelText: 'Thành phố',
                     )),
+                TextFormField(
+                  cursorColor: MaterialColors.mainColor,
+                  controller: districtController,
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.location_city_outlined),
+                    labelText: 'Quận',
+                  ),
+                ),
+
                 TextFormField(
                     cursorColor: MaterialColors.mainColor,
                     controller: giftedController,
@@ -316,8 +311,17 @@ class _ModelUpdateState extends State<ModelUpdate> {
                       icon: Icon(Icons.star_outline),
                       labelText: 'Tài năng',
                     )),
+                TextFormField(
+                    cursorColor: MaterialColors.mainColor,
+                    controller: descriptionController,
+                    maxLines: null,
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.description_outlined),
+                      labelText: 'Mô tả',
+                    )),
                 SizedBox(
-                  height: 30,
+                  height: 15,
                 ),
               ],
             ),
@@ -325,26 +329,23 @@ class _ModelUpdateState extends State<ModelUpdate> {
           ElevatedButton(
             child: Text('Cập nhật', style: TextStyle(color: Colors.black)),
             onPressed: () async {
-              var link = "https://firebasestorage.googleapis.com/v0/b/pimo-fc268.appspot.com/o/images%2F12728867_446728072204323_8942144823096127805_n.jpg?alt=media&token=760d93c4-561e-45b7-9de6-67d5690a15bf";
               Map<String, dynamic> params = Map<String, dynamic>();
               // params['id'] = widget.modelDetail.id;
               params['name'] = nameController.text;
-              // params['genderName'] = genderController;
-              params['description'] = "HELLO WORLD";
+              params['description'] = descriptionController.text;
               params['genderId'] = 1.toString();
               params['dateOfBirth'] = _date.toString();
-              params['country'] = addressController.text;
+              params['country'] = countryController.text;
               params['imageAvatar'] = '';
-              params['province'] = "Gia Lai";
-              params['district'] = "QUan 2";
+              params['province'] = provinceController.text;
+              params['district'] = districtController.text;
               params['phone'] = phoneController.text;
               params['gifted'] = giftedController.text;
-              params['facebook'] = "string";
-              params['instagram'] = "string";
-              params['twitter'] = "string";
-              params['linkAvatar']  = link;
+              params['facebook'] = widget.modelDetail.facebook;
+              params['instagram'] = widget.modelDetail.insta;
+              params['twitter'] = widget.modelDetail.twitter;
+              params['linkAvatar']  = widget.modelDetail.avatar;
               var form = new FormData.fromMap(params);
-
               updateModelDetail(form);
 
               await FlutterSession().set("modelName", nameController.text);
@@ -360,7 +361,6 @@ class _ModelUpdateState extends State<ModelUpdate> {
                               builder: (context, snapshot) {
                                 return ModelProfilePage(
                                   modelId: widget.modelDetail.id,
-                                  // oldImage: params['linkAvatar'],
                                 );
                               },
                             ))),
@@ -369,7 +369,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
             style: ElevatedButton.styleFrom(
                 primary: MaterialColors.mainColor,
                 elevation: 0,
-                minimumSize: Size(10, 50)),
+                minimumSize: Size(10, 40)),
           ),
         ],
       ),

@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
@@ -17,10 +16,22 @@ class IncomingCastingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     return SafeArea(
+        child: DefaultTabController(
+      length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Casting'),
+            title: Text('Chiến dịch'),
             backgroundColor: MaterialColors.mainColor,
+            bottom: TabBar(
+              tabs: const [
+                Tab(text: 'Chiến dịch đã ứng tuyển'),
+                Tab(text: 'Chiến dịch đã được duyệt')
+              ],
+              indicatorColor: Colors.black,
+              indicatorWeight: 3,
+              labelColor: Colors.black,
+              unselectedLabelColor: Colors.black.withOpacity(0.8),
+            ),
             actions: [
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -31,24 +42,25 @@ class IncomingCastingPage extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                           builder: (context) => MultiProvider(
-                              providers: [
-                                ChangeNotifierProvider(
-                                    create: (_) => TaskListViewModel()),
-                              ],
-                              child: FutureBuilder(
-                                builder: (context, snapshot) {
-                                  return ModelSchedulePage(
-                                  );
-                                },
-                              ))),
+                                  providers: [
+                                    ChangeNotifierProvider(
+                                        create: (_) => TaskListViewModel()),
+                                  ],
+                                  child: FutureBuilder(
+                                    builder: (context, snapshot) {
+                                      return ModelSchedulePage();
+                                    },
+                                  ))),
                     );
                   },
                 ),
               )
             ],
           ),
-          body: SingleChildScrollView(
-              child: Column(
+          body: TabBarView(
+            children: [
+              SingleChildScrollView(
+                  child: Column(
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(bottom: 100),
@@ -56,10 +68,11 @@ class IncomingCastingPage extends StatelessWidget {
                       height: height - 162,
                       child: FutureBuilder<CastingInfoListViewModel>(
                           future: Provider.of<CastingInfoListViewModel>(context,
-                              listen: false)
+                                  listen: false)
                               .getCastingInfoList(),
                           builder: (context, data) {
-                            if (data.connectionState == ConnectionState.waiting) {
+                            if (data.connectionState ==
+                                ConnectionState.waiting) {
                               return Column(
                                 children: <Widget>[
                                   SizedBox(
@@ -78,7 +91,9 @@ class IncomingCastingPage extends StatelessWidget {
                               } else {
                                 return Center(
                                   child: SizedBox(
-                                    child: Center(child: Text('Không có lịch đặt'),),
+                                    child: Center(
+                                      child: Text('Không có lịch đặt'),
+                                    ),
                                   ),
                                 );
                               }
@@ -87,7 +102,53 @@ class IncomingCastingPage extends StatelessWidget {
                     ),
                   )
                 ],
-              ))),
-    );
+              )),
+              SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 100),
+                    child: SizedBox(
+                      height: height - 162,
+                      child: FutureBuilder<CastingInfoListViewModel>(
+                          future: Provider.of<CastingInfoListViewModel>(context,
+                                  listen: false)
+                              .getCastingInfoList(),
+                          builder: (context, data) {
+                            if (data.connectionState ==
+                                ConnectionState.waiting) {
+                              return Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 150,
+                                  ),
+                                  Center(child: CircularProgressIndicator()),
+                                ],
+                              );
+                            } else {
+                              if (data.error != null) {
+                                return Consumer<CastingInfoListViewModel>(
+                                    builder: (ctx, data, child) =>
+                                        IncomingCastingListComponent(
+                                          list: data,
+                                        ));
+                              } else {
+                                return Center(
+                                  child: SizedBox(
+                                    child: Center(
+                                      child: Text('Có lịch đặt'),
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+                          }),
+                    ),
+                  )
+                ],
+              )),
+            ],
+          )),
+    ));
   }
 }
