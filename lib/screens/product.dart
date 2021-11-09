@@ -517,7 +517,7 @@ class Casting extends StatelessWidget with ChangeNotifier {
                             ),
                           ),
                           Container(
-                            padding: const EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(2),
                             decoration: BoxDecoration(
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(20),

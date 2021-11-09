@@ -9,6 +9,7 @@ import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_browse_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_result_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
@@ -93,6 +94,7 @@ class Page3 extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => TaskListViewModel()),
+          ChangeNotifierProvider(create: (_) => CastingResultListViewModel()),
         ],
         child: FutureBuilder(
           builder: (context, snapshot) {

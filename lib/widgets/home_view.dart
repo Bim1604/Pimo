@@ -72,17 +72,17 @@ class CardHorizontal extends StatelessWidget {
                             Text(cta,
                                 style: TextStyle(
                                     color: MaterialColors.muted,
-                                    fontSize: 13,
+                                    fontSize: 11,
                                     fontWeight: FontWeight.w600)),
                             Text('Bắt đầu: '+openTime,
                                 style: TextStyle(
                                     color: MaterialColors.muted,
-                                    fontSize: 13,
+                                    fontSize: 11,
                                     fontWeight: FontWeight.w300)),
                             Text('Kết thúc: '+closeTime,
                                 style: TextStyle(
                                     color: MaterialColors.muted,
-                                    fontSize: 13,
+                                    fontSize: 11,
                                     fontWeight: FontWeight.w300)),
                           ],
                         ),
