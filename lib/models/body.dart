@@ -8,15 +8,6 @@ class BodyPart {
     text = json['text'];
     value = json['value'] != null ? new Value.fromJson(json['value']) : null;
   }
-
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = new Map<String, dynamic>();
-  //   data['text'] = this.text;
-  //   if (this.value != null) {
-  //     data['value'] = this.value.toJson();
-  //   }
-  //   return data;
-  // }
 }
 
 class Value {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:pimo/screens/availiable.dart';
 import 'package:pimo/screens/project.dart';
 import 'package:pimo/screens/update_profile.dart';
 import 'package:pimo/utils/google_sign_in.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
+import 'package:pimo/viewmodels/model_availiable_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
@@ -143,7 +145,6 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10),
-                // horizontal: 4.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -317,9 +318,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) =>
                               ChangeNotifierProvider<ModelViewModel>.value(
-                                  value: modelDetail,
-                                  child: ProjectPage(
-                                  ))));
+                                  value: modelDetail, child: ProjectPage())));
                     },
                     child: Row(
                       children: const [
@@ -354,7 +353,6 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: MaterialColors.mainColor,
-                      // width: 2,
                     ),
                   ),
                   child: FlatButton(
@@ -363,13 +361,23 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                         borderRadius: BorderRadius.circular(10)),
                     color: Color(0xFFF0F0F0),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) =>
-                              ChangeNotifierProvider<ModelViewModel>.value(
-                                  value: modelDetail,
-                                  child: UpdateModelProfilePage(
-                                    modelId: widget.modelId,
-                                  ))));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MultiProvider(
+                                    providers: [
+                                      ChangeNotifierProvider(
+                                        create: (_) => AvailibleListViewModel(),
+                                      ),
+                                    ],
+                                    child: FutureBuilder(
+                                      builder: (context, snapshot) {
+                                        return AvailiableTemplatePage(
+                                          modelId: widget.modelId,
+                                        );
+                                      },
+                                    ))),
+                      );
                     },
                     child: Row(
                       children: const [
@@ -404,7 +412,6 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       color: MaterialColors.mainColor,
-                      // width: 2,
                     ),
                   ),
                   child: FlatButton(
