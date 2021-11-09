@@ -4,6 +4,8 @@ import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/utils/incoming_casting_applies_component.dart';
 import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_browse_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_list_view_model.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +15,7 @@ import 'model_schedule.dart';
 class IncomingCastingPage extends StatelessWidget {
   const IncomingCastingPage({Key key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -21,7 +24,7 @@ class IncomingCastingPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: const Text('Chiến dịch'),
+            title: Text('Chiến dịch'),
             backgroundColor: MaterialColors.mainColor,
             bottom: TabBar(
               tabs: const [
@@ -35,9 +38,9 @@ class IncomingCastingPage extends StatelessWidget {
             ),
             actions: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: GestureDetector(
-                  child: const Icon(Icons.schedule),
+                  child: Icon(Icons.schedule),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -64,7 +67,7 @@ class IncomingCastingPage extends StatelessWidget {
                   child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 100),
+                    padding: EdgeInsets.only(bottom: 100),
                     child: SizedBox(
                       height: height - 162,
                       child: FutureBuilder<CastingBrowseListViewModel>(
@@ -76,7 +79,7 @@ class IncomingCastingPage extends StatelessWidget {
                             if (data.connectionState ==
                                 ConnectionState.waiting) {
                               return Column(
-                                children: const <Widget>[
+                                children: <Widget>[
                                   SizedBox(
                                     height: 150,
                                   ),
@@ -91,7 +94,7 @@ class IncomingCastingPage extends StatelessWidget {
                                           listBrowse: data,
                                         ));
                               } else {
-                                return const Center(
+                                return Center(
                                   child: SizedBox(
                                     child: Center(
                                       child: Text('Không có lịch đặt'),
@@ -109,7 +112,7 @@ class IncomingCastingPage extends StatelessWidget {
                   child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 100),
+                    padding: EdgeInsets.only(bottom: 100),
                     child: SizedBox(
                       height: height - 162,
                       child: FutureBuilder<CastingAppliesListViewModel>(
@@ -120,7 +123,7 @@ class IncomingCastingPage extends StatelessWidget {
                             if (data.connectionState ==
                                 ConnectionState.waiting) {
                               return Column(
-                                children: const <Widget>[
+                                children: <Widget>[
                                   SizedBox(
                                     height: 150,
                                   ),
@@ -135,7 +138,7 @@ class IncomingCastingPage extends StatelessWidget {
                                           listApplies: data,
                                         ));
                               } else {
-                                return const Center(
+                                return Center(
                                   child: SizedBox(
                                     child: Center(
                                       child: Text('Không Có lịch đặt'),

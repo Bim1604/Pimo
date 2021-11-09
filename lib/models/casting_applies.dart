@@ -47,3 +47,4 @@ class ApplyList {
     return data;
   }
 }
+

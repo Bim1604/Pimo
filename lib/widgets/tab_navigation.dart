@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/home_page.dart';
 import 'package:pimo/screens/incoming_casting.dart';
+import 'package:pimo/screens/model_apply_casting.dart';
 import 'package:pimo/screens/model_collection.dart';
 import 'package:pimo/screens/model_profile.dart';
+import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_browse_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_project_list_view_model.dart';
@@ -54,7 +57,7 @@ class Page1 extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => CastingInfoListViewModel()),
         ],
         child: FutureBuilder(
-          // future: FlutterSession().get('modelId'),
+          future: FlutterSession().get('modelId'),
           builder: (context, snapshot) {
             return MainScreen();
           },
@@ -70,10 +73,11 @@ class Page2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => CastingInfoListViewModel()),
+          ChangeNotifierProvider(create: (_) => CastingBrowseListViewModel()),
+          ChangeNotifierProvider(create: (_) => CastingAppliesListViewModel()),
         ],
         child: FutureBuilder(
-          // future: FlutterSession().get('modelId'),
+          future: FlutterSession().get('modelId'),
           builder: (context, snapshot) {
             return IncomingCastingPage();
           },
@@ -93,7 +97,7 @@ class Page3 extends StatelessWidget {
         child: FutureBuilder(
           builder: (context, snapshot) {
             // return Container();
-            return IncomingCastingPage();
+            return ModelApplyCastingPage();
           },
         ));
   }
@@ -109,7 +113,7 @@ class Page4 extends StatelessWidget {
           // ChangeNotifierProvider(create: (_) => CollectionListViewModel()),
         ],
         child: FutureBuilder(
-          //future: FlutterSession().get('modelId'),
+          future: FlutterSession().get('modelId'),
           builder: (context, snapshot) {
             return ModelCollection(
               modelId: snapshot.data.toString(),
