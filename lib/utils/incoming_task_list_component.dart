@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/viewmodels/model_task_view_model.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
+import 'package:pimo/viewmodels/task_view_model.dart';
 
 class IncomingTaskListComponent extends StatefulWidget {
   final TaskListViewModel list;
@@ -17,18 +17,18 @@ class  IncomingTaskListComponentState extends State<IncomingTaskListComponent> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: widget.list.tasks.length,
+      itemCount: widget.list.listTask.length,
       itemBuilder: (context, index) {
-        return TaskCard(task: widget.list.tasks[index], index: index,);
+        return TaskCard(taskInfo: widget.list.listTask[index], index: index,);
       },
     );
   }
 }
 
 class TaskCard extends StatelessWidget {
-  final ModelTaskViewModel task;
+  final TaskViewModel taskInfo;
   final int index;
-  const TaskCard({Key key, this.task, this.index}) : super(key: key);
+  const TaskCard({Key key, this.taskInfo, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,18 +84,18 @@ class TaskCard extends StatelessWidget {
             ),
             Row(
               children: [
-                Text('Start at: '),
+                Text('Bắt đầu: '),
                 Text(
-                  '${task.startAtTime} ${task.startAtDate}'?? '',
+                  '${taskInfo.task.startDate}' ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
             Row(
               children: [
-                Text('End at: '),
+                Text('Kết thúc: '),
                 Text(
-                  '${task.endAtTime} ${task.endAtDate}'?? '',
+                  '${taskInfo.task.endDate}'?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

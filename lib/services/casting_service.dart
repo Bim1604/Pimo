@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:dio/dio.dart';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/casting.dart';
 import 'package:http/http.dart' as http;
@@ -160,11 +159,8 @@ class CastingService {
     int count = 0;
     var list = jsonDecode(responseBody);
     List<CastingBrowses> castingBrowse = new List<CastingBrowses>();
-    // print(list['castingBrowses'][0]['browse']);
     list['castingBrowses'].map((e) => count++).toList();
     for (int i = 0; i < count; i++) {
-      print(i);
-      print(list['castingBrowses'][i]['casting']);
       castingBrowse.add(CastingBrowses.fromJson(list['castingBrowses'][i]));
     }
     return castingBrowse;
@@ -182,7 +178,6 @@ class CastingService {
     final response = await http.get(Uri.parse(url + "api/v1/applies"), headers: headers);
     if (response.statusCode == 200) {
       var list = parseCastingAppliesList(response.body);
-      print('Xong r ne getCastingAppliesList');
       return list;
     } else {
       throw Exception("ERROR at getCastingAppliesList");
@@ -195,7 +190,6 @@ class CastingService {
     List<ApplyList> castingApplies = new List<ApplyList>();
     list['applyList'].map((e) => count++).toList();
     for (int i = 0; i < count; i++) {
-      print(list['applyList'][i]['casting']);
       castingApplies.add(ApplyList.fromJson(list['applyList'][i]));
     }
     return castingApplies;
