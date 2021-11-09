@@ -4,13 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/models/brand.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 
 //widgets
-import 'package:pimo/widgets/navbar.dart';
 import 'package:pimo/widgets/slider.dart';
-import 'package:pimo/widgets/product-size-picker.dart';
 import 'package:pimo/screens/chat.dart';
 import 'package:intl/intl.dart';
 
@@ -65,7 +62,6 @@ class Casting extends StatelessWidget with ChangeNotifier {
   }
 
   applyCasting(String id) async {
-
     String accessToken = (await FlutterSession().get('jwt')).toString();
     var headers = {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -77,7 +73,7 @@ class Casting extends StatelessWidget with ChangeNotifier {
         headers: headers,
         body: jsonEncode(id));
 
-    var msg = "Ứng tuyển thất bại"; 
+    var msg = "Ứng tuyển thất bại";
     if (response.statusCode == 200) {
       var body = jsonDecode(response.body);
       if (body["success"]) {
@@ -88,10 +84,7 @@ class Casting extends StatelessWidget with ChangeNotifier {
       //throw Exception('Failed');
     }
     return Fluttertoast.showToast(
-            msg: msg,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.BOTTOM);
-
+        msg: msg, toastLength: Toast.LENGTH_LONG, gravity: ToastGravity.BOTTOM);
   }
 
   @override
@@ -434,7 +427,6 @@ class Casting extends StatelessWidget with ChangeNotifier {
                               ],
                             ),
                           ),
-                          // ProductSizePicker(),
                           Padding(
                             padding:
                                 const EdgeInsets.only(top: 20.0, bottom: 10),
@@ -607,6 +599,7 @@ class Casting extends StatelessWidget with ChangeNotifier {
 class Product extends StatelessWidget with ChangeNotifier {
   final double height = window.physicalSize.height;
   final String id;
+
   Product({this.id = ""});
 
   Future<Casting> fetchCasting(String id) async {

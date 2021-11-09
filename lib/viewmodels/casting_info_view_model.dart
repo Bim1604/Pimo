@@ -18,23 +18,6 @@ class CastingInfoViewModel {
     return _castingInfo.brand;
   }
 
-  // String get nameCasting {
-  //   return _castingInfo.casting.name;
-  // }
-  //
-  // int get salary {
-  //   return _castingInfo.casting.salary;
-  // }
-  // int get castingId {
-  //   return    _castingInfo.casting.id;
-  // }
-  //
-  // String get castingPoster {
-  //   return     _castingInfo.casting.poster;
-  // }
-  // String get castingDescription {
-  //   return _castingInfo.casting.description;
-  // }
   DateTime get openTimeDateTime {
     return parseDatetime(_castingInfo.casting.openTime);
   }
