@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
             "/home": (BuildContext context) => new Home(),
             "/authentication": (BuildContext context) =>
                 new HomeAuthentication(),
-            "/components": (BuildContext context) => new Components(),
             "/newcollection": (BuildContext context) => new NewCollection(),
             "/profile": (BuildContext context) => new Profile(),
           }),

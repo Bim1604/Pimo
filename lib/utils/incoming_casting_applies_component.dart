@@ -1,34 +1,34 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/viewmodels/casting_browse_list_view_model.dart';
-import 'package:pimo/viewmodels/casting_browse_view_model.dart';
+import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_applies_view_model.dart';
 import 'package:intl/intl.dart';
-class IncomingCastingListComponent extends StatefulWidget {
-  final CastingBrowseListViewModel listBrowse;
-  IncomingCastingListComponent({Key key, this.listBrowse}) : super(key: key);
+
+class IncomingAppliesListComponent extends StatefulWidget {
+  final CastingAppliesListViewModel listApplies;
+  IncomingAppliesListComponent({Key key, this.listApplies}) : super(key: key);
 
   @override
   IncomingCastingListComponentState createState() =>
       IncomingCastingListComponentState();
 }
 
-  class IncomingCastingListComponentState
-      extends State<IncomingCastingListComponent> {
-    @override
-    Widget build(BuildContext context) {
-      return ListView.builder(
-        itemCount: widget.listBrowse.listCastingBrowse.length,
-        itemBuilder: (context, index) {
-          return CastingCard(castingBrowse: widget.listBrowse.listCastingBrowse[index]);
-        },
-      );
-    }
+class IncomingCastingListComponentState
+    extends State<IncomingAppliesListComponent> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: widget.listApplies.listCastingApplies.length,
+      itemBuilder: (context, index) {
+        return CastingCard(castingApplies: widget.listApplies.listCastingApplies[index]);
+      },
+    );
   }
+}
 
 class CastingCard extends StatelessWidget {
-  final CastingBrowseViewModel castingBrowse;
-  const CastingCard({Key key, this.castingBrowse}) : super(key: key);
+  final CastingAppliesViewModel castingApplies;
+  const CastingCard({Key key, this.castingApplies}) : super(key: key);
 
   String formatDate(String date) {
     DateTime dt = DateTime.parse(date);;
@@ -40,7 +40,7 @@ class CastingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -60,7 +60,7 @@ class CastingCard extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
-                    castingBrowse.casting.name ?? '',
+                    castingApplies.casting.name ?? '',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -73,7 +73,7 @@ class CastingCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  castingBrowse.casting.salary.toString() + 'VNĐ' ?? '',
+                  castingApplies.casting.salary.toString() + 'VNĐ' ?? '',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class CastingCard extends StatelessWidget {
             ),
             Container(
               child: Text(
-                castingBrowse.casting.description ?? '',
+                castingApplies.casting.description ?? '',
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
                 softWrap: false,
@@ -94,8 +94,7 @@ class CastingCard extends StatelessWidget {
               children: [
                 Text('Bắt đầu: '),
                 Text(
-                  formatDate(castingBrowse.casting.openTime)
-                   ?? '',
+                  formatDate(castingApplies.casting.openTime) ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -104,7 +103,7 @@ class CastingCard extends StatelessWidget {
               children: [
                 Text('Kết thúc: '),
                 Text(
-                  formatDate(castingBrowse.casting.closeTime) ?? '',
+                  formatDate(castingApplies.casting.closeTime) ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

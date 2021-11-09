@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
-import 'package:pimo/viewmodels/casting_list_view_model.dart';
+import 'package:pimo/utils/incoming_casting_applies_component.dart';
+import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_browse_list_view_model.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +21,12 @@ class IncomingCastingPage extends StatelessWidget {
       length: 2,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('Chiến dịch'),
+            title: const Text('Chiến dịch'),
             backgroundColor: MaterialColors.mainColor,
             bottom: TabBar(
               tabs: const [
-                Tab(text: 'Chiến dịch đã ứng tuyển'),
-                Tab(text: 'Chiến dịch đã được duyệt')
+                Tab(text: 'Đã ứng tuyển'),
+                Tab(text: 'Đã được duyệt')
               ],
               indicatorColor: Colors.black,
               indicatorWeight: 3,
@@ -34,9 +35,9 @@ class IncomingCastingPage extends StatelessWidget {
             ),
             actions: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: GestureDetector(
-                  child: Icon(Icons.schedule),
+                  child: const Icon(Icons.schedule),
                   onTap: () {
                     Navigator.push(
                       context,
@@ -63,18 +64,19 @@ class IncomingCastingPage extends StatelessWidget {
                   child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(bottom: 100),
+                    padding: const EdgeInsets.only(bottom: 100),
                     child: SizedBox(
                       height: height - 162,
-                      child: FutureBuilder<CastingInfoListViewModel>(
-                          future: Provider.of<CastingInfoListViewModel>(context,
+                      child: FutureBuilder<CastingBrowseListViewModel>(
+                          future: Provider.of<CastingBrowseListViewModel>(context,
                                   listen: false)
-                              .getCastingInfoList(),
+                              .getCastingBrowseList(),
                           builder: (context, data) {
+                            print(data);
                             if (data.connectionState ==
                                 ConnectionState.waiting) {
                               return Column(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 150,
                                   ),
@@ -83,13 +85,13 @@ class IncomingCastingPage extends StatelessWidget {
                               );
                             } else {
                               if (data.error == null) {
-                                return Consumer<CastingInfoListViewModel>(
+                                return Consumer<CastingBrowseListViewModel>(
                                     builder: (ctx, data, child) =>
                                         IncomingCastingListComponent(
-                                          list: data,
+                                          listBrowse: data,
                                         ));
                               } else {
-                                return Center(
+                                return const Center(
                                   child: SizedBox(
                                     child: Center(
                                       child: Text('Không có lịch đặt'),
@@ -107,18 +109,18 @@ class IncomingCastingPage extends StatelessWidget {
                   child: Column(
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(bottom: 100),
+                    padding: const EdgeInsets.only(bottom: 100),
                     child: SizedBox(
                       height: height - 162,
-                      child: FutureBuilder<CastingInfoListViewModel>(
-                          future: Provider.of<CastingInfoListViewModel>(context,
+                      child: FutureBuilder<CastingAppliesListViewModel>(
+                          future: Provider.of<CastingAppliesListViewModel>(context,
                                   listen: false)
-                              .getCastingInfoList(),
+                              .getCastingAppliesList(),
                           builder: (context, data) {
                             if (data.connectionState ==
                                 ConnectionState.waiting) {
                               return Column(
-                                children: <Widget>[
+                                children: const <Widget>[
                                   SizedBox(
                                     height: 150,
                                   ),
@@ -126,17 +128,17 @@ class IncomingCastingPage extends StatelessWidget {
                                 ],
                               );
                             } else {
-                              if (data.error != null) {
-                                return Consumer<CastingInfoListViewModel>(
+                              if (data.error == null) {
+                                return Consumer<CastingAppliesListViewModel>(
                                     builder: (ctx, data, child) =>
-                                        IncomingCastingListComponent(
-                                          list: data,
+                                        IncomingAppliesListComponent(
+                                          listApplies: data,
                                         ));
                               } else {
-                                return Center(
+                                return const Center(
                                   child: SizedBox(
                                     child: Center(
-                                      child: Text('Có lịch đặt'),
+                                      child: Text('Không Có lịch đặt'),
                                     ),
                                   ),
                                 );

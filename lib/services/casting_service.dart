@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/models/casting.dart';
 import 'package:http/http.dart' as http;
+import 'package:pimo/models/casting_applies.dart';
+import 'package:pimo/models/casting_browse.dart';
 import 'package:pimo/models/casting_info.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/viewmodels/casting_view_model.dart';
@@ -32,14 +35,6 @@ class CastingService {
   }
 
   Future<List<Casting>> getCastingList() async {
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-    // var modelId = (await FlutterSession().get("modelId")).toString();
-    // final response =
-    // await http.get(Uri.parse(url + "api/v1/castings"), headers: heads);
     final response = await http.get(Uri.parse(url + "api/v1/castings"));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
@@ -87,15 +82,6 @@ class CastingService {
   }
 
   Future<List<Casting>> getIncomingCasting() async {
-    // var modelId = (await FlutterSession().get("modelId")).toString();
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-    // final response = await http.get(
-    //     Uri.parse(url + 'api/v1/castings/$modelId/incoming'),
-    //     headers: heads);
     final response = await http.get(Uri.parse(url + 'api/v1/castings'));
     if (response.statusCode == 200) {
       var list = parseCastingList(response.body);
@@ -107,15 +93,6 @@ class CastingService {
   }
 
   Future<CastingViewModel> getCasting(String castingId) async {
-    // var modelId = (await FlutterSession().get("modelId")).toString();
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-
-    // final response = await http
-    //     .get(Uri.parse(url + 'api/v1/castings/$castingId'), headers: heads);
     final response =
         await http.get(Uri.parse(url + 'api/v1/castings/$castingId'));
     if (response.statusCode == 200) {
@@ -130,13 +107,6 @@ class CastingService {
   Future<List<Casting>> getCastingByIds(List<int> castingIds) async {
     Map<String, dynamic> params = Map<String, dynamic>();
     params['castingIds'] = castingIds;
-
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-
     final message = jsonEncode(params);
     final response =
         await http.post(Uri.parse(url + 'api/v1/castings'), body: message);
@@ -168,31 +138,66 @@ class CastingService {
       throw Exception("Request API error");
     }
   }
-// Future startThread() async {
-//   var modelId = (await FlutterSession().get("modelId")).toString();
 
-//   final response =
-//       await http.get(Uri.parse(url + 'api/v1/castings/$modelId/thread'));
-//   if (response.statusCode == 200) {
-//     // var casting = CastingViewModel(
-//     //     casting: Casting.fromJson(jsonDecode(response.body)));
-//     // return casting;
-//   } else {
-//     Fluttertoast.showToast(msg: 'Not found');
-//     throw Exception('Failed to load');
-//   }
-// }
+  Future<List<CastingBrowses>> getCastingBrowseList() async {
 
-// Future endThread() async {
-//   final response =
-//       await http.get(Uri.parse(url + 'api/v1/castings/end-thread'));
-//   if (response.statusCode == 200) {
-//     // var casting = CastingViewModel(
-//     //     casting: Casting.fromJson(jsonDecode(response.body)));
-//     // return casting;
-//   } else {
-//     Fluttertoast.showToast(msg: 'Not found');
-//     throw Exception('Failed to load');
-//   }
-// }
+    var jwt = (await FlutterSession().get("jwt")).toString();
+    var headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer ' + jwt
+    };
+    final response = await http.get(Uri.parse(url + "api/v1/browses"), headers: headers);
+    if (response.statusCode == 200) {
+      var list = parseCastingBrowseList(response.body);
+      return list;
+    } else {
+      throw Exception("ERROR at getCastingBrowseList");
+    }
+  }
+
+  List<CastingBrowses> parseCastingBrowseList(String responseBody) {
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<CastingBrowses> castingBrowse = new List<CastingBrowses>();
+    // print(list['castingBrowses'][0]['browse']);
+    list['castingBrowses'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      print(i);
+      print(list['castingBrowses'][i]['casting']);
+      castingBrowse.add(CastingBrowses.fromJson(list['castingBrowses'][i]));
+    }
+    return castingBrowse;
+  }
+
+
+  Future<List<ApplyList>> getCastingAppliesList() async {
+    var jwt = (await FlutterSession().get("jwt")).toString();
+    var headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer ' + jwt
+    };
+
+    final response = await http.get(Uri.parse(url + "api/v1/applies"), headers: headers);
+    if (response.statusCode == 200) {
+      var list = parseCastingAppliesList(response.body);
+      print('Xong r ne getCastingAppliesList');
+      return list;
+    } else {
+      throw Exception("ERROR at getCastingAppliesList");
+    }
+  }
+
+  List<ApplyList> parseCastingAppliesList(String responseBody) {
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<ApplyList> castingApplies = new List<ApplyList>();
+    list['applyList'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      print(list['applyList'][i]['casting']);
+      castingApplies.add(ApplyList.fromJson(list['applyList'][i]));
+    }
+    return castingApplies;
+  }
 }

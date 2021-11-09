@@ -4,12 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
-import 'package:pimo/screens/components.dart';
-import 'package:pimo/screens/product.dart';
 import 'package:pimo/screens/search.dart';
 import 'package:pimo/widgets/home_view.dart';
 import 'package:intl/intl.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
+import 'casting_detail.dart';
 
 class MainScreen extends StatelessWidget with ChangeNotifier {
   List data;
@@ -101,7 +101,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => Product(
+                                            builder: (context) => CastingDetail(
                                               id: i["casting"]["id"].toString(),
                                             ),
                                           ));
@@ -159,7 +159,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Product(
+                                          builder: (context) => CastingDetail(
                                             id: i["casting"]["id"].toString(),
                                           ),
                                         ));
@@ -216,7 +216,7 @@ class MainScreen extends StatelessWidget with ChangeNotifier {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => Product(
+                                          builder: (context) => CastingDetail(
                                             id: i["casting"]["id"].toString(),
                                           ),
                                         ));

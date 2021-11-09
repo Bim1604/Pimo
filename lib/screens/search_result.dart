@@ -2,20 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/constants/Images.dart';
 
-// widgets
-import 'package:pimo/widgets/navbar.dart';
-import 'package:pimo/widgets/home_view.dart';
-import 'package:pimo/widgets/card-small.dart';
-import 'package:pimo/widgets/table-cell.dart';
-
-//screens
-import 'package:pimo/screens/product.dart';
-import 'package:pimo/screens/categories.dart';
 import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:pimo/widgets/home_view.dart';
+
+import 'casting_detail.dart';
 
 class SearchResult extends StatelessWidget with ChangeNotifier {
   final String name;
@@ -142,7 +135,7 @@ class SearchResult extends StatelessWidget with ChangeNotifier {
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                              builder: (context) => Product(
+                                              builder: (context) => CastingDetail(
                                                 id: list[index]["casting"]["id"]
                                                     .toString(),
                                               ),
