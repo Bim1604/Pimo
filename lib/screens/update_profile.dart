@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -62,8 +61,8 @@ class _UpdateModelProfilePageState extends State<UpdateModelProfilePage> {
                 } else {
                   if (prevData.error == null) {
                     return ModelUpdate(
-                        modelDetail:
-                            Provider.of<ModelViewModel>(context, listen: false));
+                        modelDetail: Provider.of<ModelViewModel>(context,
+                            listen: false));
                   } else {
                     return Text('Lỗi');
                   }
@@ -92,7 +91,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
       dobController,
       phoneController,
       countryController,
-      provinceController, 
+      provinceController,
       districtController,
       descriptionController,
       giftedController;
@@ -102,14 +101,13 @@ class _ModelUpdateState extends State<ModelUpdate> {
   updateModelDetail(FormData params) async {
     var jwt = (await FlutterSession().get("jwt")).toString();
     var dio = Dio();
-    var response = await dio.request((url + 'api/v1/models'),
-        options: Options(
-          method: "PUT",
-            headers: {
-              'Content-Type': "multipart/form-data",
-              "Authorization": 'Bearer $jwt',
-          }),
-        data: params,
+    var response = await dio.request(
+      (url + 'api/v1/models'),
+      options: Options(method: "PUT", headers: {
+        'Content-Type': "multipart/form-data",
+        "Authorization": 'Bearer $jwt',
+      }),
+      data: params,
     );
     try {
       if (response.statusCode == 200) {
@@ -118,7 +116,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
         throw Exception("Something wrong in update profile");
       }
     } on Exception catch (exception) {
-      print("Exception: "+ exception.toString());
+      print("Exception: " + exception.toString());
     } catch (error) {
       print("ERROR: " + error.toString());
     }
@@ -170,18 +168,21 @@ class _ModelUpdateState extends State<ModelUpdate> {
 
   void _loadData() {
     nameController = TextEditingController()..text = widget.modelDetail.name;
-    genderController  = widget.modelDetail.genderName;
+    genderController = widget.modelDetail.genderName;
     dobController = TextEditingController()
       ..text = formatDate(widget.modelDetail.dateOfBirth);
-    descriptionController = TextEditingController()..text = widget.modelDetail.description;
+    descriptionController = TextEditingController()
+      ..text = widget.modelDetail.description;
     phoneController = TextEditingController()..text = widget.modelDetail.phone;
     countryController = TextEditingController()
       ..text = widget.modelDetail.country;
-    districtController = TextEditingController()..text = widget.modelDetail.district;
-    provinceController = TextEditingController()..text = widget.modelDetail.province;
-    giftedController = TextEditingController()..text = widget.modelDetail.gifted;
+    districtController = TextEditingController()
+      ..text = widget.modelDetail.district;
+    provinceController = TextEditingController()
+      ..text = widget.modelDetail.province;
+    giftedController = TextEditingController()
+      ..text = widget.modelDetail.gifted;
     _date = DateTime.parse(widget.modelDetail.dateOfBirth);
-
   }
 
   String formatDate(String date) {
@@ -303,7 +304,6 @@ class _ModelUpdateState extends State<ModelUpdate> {
                     labelText: 'Quận',
                   ),
                 ),
-
                 TextFormField(
                     cursorColor: MaterialColors.mainColor,
                     controller: giftedController,
@@ -344,7 +344,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
               params['facebook'] = widget.modelDetail.facebook;
               params['instagram'] = widget.modelDetail.insta;
               params['twitter'] = widget.modelDetail.twitter;
-              params['linkAvatar']  = widget.modelDetail.avatar;
+              params['linkAvatar'] = widget.modelDetail.avatar;
               var form = new FormData.fromMap(params);
               updateModelDetail(form);
 

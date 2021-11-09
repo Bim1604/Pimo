@@ -1,5 +1,4 @@
 import 'package:pimo/models/body.dart';
-import 'package:pimo/models/body_value.dart';
 
 class BodyPartViewModel {
   BodyPart _bodyPart;
@@ -13,7 +12,7 @@ class BodyPartViewModel {
     if (_bodyPart.value.measure == null) {
       return 'Không có';
     }
-    return _bodyPart.value.measure ;
+    return _bodyPart.value.measure;
   }
 
   String get textValue {
@@ -23,5 +22,4 @@ class BodyPartViewModel {
   double get quantity {
     return _bodyPart.value.quantityValue;
   }
-
 }

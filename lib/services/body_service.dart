@@ -9,23 +9,24 @@ class BodyPartService {
     var list = jsonDecode(responseBody);
     List<BodyPart> collectionListProject = new List<BodyPart>();
     list['listBodyPart'].map((e) => count++).toList();
-    // var list = jsonDecode(responseBody)['listBodyPart']
-    //     .map((data) => BodyPart.fromJson(data))
-    //     .toList();
     for (int i = 0; i < count; i++) {
       collectionListProject.add(BodyPart.fromJson(list['listBodyPart'][i]));
     }
     return collectionListProject;
   }
 
-  Future<List<BodyPart>> getBodyPartList() async {
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-    // String modelId = (await FlutterSession().get('modelId')).toString();
-    final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+  Future<List<BodyPart>> getBodyPartList(int modelId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
+    if (response.statusCode == 200) {
+      var list = parseBodyPartList(response.body);
+      return list;
+    } else {
+      throw Exception("Cannot fetch body ");
+    }
+  }
+
+  Future<List<BodyPart>> getBodyPartList2(int modelId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
     if (response.statusCode == 200) {
       var list = parseBodyPartList(response.body);
       return list;

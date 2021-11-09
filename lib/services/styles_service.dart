@@ -15,14 +15,8 @@ class StylesService {
     return stylesListProject;
   }
 
-  Future<List<Styles>> getStylesList() async {
-    // var token = (await FlutterSession().get("token")).toString();
-    // Map<String, String> heads = Map<String, String>();
-    // heads['Content-Type'] = 'application/json';
-    // heads['Accept'] = 'application/json';
-    // heads['Authorization'] = 'Bearer $token';
-    // String modelId = (await FlutterSession().get('modelId')).toString();
-    final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+  Future<List<Styles>> getStylesList(int modelId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
     if (response.statusCode == 200) {
       var list = parseStylesList(response.body);
       return list;
