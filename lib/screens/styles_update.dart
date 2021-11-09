@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Images.dart';
+import 'package:pimo/models/styles.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/measure_template.dart';
-import 'package:pimo/screens/measure_update.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
-import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:http/http.dart' as http;
@@ -24,27 +23,23 @@ class _UpdateStylesProfilePage extends State<UpdateStylesProfilePage> {
   @override
   void initState() {
     super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      fetchStyles();
+    });
   }
 
-  TextEditingController heightController,
-      weightController,
-      chestController,
-      waistController,
-      buttController,
-      tattoController;
-
-  @override
-  void dispose() {
-    heightController.dispose();
-    weightController.dispose();
-    chestController.dispose();
-    waistController.dispose();
-    buttController.dispose();
-    tattoController.dispose();
-    super.dispose();
+  List list;
+  // fetch
+  List<Styles> parseStylesList(String responseBody) {
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<Styles> stylesListProject = new List<Styles>();
+    list['styleList'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      stylesListProject.add(Styles.fromJson(list['styleList'][i]));
+    }
+    return stylesListProject;
   }
-
-  // StyleChecked
 
   bool isSexyChecked = false;
   bool isClassesChecked = false;
@@ -55,19 +50,60 @@ class _UpdateStylesProfilePage extends State<UpdateStylesProfilePage> {
   bool isNudeChecked = false;
   bool isArtChecked = false;
 
+  Future<List> fetchStyles() async {
+    final response =
+        await http.get(Uri.parse(url + "api/v1/models/${widget.modelId}"));
+    print(list);
+    if (response.statusCode == 200) {
+      list = parseStylesList(response.body);
+      for (int i = 0; i < list.length; i++) {
+        if (list[i].name == 'Gợi cảm') {
+          isSexyChecked = true;
+          selectedStyles.add(1);
+        } else if (list[i].name == 'Cổ điển') {
+          isClassesChecked = true;
+          selectedStyles.add(2);
+        } else if (list[i].name == 'Đường phố') {
+          isStreetChecked = true;
+          selectedStyles.add(3);
+        } else if (list[i].name == 'Mùa hè') {
+          isSummerChecked = true;
+          selectedStyles.add(4);
+        } else if (list[i].name == 'Mùa đông') {
+          isWinterChecked = true;
+          selectedStyles.add(5);
+        } else if (list[i].name == 'Năng động') {
+          isPositiveChecked = true;
+          selectedStyles.add(6);
+        } else if (list[i].name == 'Nude') {
+          isNudeChecked = true;
+          selectedStyles.add(7);
+        } else if (list[i].name == 'Nghệ Thuật') {
+          isArtChecked = true;
+          selectedStyles.add(8);
+        }
+      }
+    } else {
+      throw Exception("Cannot fetch body ");
+    }
+  }
+
+  // StyleChecked
+
   List<int> selectedStyles = List();
 
-  updateModelDetail(FormData params) async {
+  updateModelDetail() async {
     var jwt = (await FlutterSession().get("jwt")).toString();
-    var dio = Dio();
-    var response = await dio.request(
-      (url + 'api/v1/models'),
-      options: Options(method: "PUT", headers: {
-        'Content-Type': "multipart/form-data",
-        "Authorization": 'Bearer $jwt',
-      }),
-      data: params,
-    );
+    var headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer ' + jwt,
+    };
+    var response = await http.put(
+        Uri.parse('https://api.pimo.studio/api/v1/modelstyles'),
+        headers: headers,
+        body: jsonEncode(selectedStyles));
+
     try {
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: 'Cập nhật thành công');
@@ -181,6 +217,7 @@ class _UpdateStylesProfilePage extends State<UpdateStylesProfilePage> {
                                                       .remove(index + 1);
                                                 }
                                               }
+                                              print(selectedStyles);
                                             });
                                           },
                                         ),
@@ -270,25 +307,8 @@ class _UpdateStylesProfilePage extends State<UpdateStylesProfilePage> {
                     child:
                         Text('Cập nhật', style: TextStyle(color: Colors.black)),
                     onPressed: () async {
-                      Map<String, dynamic> params = Map<String, dynamic>();
-                      // params['id'] = widget.modelDetail.id;
-                      // params['name'] = nameController.text;
-                      // params['description'] = descriptionController.text;
-                      // params['genderId'] = 1.toString();
-                      // params['dateOfBirth'] = _date.toString();
-                      // params['country'] = countryController.text;
-                      // params['imageAvatar'] = '';
-                      // params['province'] = provinceController.text;
-                      // params['district'] = districtController.text;
-                      // params['phone'] = phoneController.text;
-                      // params['gifted'] = giftedController.text;
-                      // params['facebook'] = widget.modelDetail.facebook;
-                      // params['instagram'] = widget.modelDetail.insta;
-                      // params['twitter'] = widget.modelDetail.twitter;
-                      // params['linkAvatar'] = widget.modelDetail.avatar;
-                      var form = new FormData.fromMap(params);
-                      // updateModelDetail(form);
-                      Navigator.push(
+                      updateModelDetail();
+                      Navigator.pop(
                         context,
                         MaterialPageRoute(
                             builder: (context) => MultiProvider(

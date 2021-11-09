@@ -1,3 +1,5 @@
+// ignore_for_file: missing_return
+
 import 'package:flutter/material.dart';
 import 'package:pimo/screens/measure_update.dart';
 import 'package:pimo/screens/styles_update.dart';
@@ -45,7 +47,7 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                           Padding(
                             padding: EdgeInsets.only(bottom: 0),
                             child: SizedBox(
-                                height: height / 1.7,
+                                height: height / 1.5,
                                 child: FutureBuilder<BodyPartListViewModel>(
                                   future: Provider.of<BodyPartListViewModel>(
                                           context,
@@ -80,12 +82,27 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                                                           .listBodyPart[index]
                                                           .name,
                                                       value: data
-                                                          .listBodyPart[index]
-                                                          .quantity
-                                                          .toString(),
+                                                                  .listBodyPart[
+                                                                      index]
+                                                                  .quantity !=
+                                                              null
+                                                          ? data
+                                                              .listBodyPart[
+                                                                  index]
+                                                              .quantity
+                                                              .toString()
+                                                          : 'Không có',
                                                       measure: data
-                                                          .listBodyPart[index]
-                                                          .measure,
+                                                                  .listBodyPart[
+                                                                      index]
+                                                                  .measure !=
+                                                              null
+                                                          ? data
+                                                              .listBodyPart[
+                                                                  index]
+                                                              .measure
+                                                              .toString()
+                                                          : 'Không có',
                                                     );
                                                   })),
                                         );
@@ -100,13 +117,6 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                             child: Text('Cập nhật',
                                 style: TextStyle(color: Colors.black)),
                             onPressed: () async {
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider<
-                              //                 BodyPartListViewModel>.value(
-                              //             child: UpdateMeasureProfilePage(
-                              //           modelId: widget.modelId,
-                              //           data2: widget.data2[0],
-                              //         ))));
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -140,7 +150,7 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                           Padding(
                             padding: EdgeInsets.only(bottom: 0),
                             child: SizedBox(
-                                height: height / 1.7,
+                                height: height / 1.5,
                                 child: FutureBuilder<BodyPartListViewModel>(
                                   future: Provider.of<BodyPartListViewModel>(
                                           context,
@@ -188,12 +198,6 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                             child: Text('Cập nhật',
                                 style: TextStyle(color: Colors.black)),
                             onPressed: () async {
-                              // Navigator.of(context).push(MaterialPageRoute(
-                              //     builder: (context) => ChangeNotifierProvider<
-                              //                 BodyPartListViewModel>.value(
-                              //             child: UpdateStylesProfilePage(
-                              //           modelId: widget.modelId,
-                              //         ))));
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Images.dart';
 import 'package:pimo/constants/Theme.dart';
@@ -12,11 +10,7 @@ import 'package:pimo/models/body.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/measure_template.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
-import 'package:pimo/viewmodels/body_view_model.dart';
-import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
-import 'model_profile.dart';
 import 'package:http/http.dart' as http;
 
 class UpdateMeasureProfilePage extends StatefulWidget {
@@ -81,17 +75,6 @@ class _UpdateMeasureProfilePage extends State<UpdateMeasureProfilePage> {
     }
   }
 
-  // @override
-  // void dispose() {
-  //   heightController.dispose();
-  //   weightController.dispose();
-  //   chestController.dispose();
-  //   waistController.dispose();
-  //   buttController.dispose();
-  //   tattoController.dispose();
-  //   super.dispose();
-  // }
-
   updateMeasureDetail() async {
     var jwt = (await FlutterSession().get("jwt")).toString();
     var headers = {
@@ -108,9 +91,7 @@ class _UpdateMeasureProfilePage extends State<UpdateMeasureProfilePage> {
           "bust": double.tryParse(chestController.text).toInt(),
           "hip": double.tryParse(waistController.text).toInt(),
           "waist": double.tryParse(buttController.text).toInt(),
-          "skin": 'nâu',
         }));
-
     try {
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: 'Cập nhật thành công');
@@ -182,10 +163,6 @@ class _UpdateMeasureProfilePage extends State<UpdateMeasureProfilePage> {
                                             controller: heightController,
                                             onChanged: (text) {
                                               heigh = text;
-                                              print(heightController);
-                                              print(weightController);
-                                              print(waistController);
-                                              print(chestController);
                                             },
                                             cursorColor:
                                                 MaterialColors.mainColor,
@@ -290,7 +267,7 @@ class _UpdateMeasureProfilePage extends State<UpdateMeasureProfilePage> {
                 child: Text('Cập nhật', style: TextStyle(color: Colors.black)),
                 onPressed: () async {
                   updateMeasureDetail();
-                  Navigator.push(
+                  Navigator.pop(
                     context,
                     MaterialPageRoute(
                         builder: (context) => MultiProvider(
@@ -312,60 +289,6 @@ class _UpdateMeasureProfilePage extends State<UpdateMeasureProfilePage> {
                     primary: MaterialColors.mainColor,
                     elevation: 0,
                     minimumSize: Size(width / 2, 40)),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CompButton extends StatelessWidget {
-  final String temp;
-  final String value;
-  final String measure;
-  TextEditingController measureController;
-
-  CompButton(
-      {Key key, this.value, this.measure, this.temp, this.measureController})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(-2, 5),
-              blurRadius: 10,
-              color: Color(0xFFF0F0F0).withOpacity(0.5),
-            )
-          ],
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: MaterialColors.mainColor,
-            // width: 2,
-          ),
-        ),
-        child: FlatButton(
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  onChanged: (newText) {
-                    print(measureController.text);
-                  },
-                  controller: measureController,
-                  cursorColor: MaterialColors.mainColor,
-                  decoration: InputDecoration(
-                    labelText: temp + '(' + measure + ')',
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 30,
               ),
             ],
           ),
