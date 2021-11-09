@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pimo/screens/project.dart';
 import 'package:pimo/screens/update_profile.dart';
 import 'package:pimo/utils/google_sign_in.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
@@ -317,8 +318,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                           builder: (context) =>
                               ChangeNotifierProvider<ModelViewModel>.value(
                                   value: modelDetail,
-                                  child: UpdateModelProfilePage(
-                                    modelId: widget.modelId,
+                                  child: ProjectPage(
                                   ))));
                     },
                     child: Row(

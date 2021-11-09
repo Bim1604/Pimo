@@ -25,16 +25,6 @@ class BodyPartService {
     }
   }
 
-  Future<List<BodyPart>> getBodyPartList2(int modelId) async {
-    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
-    if (response.statusCode == 200) {
-      var list = parseBodyPartList(response.body);
-      return list;
-    } else {
-      throw Exception("Cannot fetch body ");
-    }
-  }
-
   Future<List<BodyPart>> getBodyStylesList() async {
     // var token = (await FlutterSession().get("token")).toString();
     // Map<String, String> heads = Map<String, String>();
