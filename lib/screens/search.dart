@@ -3,20 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/constants/Images.dart';
 import 'package:pimo/screens/search_result.dart';
 
-// widgets
-import 'package:pimo/widgets/navbar.dart';
-import 'package:pimo/widgets/home_view.dart';
-import 'package:pimo/widgets/card-small.dart';
-import 'package:pimo/widgets/table-cell.dart';
-
-//screens
-import 'package:pimo/screens/product.dart';
-import 'package:pimo/screens/categories.dart';
-import 'package:intl/intl.dart';
-import 'package:pimo/screens/best-deals.dart';
 
 import 'package:http/http.dart' as http;
 

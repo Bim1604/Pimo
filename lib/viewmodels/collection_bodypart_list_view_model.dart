@@ -9,7 +9,6 @@ class ListCollectionBodyPartListViewModel with ChangeNotifier {
   List<CollectionBodyPartViewModel> listCollectionBodyPart = new List<CollectionBodyPartViewModel>();
 
   Future<ListCollectionBodyPartListViewModel> getListCollectionBodyPart(String modelId) async {
-    print(modelId.length );
     List<ListCollectionBodyPart> collectionBodyPart = await CollectionService().fetchListCollectionBodyPart(modelId);
     notifyListeners();
     listCollectionBodyPart = collectionBodyPart.map((value)

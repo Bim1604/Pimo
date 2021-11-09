@@ -1,5 +1,11 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/viewmodels/collection_bodypart_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_bodypart_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
@@ -7,7 +13,8 @@ import 'package:pimo/viewmodels/model_image_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import 'intro_image.dart';
+import 'intro_image_body_part.dart';
+import 'package:http_parser/http_parser.dart';
 
 class ImageInCollectionBodyPartPage extends StatefulWidget {
   final CollectionBodyPartViewModel collection;
@@ -29,26 +36,70 @@ class _ImageInCollectionPageState extends State<ImageInCollectionBodyPartPage> {
   }
 
   bool isLoading = false;
+  PickedFile imageFile;
+
+  addImageBodyPart(int collectionId, PickedFile imageFile) async {
+    var jwt = (await FlutterSession().get("jwt")).toString();
+    var dio = Dio();
+    String fileName = imageFile.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "collectionId": collectionId,
+      "fileImage": await MultipartFile.fromFile(imageFile.path,
+          filename: fileName, contentType: MediaType("image", "jpeg")),
+    });
+    var response = await dio.post(
+      ("https://api.pimo.studio/api/v1/imagebodyparts"),
+      options: Options(headers: {
+        'Content-Type': "multipart/form-data",
+        "Authorization": 'Bearer $jwt',
+      }),
+      data: formData,
+    );
+    try {
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(msg: 'Thêm thành công');
+      } else {
+        throw Exception("Something wrong in update profile");
+      }
+    } on Exception catch (exception) {
+      print("Exception: " + exception.toString());
+    } catch (error) {
+      print("ERROR: " + error.toString());
+    }
+  }
+
+
+  void _openGallery(BuildContext context) async {
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    setState(() {
+      imageFile = pickedFile;
+    });
+    addImageBodyPart(widget.collection.idCollection, imageFile);
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Chi tiết"),
+          title: const Text("Hình ảnh"),
           backgroundColor: MaterialColors.mainColor,
         ),
         floatingActionButton: FloatingActionButton(
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-                backgroundColor: Colors.black,
-                onPressed: () async => {
-                  // await ImageService().uploadImage(widget.collection.id),
-                  // _reloadPage()
-                },
-              ),
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          backgroundColor: MaterialColors.mainColor,
+          onPressed: () async => {
+            _openGallery(context),
+            // await ImageService().uploadImage(widget.collection.id),
+            // _reloadPage()
+          },
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
@@ -57,8 +108,8 @@ class _ImageInCollectionPageState extends State<ImageInCollectionBodyPartPage> {
               Expanded(
                   child: FutureBuilder<ImageListViewModel>(
                 future: Provider.of<ImageListViewModel>(context, listen: false)
-                    .getImageList(widget.collection.idCollection, widget.index,
-                        widget.modelId),
+                    .getImageListBodyPart(widget.collection.idCollection,
+                        widget.index, widget.modelId),
                 builder: (context, data) {
                   if (data.connectionState == ConnectionState.waiting) {
                     return Column(
@@ -78,7 +129,7 @@ class _ImageInCollectionPageState extends State<ImageInCollectionBodyPartPage> {
                                 itemCount: data.images.length,
                                 itemBuilder: (context, index) {
                                   return _buildImageList(
-                                      (context), data.images[index], index);
+                                      (context), data.images[index], index, widget.collection.idCollection);
                                 },
                                 staggeredTileBuilder: (index) {
                                   return StaggeredTile.count(
@@ -101,55 +152,13 @@ class _ImageInCollectionPageState extends State<ImageInCollectionBodyPartPage> {
   }
 
   Widget _buildImageList(
-      BuildContext context, ModelImageViewModel image, int index) {
+      BuildContext context, ModelImageViewModel image, int index, int collectionId) {
     bool isSelect = false;
-    Future _showDialog(BuildContext context) {
-      return showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text(
-                "Bạn chắc chắn muốn xóa?",
-                style: TextStyle(color: MaterialColors.mainColor),
-              ),
-              actions: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    'Hủy',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    elevation: 0,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    // await ImageService().deleteImage(image.fileName, image.id);
-                    // Navigator.of(context).pop();
-                    // _reloadPage();
-                  },
-                  child: const Text(
-                    'Xóa',
-                    style: TextStyle(color: MaterialColors.mainColor),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    elevation: 0,
-                  ),
-                ),
-              ],
-            );
-          });
-    }
 
     return GestureDetector(
-        onLongPress: () => {
-              _showDialog(context),
-            },
+        // onLongPress: () => {
+        //       _showDialog(context, image.id),
+        //     },
         onTap: () {
           Navigator.push(
             context,
@@ -161,9 +170,10 @@ class _ImageInCollectionPageState extends State<ImageInCollectionBodyPartPage> {
                         ],
                         child: FutureBuilder(
                           builder: (context, snapshot) {
-                            return IntroImagePage(
+                            return IntroImageBodyPartPage(
                               beginIndex: index,
                               collectionId: widget.collection.idCollection,
+                              modelId: widget.modelId,
                             );
                           },
                         ))),

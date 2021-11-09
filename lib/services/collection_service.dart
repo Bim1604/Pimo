@@ -19,8 +19,8 @@ class CollectionService {
     return collectionListProject;
   }
 
-  Future<List<ListCollectionProject>> fetchListCollectionProject() async {
-    final response = await http.get(Uri.parse(url + "api/v1/models/1"));
+  Future<List<ListCollectionProject>> fetchListCollectionProject(String modelId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
     if (response.statusCode == 200) {
       var list = parseListCollectionProject(response.body);
       return list;

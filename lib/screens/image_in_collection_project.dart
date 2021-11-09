@@ -1,6 +1,11 @@
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/services/image_collection_project_service.dart';
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
+import 'package:pimo/screens/intro_image_project.dart';
 import 'package:pimo/viewmodels/collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_project_view_model.dart';
 import 'package:pimo/viewmodels/image_list_view_model.dart';
@@ -8,15 +13,14 @@ import 'package:pimo/viewmodels/model_image_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-import 'intro_image.dart';
-
+import 'package:http_parser/http_parser.dart';
 
 class ImageInCollectionProjectPage extends StatefulWidget {
-  // final ImageCollectionViewModel collection;
   final CollectionProjectViewModel collection;
   final int index;
   final String modelId;
-  const ImageInCollectionProjectPage({Key key, this.collection, this.index, this.modelId})
+  const ImageInCollectionProjectPage(
+      {Key key, this.collection, this.index, this.modelId})
       : super(key: key);
 
   @override
@@ -31,141 +35,117 @@ class _ImageInCollectionPageState extends State<ImageInCollectionProjectPage> {
   }
 
   bool isLoading = false;
+  PickedFile imageFile;
+
+  addImageProject(int collectionId, PickedFile imageFile) async {
+    print(collectionId);
+    var jwt = (await FlutterSession().get("jwt")).toString();
+    var dio = Dio();
+    String fileName = imageFile.path.split('/').last;
+    FormData formData = FormData.fromMap({
+      "collectionId": collectionId,
+      "fileImage": await MultipartFile.fromFile(imageFile.path,
+          filename: fileName, contentType: MediaType("image", "jpeg")),
+    });
+    var response = await dio.post(
+      ("https://api.pimo.studio/api/v1/imageprojects"),
+      options: Options(headers: {
+        'Content-Type': "multipart/form-data",
+        "Authorization": 'Bearer $jwt',
+      }),
+      data: formData,
+    );
+    try {
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(msg: 'Thêm thành công');
+      } else {
+        throw Exception("Something wrong in update profile");
+      }
+    } on Exception catch (exception) {
+      print("Exception: " + exception.toString());
+    } catch (error) {
+      print("ERROR: " + error.toString());
+    }
+  }
+
+  
+
+  void _openGallery(BuildContext context) async {
+    final pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    setState(() {
+      imageFile = pickedFile;
+    });
+    addImageProject(widget.collection.idCollection, imageFile);
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Chi tiết"),
-          actions: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: (widget.collection == null)
-                  ? !isLoading
-                  ? GestureDetector(
-                child: Icon(
-                  Icons.gif,
-                  size: 40,
-                ),
-                onTap: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
-                  // var check = await ImageCollectionService()
-                  //     .convertToGif(widget.collection.id);
-                  setState(() {
-                    isLoading = false;
-                  });
-                  // if (check) {
-                  //  Body of image
-                  // }
-                  var collection = CollectionProjectViewModel(
-                      listCollectionProject:
-                      (await ImageCollectionProjectService()
-                          .getImageInCollectionList(widget.collection.idCollection))
-                          .elementAt(widget.index));
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MultiProvider(
-                            providers: [
-                              ChangeNotifierProvider(
-                                  create: (_) =>
-                                      ImageListViewModel()
-                                  // create: (_) =>
-                                  //     ListCollectionProjectListViewModel()
-                              ),
-                            ],
-                            child: FutureBuilder(
-                              builder: (context, snapshot) {
-                                return ImageInCollectionProjectPage(
-                                  collection: collection,
-                                );
-                              },
-                            ))),
-                  );
-                },
-              )
-                  : Center(child: CircularProgressIndicator(
-                color: Colors.black,
-              ))
-                  : null,
-            ),
-          ],
+          title: const Text("Hình ảnh"),
           backgroundColor: MaterialColors.mainColor,
         ),
-        floatingActionButton: (widget.collection == null)
-            ? FloatingActionButton(
-          child: Icon(
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(
             Icons.add,
             color: Colors.white,
           ),
-          backgroundColor: Colors.black,
+          backgroundColor: MaterialColors.mainColor,
           onPressed: () async => {
+            _openGallery(context),
             // await ImageService().uploadImage(widget.collection.id),
             // _reloadPage()
           },
-        )
-            : null,
+        ),
         backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              (widget.collection == null)
-                  ? Center(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 20, bottom: 20),
-                  child: Text(
-                    'Ảnh',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )
-                  : Padding(padding: EdgeInsets.zero),
               Expanded(
-                child:  FutureBuilder<ImageListViewModel>(
-                      future: Provider.of<ImageListViewModel>(context,
-                          listen: false)
-                          .getImageList(widget.collection.idCollection, widget.index, widget.modelId),
-                      builder: (context, data) {
-                        if (data.connectionState ==
-                            ConnectionState.waiting) {
-                          return Column(
-                            children: <Widget>[
-                              SizedBox(
-                                height: 150,
-                              ),
-                              Center(child: CircularProgressIndicator()),
-                            ],
-                          );
-                        } else {
-                          if (data.error == null) {
-                            return Consumer<ImageListViewModel>(
-                              builder: (ctx, data, child) =>
-                                  StaggeredGridView.countBuilder(
-                                      crossAxisCount: 2,
-                                      itemCount: data.images.length,
-                                      itemBuilder: (context, index) {
-                                        return _buildImageList((context),
-                                            data.images[index], index);
-                                      },
-                                      staggeredTileBuilder: (index) {
-                                        return new StaggeredTile.count(
-                                            1, index.isEven ? 1.2 : 2);
-                                      }),
-                            );
-                          } else {
-                            return Center(child: Text('Không có hình ảnh'),);
-                          }
-                        }
-                      },
-                    )
-                ),
+                  child: FutureBuilder<ImageListViewModel>(
+                future: Provider.of<ImageListViewModel>(context, listen: false)
+                    .getImageListProject(widget.collection.idCollection,
+                        widget.index, widget.modelId),
+                builder: (context, data) {
+                  print(data.data);
+                  if (data.connectionState == ConnectionState.waiting) {
+                    return Column(
+                      children: const <Widget>[
+                        SizedBox(
+                          height: 150,
+                        ),
+                        Center(child: CircularProgressIndicator()),
+                      ],
+                    );
+                  } else {
+                    if (data.error == null) {
+                      return Consumer<ImageListViewModel>(
+                        builder: (ctx, data, child) =>
+                            StaggeredGridView.countBuilder(
+                                crossAxisCount: 2,
+                                itemCount: data.images.length,
+                                itemBuilder: (context, index) {
+                                  return _buildImageList(
+                                      (context), data.images[index], index, widget.collection.idCollection);
+                                },
+                                staggeredTileBuilder: (index) {
+                                  return StaggeredTile.count(
+                                      1, index.isEven ? 1.2 : 2);
+                                }),
+                      );
+                    } else {
+                      return const Center(
+                        child: Text('Không có hình ảnh'),
+                      );
+                    }
+                  }
+                },
+              )),
             ],
           ),
         ),
@@ -174,108 +154,66 @@ class _ImageInCollectionPageState extends State<ImageInCollectionProjectPage> {
   }
 
   Widget _buildImageList(
-      BuildContext context, ModelImageViewModel image, int index) {
+      BuildContext context, ModelImageViewModel image, int index, int collectionId) {
     bool isSelect = false;
-    Future _showDialog(BuildContext context) {
-      return showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text(
-                "Bạn chắc chắn muốn xóa?",
-                style: TextStyle(color: MaterialColors.mainColor),
-              ),
-              actions: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text(
-                    'Hủy',
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    elevation: 0,
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () async {
-                    // await ImageService().deleteImage(image.fileName, image.id);
-                    // Navigator.of(context).pop();
-                    // _reloadPage();
-                  },
-                  child: const Text(
-                    'Xóa',
-                    style: TextStyle(color: MaterialColors.mainColor),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    elevation: 0,
-                  ),
-                ),
-              ],
-            );
-          });
-    }
 
     return GestureDetector(
-        onLongPress: () => {
-          _showDialog(context),
-        },
+        // onLongPress: () => {
+        //       _showDialog(context, image.id),
+        //     },
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => MultiProvider(
-                    providers: [
-                      ChangeNotifierProvider(
-                          create: (_) => ListCollectionProjectListViewModel()),
-                    ],
-                    child: FutureBuilder(
-                      builder: (context, snapshot) {
-                        return IntroImagePage(
-                          beginIndex: index,
-                          collectionId: widget.collection.idCollection,
-                        );
-                      },
-                    ))),
+                        providers: [
+                          ChangeNotifierProvider(
+                              create: (_) => ImageListViewModel()),
+                        ],
+                        child: FutureBuilder(
+                          builder: (context, snapshot) {
+                            return IntroImageProjectPage(
+                              beginIndex: index,
+                              collectionId: widget.collection.idCollection,
+                              modelId: widget.modelId
+                            );
+                          },
+                        ))),
           );
         },
         child: (!isSelect)
             ? Container(
-          margin: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  offset: Offset(-2, 5),
-                  blurRadius: 10,
-                  color: Colors.black.withOpacity(0.3),
-                )
-              ],
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                  image: NetworkImage(
-                    image.fileName,
-                  ),
-                  fit: BoxFit.cover)
-          ),
-        )
-            : Container(
-          margin: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                offset: Offset(-2, 5),
-                blurRadius: 10,
-                color: MaterialColors.mainColor.withOpacity(0.3),
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(-2, 5),
+                        blurRadius: 10,
+                        color: Colors.black.withOpacity(0.3),
+                      )
+                    ],
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(10),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          image.fileName,
+                        ),
+                        fit: BoxFit.cover)),
               )
-            ],
-            color: MaterialColors.mainColor,
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ));
+            : Container(
+                margin: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset(-2, 5),
+                      blurRadius: 10,
+                      color: MaterialColors.mainColor.withOpacity(0.3),
+                    )
+                  ],
+                  color: MaterialColors.mainColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ));
   }
 
   Future _reloadPage() async {
@@ -283,16 +221,17 @@ class _ImageInCollectionPageState extends State<ImageInCollectionProjectPage> {
       context,
       MaterialPageRoute(
           builder: (context) => MultiProvider(
-              providers: [
-                ChangeNotifierProvider(create: (_) => ListCollectionProjectListViewModel()),
-              ],
-              child: FutureBuilder(
-                builder: (context, snapshot) {
-                  return ImageInCollectionProjectPage(
-                    collection: widget.collection,
-                  );
-                },
-              ))),
+                  providers: [
+                    ChangeNotifierProvider(
+                        create: (_) => ListCollectionProjectListViewModel()),
+                  ],
+                  child: FutureBuilder(
+                    builder: (context, snapshot) {
+                      return ImageInCollectionProjectPage(
+                        collection: widget.collection,
+                      );
+                    },
+                  ))),
     );
   }
 }
