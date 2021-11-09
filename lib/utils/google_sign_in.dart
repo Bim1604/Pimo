@@ -55,6 +55,7 @@ class GoogleSignInProvider extends ChangeNotifier {
         Map<String, dynamic> payload = Jwt.parseJwt(parseJson['jwt']);
 
         await FlutterSession().set("jwt", parseJson['jwt']);
+        print("JWT:" + await FlutterSession().get("jwt"));
         var linkModelId = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier';
         await FlutterSession().set("modelId", payload[linkModelId]);
         await FlutterSession().set("modelName", parseJson['name']);

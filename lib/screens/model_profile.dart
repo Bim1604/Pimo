@@ -31,7 +31,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
               builder: (ctx, prevData) {
                 if (prevData.connectionState == ConnectionState.waiting) {
                   return Column(
-                    children: <Widget>[
+                    children: const <Widget>[
                       SizedBox(
                         height: 150,
                       ),
@@ -212,7 +212,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                                   ))));
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Icon(
                           Icons.supervised_user_circle_sharp,
                         ),
@@ -272,7 +272,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       );
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Icon(
                           Icons.straighten,
                         ),
@@ -282,6 +282,106 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                         Expanded(
                           child: Text(
                             'Thông tin chi tiết',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(-2, 5),
+                        blurRadius: 10,
+                        color: MaterialColors.mainColor.withOpacity(0.5),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: MaterialColors.mainColor,
+                      // width: 2,
+                    ),
+                  ),
+                  child: FlatButton(
+                    padding: EdgeInsets.only(left: 20, top: 15, bottom: 15),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    color: Color(0xFFF0F0F0),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              ChangeNotifierProvider<ModelViewModel>.value(
+                                  value: modelDetail,
+                                  child: UpdateModelProfilePage(
+                                    modelId: widget.modelId,
+                                  ))));
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.all_inbox,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Text(
+                            'Dự án của bạn',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        offset: Offset(-2, 5),
+                        blurRadius: 10,
+                        color: MaterialColors.mainColor.withOpacity(0.5),
+                      )
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: MaterialColors.mainColor,
+                      // width: 2,
+                    ),
+                  ),
+                  child: FlatButton(
+                    padding: EdgeInsets.only(left: 20, top: 15, bottom: 15),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    color: Color(0xFFF0F0F0),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) =>
+                              ChangeNotifierProvider<ModelViewModel>.value(
+                                  value: modelDetail,
+                                  child: UpdateModelProfilePage(
+                                    modelId: widget.modelId,
+                                  ))));
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.upcoming_outlined,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: Text(
+                            'Lịch trình sắp tới',
                             style: TextStyle(fontSize: 16),
                           ),
                         )
@@ -326,7 +426,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                                   ], child: Onboarding())));
                     },
                     child: Row(
-                      children: [
+                      children: const [
                         Icon(
                           Icons.logout,
                         ),
