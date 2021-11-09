@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Self Learn\\Pimo last\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\Self Learn\\Final Pimo\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\3c8fd1bfddb99a7a7e21faa1397acdb4\\core-1.1.0\\res\\values\\values.xml",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "D:\\Self Learn\\Pimo last\\Pimo\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\Self Learn\\Final Pimo\\Pimo\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -114,7 +114,7 @@
                     }
                 },
                 {
-                    "source": "D:\\Self Learn\\Pimo last\\Pimo\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "source": "D:\\Self Learn\\Final Pimo\\Pimo\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8",
                         "startColumns": "4,4,4,4,4,4,4",
