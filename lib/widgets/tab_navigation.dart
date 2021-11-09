@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/home_page.dart';
 import 'package:pimo/screens/incoming_casting.dart';
-import 'package:pimo/screens/model_apply_casting.dart';
 import 'package:pimo/screens/model_collection.dart';
 import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
@@ -97,7 +96,7 @@ class Page3 extends StatelessWidget {
         child: FutureBuilder(
           builder: (context, snapshot) {
             // return Container();
-            return ModelApplyCastingPage();
+            return IncomingCastingPage();
           },
         ));
   }
