@@ -24,6 +24,11 @@ String formatTime(String date) {
   return formatter.format(dt);
 }
 
+String formatDateAndTime(String dateTime) {
+  DateTime dt = DateTime.parse(dateTime);
+  var formatter = new DateFormat('HH:mm - dd MMM, yyyy');
+  return formatter.format(dt);
+}
 
 String formatCurrency(int salary) {
   final formatter = new NumberFormat.simpleCurrency(decimalDigits: 0);

@@ -1,29 +1,50 @@
+import 'casting.dart';
+
 class Task {
-  final int id;
-  final String startAt;
-  final String endAt;
-  final int castingId;
-  final bool status;
-  final String castingName;
-  final String modelId;
+  int id;
+  String startDate;
+  String endDate;
+  bool status;
+  int castingId;
+  int modelId;
+  double salary;
+  Casting casting;
 
   Task(
       {this.id,
-        this.startAt,
-        this.endAt,
+        this.startDate,
+        this.endDate,
         this.status,
         this.castingId,
-        this.castingName,
-        this.modelId});
+        this.modelId,
+        this.salary,
+        this.casting,
+      });
 
-  factory Task.fromJson(Map<String, dynamic> json) {
-    return Task(
-        id: json['id'],
-        castingId: json['castingId'],
-        castingName: json['castingName'],
-        endAt: json['endAt'],
-        status: json['status'],
-        startAt: json['startAt'],
-        modelId: json['modelId']);
+  Task.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    status = json['status'];
+    castingId = json['castingId'];
+    modelId = json['modelId'];
+    salary = json['salary'];
+    casting =
+    json['casting'] != null ? new Casting.fromJson(json['casting']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['startDate'] = this.startDate;
+    data['endDate'] = this.endDate;
+    data['status'] = this.status;
+    data['castingId'] = this.castingId;
+    data['modelId'] = this.modelId;
+    data['salary'] = this.salary;
+    if (this.casting != null) {
+      data['casting'] = this.casting.toJson();
+    }
+    return data;
   }
 }

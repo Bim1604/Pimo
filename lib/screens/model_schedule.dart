@@ -30,7 +30,7 @@ class _ModelSchedulePageState extends State<ModelSchedulePage> {
       ),
       body: FutureBuilder<TaskListViewModel>(
         future: Provider.of<TaskListViewModel>(context, listen: false)
-            .getTaskList(),
+            .getTaskListViewModel(),
         builder: (ctx, prevData) {
           if (prevData.connectionState == ConnectionState.waiting) {
             return Column(
