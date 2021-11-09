@@ -1,14 +1,17 @@
-
+import 'dart:convert';
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/services/image_service.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
 import 'model_profile.dart';
+import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 
 class CameraWidget extends StatefulWidget {
   final int modelId;
@@ -27,6 +30,65 @@ class CameraWidgetState extends State<CameraWidget> {
     // PushNotificationService().init(context);
   }
 
+  uploadAvatar() async {
+    String id = (await FlutterSession().get("modelId")).toString();
+    var jwt = (await FlutterSession().get("jwt")).toString();
+    final response =
+        await http.get(Uri.parse('https://api.pimo.studio/api/v1/models/$id'));
+    if (response.statusCode == 200) {
+      var model = json.decode(response.body);
+      String fileName = imageFile.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        "name": model["model"][0]["model"]["name"],
+        "genderId": model["model"][0]["model"]["genderId"],
+        "dateOfBirth": model["model"][0]["model"]["dateOfBirth"],
+        "country": model["model"][0]["model"]["country"],
+        "province": model["model"][0]["model"]["province"],
+        "district": model["model"][0]["model"]["district"],
+        "phone": model["model"][0]["model"]["phone"],
+        "mail": model["model"][0]["model"]["mail"],
+        "status": model["model"][0]["model"]["status"],
+        "gifted": model["model"][0]["model"]["gifted"],
+        "description": model["model"][0]["model"]["description"],
+        "instagram": model["model"][0]["model"]["instagram"],
+        "twitter": model["model"][0]["model"]["twitter"],
+        "facebook": model["model"][0]["model"]["facebook"],
+        "LinkAvatar": "",
+        "imageAvatar": await MultipartFile.fromFile(imageFile.path,
+            filename: fileName, contentType: MediaType("image", "jpeg")),
+      });
+      var dio = Dio();
+      var upload = await dio.put(
+        ("https://api.pimo.studio/api/v1/models"),
+        options: Options(headers: {
+          'Content-Type': "multipart/form-data",
+          "Authorization": 'Bearer $jwt',
+        }),
+        data: formData,
+      );
+      try {
+        if (upload.statusCode == 200) {
+          Fluttertoast.showToast(msg: 'Thêm thành công');
+          Future.delayed(const Duration(milliseconds: 5000), () {
+            Navigator.pop(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ModelProfilePage(),
+                ));
+          });
+        } else {
+          throw Exception("Something wrong in update profile");
+        }
+      } on Exception catch (exception) {
+        print("Exception: " + exception.toString());
+      } catch (error) {
+        print("ERROR: " + error.toString());
+      }
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
   PickedFile imageFile;
 
   Future _showChoiceDialog(BuildContext context) {
@@ -34,14 +96,14 @@ class CameraWidgetState extends State<CameraWidget> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(
+            title: const Text(
               "Lựa chọn",
               style: TextStyle(color: MaterialColors.mainColor),
             ),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
-                  Divider(
+                  const Divider(
                     height: 2,
                     color: MaterialColors.mainColor,
                   ),
@@ -100,51 +162,32 @@ class CameraWidgetState extends State<CameraWidget> {
                         color: MaterialColors.mainColor,
                       )),
                   child: (imageFile == null)
-                      ? Center(
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: Text(
-                        "Chọn ảnh",
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontStyle: FontStyle.italic),
-                      ),
-                    ),
-                  )
+                      ? const Center(
+                          child: Padding(
+                            padding: EdgeInsets.all(20),
+                            child: Text(
+                              "Chọn ảnh",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontStyle: FontStyle.italic),
+                            ),
+                          ),
+                        )
                       : Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          image: FileImage(File(imageFile.path)),
-                          fit: BoxFit.cover),
-                    ),
-                  ),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                                image: FileImage(File(imageFile.path)),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
                 ),
               ),
               RaisedButton(
                 onPressed: () async {
                   if (imageFile != null) {
-                    await uploadFireBase(imageFile.path, widget.modelId);
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              MultiProvider(
-                                  providers: [
-                                    ChangeNotifierProvider(
-                                        create: (_) => ModelViewModel()),
-                                  ],
-                                  child: FutureBuilder(
-                                    builder: (context, snapshot) {
-                                      return ModelProfilePage(
-                                        modelId: widget.modelId,
-                                      );
-                                    },
-                                  ))),
-                    );
-                  } else {
-                    Fluttertoast.showToast(msg: 'Vui lòng chọn ảnh');
+                    uploadAvatar();
                   }
                   // Navigator.push(
                   //     context,
@@ -153,7 +196,7 @@ class CameraWidgetState extends State<CameraWidget> {
                   //     ));
                 },
                 color: MaterialColors.mainColor,
-                child: Text(
+                child: const Text(
                   "Cập nhật",
                   style: TextStyle(color: Colors.black),
                 ),
@@ -172,7 +215,6 @@ class CameraWidgetState extends State<CameraWidget> {
     setState(() {
       imageFile = pickedFile;
     });
-
     Navigator.pop(context);
   }
 

@@ -1,3 +1,7 @@
+pimo
+2.7
+file:///D:/Self%20Learn/Final%20Pimo/Pimo/
+file:///D:/Self%20Learn/Final%20Pimo/Pimo/lib/
 async
 2.12
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/async-2.8.1/
@@ -162,6 +166,10 @@ lints
 2.12
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1/lib/
+localstorage
+2.12
+file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/localstorage-4.0.0+1/
+file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/localstorage-4.0.0+1/lib/
 matcher
 2.12
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10/
@@ -178,10 +186,18 @@ path
 2.12
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.0/lib/
+path_provider
+2.14
+file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.6/
+file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.6/lib/
 path_provider_linux
 2.12
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.0/
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.0/lib/
+path_provider_macos
+2.12
+file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.2/
+file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.2/lib/
 path_provider_platform_interface
 2.12
 file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_platform_interface-2.0.1/
@@ -314,8 +330,4 @@ flutter_web_plugins
 2.12
 file:///D:/Self%20Learn/Flutter/flutter/packages/flutter_web_plugins/
 file:///D:/Self%20Learn/Flutter/flutter/packages/flutter_web_plugins/lib/
-pimo
-2.7
-file:///D:/Self%20Learn/Pimo%20last/Pimo/
-file:///D:/Self%20Learn/Pimo%20last/Pimo/lib/
 2

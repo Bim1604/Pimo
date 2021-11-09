@@ -64,7 +64,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
     return ListView(
       physics: BouncingScrollPhysics(),
       children: [
-        Center(
+        const Center(
           child: Padding(
             padding: EdgeInsets.all(5),
             child: Text(
@@ -76,7 +76,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Stack(
@@ -118,7 +118,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                               child: Container(
                             padding: EdgeInsets.all(5),
                             color: Colors.black,
-                            child: Icon(
+                            child: const Icon(
                               Icons.edit,
                               color: Colors.white,
                               size: 15,
@@ -131,7 +131,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
           width: 50,
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Center(
@@ -140,7 +140,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
@@ -153,7 +153,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       onPressed: () {},
                       elevation: 4.0,
                       fillColor: MaterialColors.socialFacebook,
-                      child: Icon(FontAwesomeIcons.facebook,
+                      child: const Icon(FontAwesomeIcons.facebook,
                           size: 24.0, color: Colors.white),
                       padding: EdgeInsets.all(15.0),
                       shape: CircleBorder(),
@@ -162,7 +162,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       onPressed: () {},
                       elevation: 4.0,
                       fillColor: MaterialColors.socialTwitter,
-                      child: Icon(FontAwesomeIcons.twitter,
+                      child: const Icon(FontAwesomeIcons.twitter,
                           size: 24.0, color: Colors.white),
                       padding: EdgeInsets.all(15.0),
                       shape: CircleBorder(),
@@ -171,7 +171,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                       onPressed: () {},
                       elevation: 4.0,
                       fillColor: MaterialColors.socialDribbble,
-                      child: Icon(FontAwesomeIcons.instagram,
+                      child: const Icon(FontAwesomeIcons.instagram,
                           size: 24.0, color: Colors.white),
                       padding: EdgeInsets.all(15.0),
                       shape: CircleBorder(),
@@ -179,7 +179,7 @@ class _ModelProfilePageState extends State<ModelProfilePage> {
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Padding(

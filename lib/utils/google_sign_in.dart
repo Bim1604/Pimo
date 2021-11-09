@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -20,7 +19,6 @@ class GoogleSignInProvider extends ChangeNotifier {
 
   Future googleLogin() async {
     try {
-      // await logout();
       final googleUser = await googleSignIn.signIn();
       if (googleUser == null) return;
       _user = googleUser;
@@ -45,37 +43,36 @@ class GoogleSignInProvider extends ChangeNotifier {
       HttpClientResponse response = await request.close();
       String reply = await response.transform(utf8.decoder).join();
       final parseJson = jsonDecode(reply);
+      Map<String, dynamic> payload = Jwt.parseJwt(parseJson['jwt']);
+      await FlutterSession().set("jwt", parseJson['jwt']);
+      print("JWT:" + await FlutterSession().get("jwt"));
+      var linkModelId =
+          'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier';
+      var linkRole =
+          'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
+      final LocalStorage storage = LocalStorage('localstorage_app');
+
+      await storage.setItem('role', payload[linkRole].toString());
       if (parseJson['isExist'] == false) {
         Fluttertoast.showToast(
-            msg: "Rất tiếc, bạn không thuộc trong hệ thống.\n Hãy đăng kí với admin. ",
+            msg:
+                "Rất tiếc, bạn không thuộc trong hệ thống.\n Hãy đăng kí với admin. ",
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1
-        );
+            timeInSecForIosWeb: 1);
         return logout();
       } else {
-        Map<String, dynamic> payload = Jwt.parseJwt(parseJson['jwt']);
-
-        await FlutterSession().set("jwt", parseJson['jwt']);
-        print("JWT:" + await FlutterSession().get("jwt"));
-        var linkModelId = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier';
-        var linkRole = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
-        //await FlutterSession().set("role", payload[linkRole]);
-        final LocalStorage storage = LocalStorage('localstorage_app');
-        storage.setItem('role', payload[linkRole].toString());
         await FlutterSession().set("modelId", payload[linkModelId]);
         await FlutterSession().set("modelName", parseJson['name']);
-          var msg = "Bạn không có quyên truy cập vào app này";
-          if(payload[linkRole].toString() == "Model"){
-            msg = "Đăng nhập thành công";
-          }
-          Fluttertoast.showToast(
-              msg: msg,
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.CENTER,
-              timeInSecForIosWeb: 1
-          );
-      
+        var msg = "Bạn không có quyên truy cập vào app này";
+        if (payload[linkRole].toString() == "Model") {
+          msg = "Đăng nhập thành công";
+        }
+        Fluttertoast.showToast(
+            msg: msg,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER,
+            timeInSecForIosWeb: 1);
       }
     } catch (e) {
       print(e.toString());
