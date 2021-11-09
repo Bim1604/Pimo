@@ -64,8 +64,8 @@ class Onboarding extends StatelessWidget {
                                     width: 30,
                                   ),
                                   const Padding(
-                                    padding: EdgeInsets.all(6.0),
-                                    child: Text("LOGIN WITH GOOGLE",
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Text("ĐĂNG NHẬP VỚI GOOGLE",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 13.0)),
