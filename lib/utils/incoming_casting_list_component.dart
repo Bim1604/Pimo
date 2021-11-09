@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/viewmodels/casting_browse_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_browse_view_model.dart';
-
+import 'package:intl/intl.dart';
 class IncomingCastingListComponent extends StatefulWidget {
   final CastingBrowseListViewModel listBrowse;
   IncomingCastingListComponent({Key key, this.listBrowse}) : super(key: key);
@@ -29,6 +29,12 @@ class IncomingCastingListComponent extends StatefulWidget {
 class CastingCard extends StatelessWidget {
   final CastingBrowseViewModel castingBrowse;
   const CastingCard({Key key, this.castingBrowse}) : super(key: key);
+
+  String formatDate(String date) {
+    DateTime dt = DateTime.parse(date);;
+    var formatter = new DateFormat('HH:mm - dd MMM, yyyy');
+    return formatter.format(dt);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +94,8 @@ class CastingCard extends StatelessWidget {
               children: [
                 Text('Bắt đầu: '),
                 Text(
-                  '${castingBrowse.casting.openTime}' ?? '',
+                  formatDate(castingBrowse.casting.openTime)
+                   ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -97,7 +104,7 @@ class CastingCard extends StatelessWidget {
               children: [
                 Text('Kết thúc: '),
                 Text(
-                  '${castingBrowse.casting.closeTime}' ?? '',
+                  formatDate(castingBrowse.casting.closeTime) ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],

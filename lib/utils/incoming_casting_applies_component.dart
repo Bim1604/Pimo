@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_applies_view_model.dart';
+import 'package:intl/intl.dart';
 
 class IncomingAppliesListComponent extends StatefulWidget {
   final CastingAppliesListViewModel listApplies;
@@ -29,11 +30,17 @@ class CastingCard extends StatelessWidget {
   final CastingAppliesViewModel castingApplies;
   const CastingCard({Key key, this.castingApplies}) : super(key: key);
 
+  String formatDate(String date) {
+    DateTime dt = DateTime.parse(date);;
+    var formatter = new DateFormat('HH:mm - dd MMM, yyyy');
+    return formatter.format(dt);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         decoration: BoxDecoration(
             color: Colors.white,
@@ -87,7 +94,7 @@ class CastingCard extends StatelessWidget {
               children: [
                 Text('Bắt đầu: '),
                 Text(
-                  '${castingApplies.casting.openTime}' ?? '',
+                  formatDate(castingApplies.casting.openTime) ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
@@ -96,7 +103,7 @@ class CastingCard extends StatelessWidget {
               children: [
                 Text('Kết thúc: '),
                 Text(
-                  '${castingApplies.casting.closeTime}' ?? '',
+                  formatDate(castingApplies.casting.closeTime) ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
