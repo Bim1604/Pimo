@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Self Learn\\React-Native\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
+            "outputFile": "D:\\Self Learn\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-watch-v20\\values-watch-v20.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\d4bc603c551f9a4059b63218321abb89\\jetified-play-services-auth-16.0.1\\res\\values-watch-v20\\values.xml",

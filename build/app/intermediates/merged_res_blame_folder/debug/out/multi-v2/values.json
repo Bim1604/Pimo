@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Self Learn\\React-Native\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\Self Learn\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\3c8fd1bfddb99a7a7e21faa1397acdb4\\core-1.1.0\\res\\values\\values.xml",
@@ -61,42 +61,6 @@
                     }
                 },
                 {
-                    "source": "D:\\Self Learn\\React-Native\\Pimo\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "55,200,283,387,497,617,711",
-                        "endColumns": "144,82,103,109,119,93,70",
-                        "endOffsets": "195,278,382,492,612,706,777"
-                    },
-                    "to": {
-                        "startLines": "111,112,113,114,115,116,117",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "8183,8328,8411,8515,8625,8745,8839",
-                        "endColumns": "144,82,103,109,119,93,70",
-                        "endOffsets": "8323,8406,8510,8620,8740,8834,8905"
-                    }
-                },
-                {
-                    "source": "D:\\Self Learn\\React-Native\\Pimo\\android\\app\\src\\main\\res\\values\\styles.xml",
-                    "from": {
-                        "startLines": "3,14",
-                        "startColumns": "4,4",
-                        "startOffsets": "176,830",
-                        "endLines": "7,16",
-                        "endColumns": "12,12",
-                        "endOffsets": "472,996"
-                    },
-                    "to": {
-                        "startLines": "119,124",
-                        "startColumns": "4,4",
-                        "startOffsets": "8981,9278",
-                        "endLines": "123,126",
-                        "endColumns": "12,12",
-                        "endOffsets": "9273,9442"
-                    }
-                },
-                {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\afd2d987ef6a954ce95af3f20bd0f6cf\\browser-1.0.0\\res\\values\\values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
@@ -128,6 +92,42 @@
                         "startOffsets": "5712,6890",
                         "endColumns": "67,166",
                         "endOffsets": "5775,7052"
+                    }
+                },
+                {
+                    "source": "D:\\Self Learn\\Pimo\\build\\app\\generated\\res\\google-services\\debug\\values\\values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,200,283,387,497,617,711",
+                        "endColumns": "144,82,103,109,119,93,70",
+                        "endOffsets": "195,278,382,492,612,706,777"
+                    },
+                    "to": {
+                        "startLines": "111,112,113,114,115,116,117",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "8183,8328,8411,8515,8625,8745,8839",
+                        "endColumns": "144,82,103,109,119,93,70",
+                        "endOffsets": "8323,8406,8510,8620,8740,8834,8905"
+                    }
+                },
+                {
+                    "source": "D:\\Self Learn\\Pimo\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "from": {
+                        "startLines": "3,14",
+                        "startColumns": "4,4",
+                        "startOffsets": "176,830",
+                        "endLines": "7,16",
+                        "endColumns": "12,12",
+                        "endOffsets": "472,996"
+                    },
+                    "to": {
+                        "startLines": "119,124",
+                        "startColumns": "4,4",
+                        "startOffsets": "8981,9278",
+                        "endLines": "123,126",
+                        "endColumns": "12,12",
+                        "endOffsets": "9273,9442"
                     }
                 }
             ]
