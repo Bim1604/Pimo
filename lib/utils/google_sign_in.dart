@@ -7,8 +7,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:jwt_decode/jwt_decode.dart';
+import 'package:localstorage/localstorage.dart';
 
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GoogleSignInProvider extends ChangeNotifier {
   final googleSignIn = GoogleSignIn();
@@ -57,14 +59,23 @@ class GoogleSignInProvider extends ChangeNotifier {
         await FlutterSession().set("jwt", parseJson['jwt']);
         print("JWT:" + await FlutterSession().get("jwt"));
         var linkModelId = 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier';
+        var linkRole = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
+        //await FlutterSession().set("role", payload[linkRole]);
+        final LocalStorage storage = LocalStorage('localstorage_app');
+        storage.setItem('role', payload[linkRole].toString());
         await FlutterSession().set("modelId", payload[linkModelId]);
         await FlutterSession().set("modelName", parseJson['name']);
-        Fluttertoast.showToast(
-            msg: "Đăng nhập thành công",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 1
-        );
+          var msg = "Bạn không có quyên truy cập vào app này";
+          if(payload[linkRole].toString() == "Model"){
+            msg = "Đăng nhập thành công";
+          }
+          Fluttertoast.showToast(
+              msg: msg,
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1
+          );
+      
       }
     } catch (e) {
       print(e.toString());
@@ -76,5 +87,7 @@ class GoogleSignInProvider extends ChangeNotifier {
   Future logout() async {
     await googleSignIn.disconnect();
     FirebaseAuth.instance.signOut();
+    final LocalStorage storage = LocalStorage('localstorage_app');
+    storage.deleteItem('role');
   }
 }
