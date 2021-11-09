@@ -141,9 +141,7 @@ class _ModelImagePageState extends State<ModelCollection> {
                                     ],
                                     child: FutureBuilder(
                                       builder: (context, snapshot) {
-                                        return ModelCollectionProject(
-                                          modelId: snapshot.data.toString(),
-                                        );
+                                        return const ModelCollectionProject();
                                       },
                                     ))),
                       ));

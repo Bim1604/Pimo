@@ -13,7 +13,6 @@ import 'package:pimo/widgets/table-cell.dart';
 //screens
 import 'package:pimo/screens/product.dart';
 import 'package:pimo/screens/categories.dart';
-import 'package:pimo/screens/best-deals.dart';
 import 'package:intl/intl.dart';
 
 import 'package:http/http.dart' as http;

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:pimo/constants/Images.dart';
+import 'package:pimo/models/collection_bodypart.dart';
 import 'package:pimo/models/collection_project.dart';
 import 'package:pimo/models/image.dart';
 import 'package:http/http.dart' as http;
@@ -43,7 +44,7 @@ Future<String> uploadFireBase(String path, int modelId) async {
 
 class ImageService {
 
-  List<ModelImage> parseImageList(String responseBody, int index) {
+  List<ModelImage> parseImageListProject(String responseBody, int index) {
     int count = 0;
     var list = jsonDecode(responseBody);
     List<ModelImage> imageList = new List<ModelImage>();
@@ -63,10 +64,40 @@ class ImageService {
     return imageList;
   }
 
-  Future<List<ModelImage>> getImageList(int collectionId, int index, String modelId) async {
+  Future<List<ModelImage>> getImageListProject(int collectionId, int index, String modelId) async {
     final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
     if (response.statusCode == 200) {
-      var list = parseImageList(response.body, index);
+      var list = parseImageListProject(response.body, index);
+      return list;
+    } else {
+      throw Exception('Failed to load');
+    }
+  }
+
+  List<ModelImage> parseImageListBodyPart(String responseBody, int index) {
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<ModelImage> imageList = new List<ModelImage>();
+    List<ListCollectionBodyPart> collectionListProject = new List<ListCollectionBodyPart>();
+    list['listCollectionBody'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+      collectionListProject.add(ListCollectionBodyPart.fromJson(list['listCollectionBody'][i]));
+    }
+    for (int i = 0; i < collectionListProject.length; i++) {
+      if (index == i) {
+        var lengthOfImageList = collectionListProject.elementAt(index).imageList.toList().length;
+        for (int j = 0; j < lengthOfImageList; j++) {
+          imageList.add(ModelImage.fromJson(list['listCollectionBody'][index]['imageList'][j]));
+        }
+      }
+    }
+    return imageList;
+  }
+
+  Future<List<ModelImage>> getImageListBodyPart(int collectionId, int index, String modelId) async {
+    final response = await http.get(Uri.parse(url + "api/v1/models/$modelId"));
+    if (response.statusCode == 200) {
+      var list = parseImageListBodyPart(response.body, index);
       return list;
     } else {
       throw Exception('Failed to load');

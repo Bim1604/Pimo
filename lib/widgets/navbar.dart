@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:pimo/constants/Theme.dart';
 
-import 'package:pimo/screens/categories.dart';
-import 'package:pimo/screens/best-deals.dart';
 import 'package:pimo/screens/search.dart';
 import 'package:pimo/screens/cart.dart';
 import 'package:pimo/screens/chat.dart';

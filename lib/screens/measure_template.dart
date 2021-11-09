@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pimo/screens/measure_update.dart';
-import 'package:pimo/screens/update_measure.dart';
+import 'package:pimo/screens/styles_update.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
-import 'package:pimo/viewmodels/model_view_model.dart';
-import 'package:pimo/viewmodels/styles_list_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
 
@@ -15,8 +13,6 @@ class MeasureTemplatePage extends StatefulWidget {
 }
 
 class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
-  List<String> bodyList = [];
-
   @override
   void initState() {
     super.initState();
@@ -54,7 +50,7 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                                   future: Provider.of<BodyPartListViewModel>(
                                           context,
                                           listen: false)
-                                      .getListBodyPart(),
+                                      .getListBodyPart(widget.modelId),
                                   builder: (ctx, prevData) {
                                     if (prevData.connectionState ==
                                         ConnectionState.waiting) {
@@ -104,13 +100,31 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                             child: Text('Cập nhật',
                                 style: TextStyle(color: Colors.black)),
                             onPressed: () async {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => ChangeNotifierProvider<
-                                          BodyPartListViewModel>.value(
-                                      // value: modelDetail,
-                                      child: UpdateMeasureProfilePage(
-                                          // modelId: widget.modelId,
-                                          ))));
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (context) => ChangeNotifierProvider<
+                              //                 BodyPartListViewModel>.value(
+                              //             child: UpdateMeasureProfilePage(
+                              //           modelId: widget.modelId,
+                              //           data2: widget.data2[0],
+                              //         ))));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MultiProvider(
+                                            providers: [
+                                              ChangeNotifierProvider(
+                                                create: (_) =>
+                                                    BodyPartListViewModel(),
+                                              ),
+                                            ],
+                                            child: FutureBuilder(
+                                              builder: (context, snapshot) {
+                                                return UpdateMeasureProfilePage(
+                                                  modelId: widget.modelId,
+                                                );
+                                              },
+                                            ))),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                                 primary: MaterialColors.mainColor,
@@ -131,7 +145,7 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                                   future: Provider.of<BodyPartListViewModel>(
                                           context,
                                           listen: false)
-                                      .getListStyles(),
+                                      .getListStyles(widget.modelId),
                                   builder: (ctx, prevData) {
                                     if (prevData.connectionState ==
                                         ConnectionState.waiting) {
@@ -173,7 +187,32 @@ class _MeasureTemplatePageState extends State<MeasureTemplatePage> {
                           ElevatedButton(
                             child: Text('Cập nhật',
                                 style: TextStyle(color: Colors.black)),
-                            onPressed: () async {},
+                            onPressed: () async {
+                              // Navigator.of(context).push(MaterialPageRoute(
+                              //     builder: (context) => ChangeNotifierProvider<
+                              //                 BodyPartListViewModel>.value(
+                              //             child: UpdateStylesProfilePage(
+                              //           modelId: widget.modelId,
+                              //         ))));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MultiProvider(
+                                            providers: [
+                                              ChangeNotifierProvider(
+                                                create: (_) =>
+                                                    BodyPartListViewModel(),
+                                              ),
+                                            ],
+                                            child: FutureBuilder(
+                                              builder: (context, snapshot) {
+                                                return UpdateStylesProfilePage(
+                                                  modelId: widget.modelId,
+                                                );
+                                              },
+                                            ))),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                                 primary: MaterialColors.mainColor,
                                 elevation: 0,

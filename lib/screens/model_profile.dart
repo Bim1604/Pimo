@@ -3,8 +3,6 @@ import 'package:pimo/screens/update_profile.dart';
 import 'package:pimo/utils/google_sign_in.dart';
 import 'package:pimo/viewmodels/body_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
-import 'package:pimo/viewmodels/styles_list_view_model.dart';
-import 'package:pimo/viewmodels/styles_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'avatar_page.dart';

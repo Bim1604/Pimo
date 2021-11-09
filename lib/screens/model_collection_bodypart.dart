@@ -7,7 +7,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pimo/constants/Theme.dart';
 import 'package:pimo/models/project.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
-import 'package:pimo/services/image_collection_bodypart_service.dart';
 import 'package:pimo/viewmodels/collection_bodypart_list_view_model.dart';
 import 'package:pimo/viewmodels/collection_bodypart_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_bodypart_list_view_model.dart';
@@ -106,7 +105,8 @@ class _ModelBodyPartProjectState extends State<ModelCollectionBodyPart>
                                               (context),
                                               data.listCollectionBodyPart[
                                                   index],
-                                              index);
+                                              index,
+                                              snapshot.data.toString());
                                         },
                                       ),
                                     );
@@ -128,7 +128,7 @@ class _ModelBodyPartProjectState extends State<ModelCollectionBodyPart>
   }
 
   Widget _buildImageCollectList(
-      BuildContext context, CollectionBodyPartViewModel collection, int index) {
+      BuildContext context, CollectionBodyPartViewModel collection, int index, String modelId) {
     // Size size = MediaQuery.of(context).size;
     // deleteCollectionBodyPart(String name, String description) async {
     //   String id = (await FlutterSession().get('modelId')).toString();
@@ -256,6 +256,7 @@ class _ModelBodyPartProjectState extends State<ModelCollectionBodyPart>
                               //Gia tri collection ID dung.
                               return ImageInCollectionBodyPartPage(
                                 collection: collection,
+                                modelId: modelId,
                                 index: index,
                               );
                             },
@@ -345,7 +346,7 @@ class _ModelBodyPartProjectState extends State<ModelCollectionBodyPart>
           var body = jsonDecode(response.body);
           if (body["success"]) {
             msg = "Tạo thành công";
-            _reloadPage();
+            //_reloadPage();
           }
         } else {
           msg = "Tạo thất bại";
