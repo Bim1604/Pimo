@@ -8,8 +8,6 @@ class StylesListViewModel with ChangeNotifier {
 
   Future<StylesListViewModel> getListStyles() async {
     List<Styles> list = await StylesService().getStylesList();
-    print('hihi');
-    // print(list);
     notifyListeners();
     this.listStyles =
         list.map((value) => StylesViewModel(styles: value)).toList();

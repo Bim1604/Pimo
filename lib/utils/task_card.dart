@@ -1,39 +1,51 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/screens/casting_detail.dart';
+import 'package:pimo/screens/task_detail.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
-import 'package:pimo/viewmodels/casting_view_model.dart';
+import 'package:pimo/viewmodels/task_list_view_model.dart';
+import 'package:pimo/viewmodels/task_view_model.dart';
 import 'package:provider/provider.dart';
 
-class CastingListComponent extends StatefulWidget {
-  final CastingListViewModel list;
-  final bool check;
-  CastingListComponent({Key key, this.list, this.check}) : super(key: key);
+class TaskListComponent extends StatefulWidget {
+
+  final TaskListViewModel taskInfo;
+  TaskListComponent({Key key, this.taskInfo}) : super(key: key);
 
   @override
-  CastingListComponentState createState() =>  CastingListComponentState();
+  TaskListComponentState createState() =>  TaskListComponentState();
 }
 
-class  CastingListComponentState extends State<CastingListComponent> {
+class  TaskListComponentState extends State<TaskListComponent> {
   @override
   Widget build(BuildContext context) {
+
     return ListView.builder(
-      itemCount: widget.list.castings.length,
+      itemCount: widget.taskInfo.listTask.length,
       itemBuilder: (context, index) {
-        return CastingCard(casting: widget.list.castings[index], check: widget.check);
+        return TaskCard(task: widget.taskInfo.listTask[index]);
       },
     );
   }
 }
 
-class CastingCard extends StatelessWidget {
-  final CastingViewModel casting;
-  final bool check;
-  const CastingCard({Key key, this.casting, this.check}) : super(key: key);
+class TaskCard extends StatelessWidget {
+  final TaskViewModel task;
+  const TaskCard({Key key, this.task}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    List<String> requestList = List<String>();
+    if (task.casting.request.isNotEmpty) {
+      var listRequest = task.casting.request.split("<br/>");
+      for (var i = 1; i < listRequest.length; i++) {
+        requestList.add(listRequest[i].toString());
+      }
+    } else {
+      requestList.add("Không có yêu cầu.");
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -46,9 +58,8 @@ class CastingCard extends StatelessWidget {
                   ],
                   child: FutureBuilder(
                     builder: (context, snapshot) {
-                      return CastingDetailPage(
-                        isApplyPage: check,
-                        casting: casting,
+                      return TaskDetailPage(
+                        taskInfo: task,
                       );
                     },
                   ))),
@@ -75,7 +86,7 @@ class CastingCard extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: Text(
-                    casting.name?? '',
+                    task.casting.name?? '',
                     style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -84,27 +95,30 @@ class CastingCard extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 5),
                 ),
                 Container(
-                    child: Text(
-                      casting.getStatus?? '',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white),
+                    child: Expanded(
+                      child: Text(
+                        task.casting.status ?  'Đang thực hiện' : 'Hoàn thành' ,
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
                     ),
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: casting.getStatus == 'Opening'
+                        color: task.casting.status == true
                             ? Colors.green
-                            : casting.getStatus == 'Closed'
-                            ? Colors.amberAccent
-                            : Colors.grey[800])),
+                            : task.casting.status == false
+                            ? Colors.grey[800]
+                            : Colors.redAccent)
+                ),
               ],
             ),
             Row(
               children: [
                 Text(
-                  casting.salary?? '',
+                  task.casting.salary.toString()+ " VNĐ"?? '',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -113,23 +127,39 @@ class CastingCard extends StatelessWidget {
               ],
             ),
             Container(
-              child: Text(
-                casting.description?? '',
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                softWrap: false,
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                padding: EdgeInsets.all(2),
+                itemCount: requestList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Text(
+                     requestList[index] ?? '',
+                    softWrap: false,
+                  );
+                },
+
               ),
               padding: EdgeInsets.symmetric(vertical: 10),
             ),
             Row(
               children: [
-                Text('Mở vào lúc: '),
+                Text('Bắt đầu: '),
                 Text(
-                  casting.openDate?? '',
+                  task.taskStartDate ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
               ],
             ),
+            Row(
+              children: [
+                Text('Kết thúc: '),
+                Text(
+                  task.taskStartDate ?? '',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ],
+            )
           ],
         ),
       ),

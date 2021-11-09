@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pimo/utils/incoming_task_list_component.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:pimo/utils/incoming_casting_list_component.dart';
 
 import 'model_schedule.dart';
 
@@ -43,47 +41,48 @@ class IncomingTaskInCastingPage extends StatelessWidget {
               )
             ],
           ),
-          body: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 100),
-                    child: SizedBox(
-                      height: height - 162,
-                      child: FutureBuilder<TaskListViewModel>(
-                          future: Provider.of<TaskListViewModel>(context,
-                              listen: false)
-                              .getIncomingTaskList(castingId),
-                          builder: (context, data) {
-                            if (data.connectionState == ConnectionState.waiting) {
-                              return Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 150,
-                                  ),
-                                  Center(child: CircularProgressIndicator()),
-                                ],
-                              );
-                            } else {
-                              if (data.error == null) {
-                                return Consumer<TaskListViewModel>(
-                                    builder: (ctx, data, child) =>
-                                        IncomingTaskListComponent(
-                                          list: data,
-                                        ));
-                              } else {
-                                return Center(
-                                  child: SizedBox(
-                                    child: Text('Not found'),
-                                  ),
-                                );
-                              }
-                            }
-                          }),
-                    ),
-                  )
-                ],
-              ))),
+          // body: SingleChildScrollView(
+          //     child: Column(
+          //       children: <Widget>[
+          //         Padding(
+          //           padding: EdgeInsets.only(bottom: 100),
+          //           child: SizedBox(
+          //             height: height - 162,
+          //             child: FutureBuilder<TaskListViewModel>(
+          //                 future: Provider.of<TaskListViewModel>(context,
+          //                     listen: false)
+          //                     .getIncomingTaskList(castingId),
+          //                 builder: (context, data) {
+          //                   if (data.connectionState == ConnectionState.waiting) {
+          //                     return Column(
+          //                       children: <Widget>[
+          //                         SizedBox(
+          //                           height: 150,
+          //                         ),
+          //                         Center(child: CircularProgressIndicator()),
+          //                       ],
+          //                     );
+          //                   } else {
+          //                     if (data.error == null) {
+          //                       return Consumer<TaskListViewModel>(
+          //                           builder: (ctx, data, child) =>
+          //                               IncomingTaskListComponent(
+          //                                 list: data,
+          //                               ));
+          //                     } else {
+          //                       return Center(
+          //                         child: SizedBox(
+          //                           child: Text('Not found'),
+          //                         ),
+          //                       );
+          //                     }
+          //                   }
+          //                 }),
+          //           ),
+          //         )
+          //       ],
+          //     ))
+      ),
     );
   }
 }

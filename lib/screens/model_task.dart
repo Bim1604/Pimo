@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
-import 'package:pimo/utils/casting_card.dart';
+import 'package:pimo/utils/task_card.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
+import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
 
-class ModelApplyCastingPage extends StatefulWidget {
-  ModelApplyCastingPage({Key key}) : super(key: key);
+class ModelTaskPage extends StatefulWidget {
+  ModelTaskPage({Key key}) : super(key: key);
 
   @override
-  _ModelApplyCastingPageState createState() => _ModelApplyCastingPageState();
+  _ModelTaskPageState createState() => _ModelTaskPageState();
 }
 
-class _ModelApplyCastingPageState extends State<ModelApplyCastingPage> {
+class _ModelTaskPageState extends State<ModelTaskPage> {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -24,17 +25,17 @@ class _ModelApplyCastingPageState extends State<ModelApplyCastingPage> {
                 backgroundColor: MaterialColors.mainColor,
                 bottom: TabBar(
                   tabs: [
-                    Tab(text: 'Tới bạn'),
                     Tab(
-                      text: 'Từ bạn',
-                    )
+                      text: 'Kết quả',
+                    ),
+                    Tab(text: 'Nhiệm vụ'),
                   ],
                   indicatorColor: Colors.black,
                   indicatorWeight: 3,
                   labelColor: Colors.black,
                   unselectedLabelColor: Colors.black.withOpacity(0.8),
                 ),
-                title: Text('Yêu cầu'),
+                title: Text('Nhiệm vụ'),
               ),
               body: TabBarView(
                 children: [
@@ -45,10 +46,10 @@ class _ModelApplyCastingPageState extends State<ModelApplyCastingPage> {
                             padding: EdgeInsets.only(bottom: 100),
                             child: SizedBox(
                               height: height - 162,
-                              child: FutureBuilder<CastingListViewModel>(
-                                  future: Provider.of<CastingListViewModel>(context,
+                              child: FutureBuilder<TaskListViewModel>(
+                                  future: Provider.of<TaskListViewModel>(context,
                                       listen: false)
-                                      .modelApplyCasting(),
+                                      .getTaskListViewModel(),
                                   builder: (context, data) {
                                     if (data.connectionState ==
                                         ConnectionState.waiting) {
@@ -62,16 +63,15 @@ class _ModelApplyCastingPageState extends State<ModelApplyCastingPage> {
                                       );
                                     } else {
                                       if (data.error == null && false) {
-                                        return Consumer<CastingListViewModel>(
+                                        return Consumer<TaskListViewModel>(
                                             builder: (ctx, data, child) =>
-                                                CastingListComponent(
-                                                  check: true,
-                                                  list: data,
+                                                TaskListComponent(
+                                                  taskInfo: data,
                                                 ));
                                       } else {
                                         return Center(
                                           child: SizedBox(
-                                            child: Text('Chưa có đề nghị nào'),
+                                            child: Text('Chưa có kết quả nào'),
                                           ),
                                         );
                                       }
@@ -88,10 +88,10 @@ class _ModelApplyCastingPageState extends State<ModelApplyCastingPage> {
                             padding: EdgeInsets.only(bottom: 100),
                             child: SizedBox(
                               height: height - 162,
-                              child: FutureBuilder<CastingListViewModel>(
-                                  future: Provider.of<CastingListViewModel>(context,
+                              child: FutureBuilder<TaskListViewModel>(
+                                  future: Provider.of<TaskListViewModel>(context,
                                       listen: false)
-                                      .modelApplyCasting(),
+                                      .getTaskListViewModel(),
                                   builder: (context, data) {
                                     if (data.connectionState ==
                                         ConnectionState.waiting) {
@@ -105,17 +105,16 @@ class _ModelApplyCastingPageState extends State<ModelApplyCastingPage> {
                                       );
                                     } else {
                                       if (data.error == null) {
-                                        return Consumer<CastingListViewModel>(
+                                        return Consumer<TaskListViewModel>(
                                             builder: (ctx, data, child) =>
-                                                CastingListComponent(
-                                                  check: true,
-                                                  list: data,
+                                               TaskListComponent(
+                                                  taskInfo: data,
                                                 ));
                                       } else {
                                         return Center(
                                           child: SizedBox(
                                             child: Text(
-                                                'Bạn chưa đăng kí bất kì casting nào !'),
+                                                'Bạn chưa đăng kí bất kì nhiệm vụ nào !'),
                                           ),
                                         );
                                       }
