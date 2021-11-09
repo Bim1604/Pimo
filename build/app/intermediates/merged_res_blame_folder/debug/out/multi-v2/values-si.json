@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Self Learn\\Pimo last\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-si\\values-si.xml",
+            "outputFile": "D:\\Self Learn\\Final Pimo\\Pimo\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-si\\values-si.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Admin\\.gradle\\caches\\transforms-2\\files-2.1\\14e561dfe998324f0993f7eed2935f20\\jetified-play-services-basement-17.1.0\\res\\values-si\\values.xml",

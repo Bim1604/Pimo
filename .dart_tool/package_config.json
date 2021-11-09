@@ -266,6 +266,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "localstorage",
+      "rootUri": "file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/localstorage-4.0.0+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10",
       "packageUri": "lib/",
@@ -290,8 +296,20 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "path_provider",
+      "rootUri": "file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "path_provider_linux",
       "rootUri": "file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_provider_macos",
+      "rootUri": "file:///D:/Self%20Learn/Flutter/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -482,7 +500,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-11-09T14:02:37.933985Z",
+  "generated": "2021-11-09T17:36:34.848836Z",
   "generator": "pub",
   "generatorVersion": "2.14.0"
 }
