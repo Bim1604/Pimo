@@ -30,6 +30,7 @@ class IncomingCastingPage extends StatelessWidget {
               tabs: const [
                 Tab(text: 'Đã ứng tuyển'),
                 Tab(text: 'Đã được duyệt')
+                
               ],
               indicatorColor: Colors.black,
               indicatorWeight: 3,
@@ -70,12 +71,55 @@ class IncomingCastingPage extends StatelessWidget {
                     padding: EdgeInsets.only(bottom: 100),
                     child: SizedBox(
                       height: height - 162,
+                      child: FutureBuilder<CastingAppliesListViewModel>(
+                          future: Provider.of<CastingAppliesListViewModel>(context,
+                                  listen: false)
+                              .getCastingAppliesList(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Column(
+                                children: <Widget>[
+                                  SizedBox(
+                                    height: 150,
+                                  ),
+                                  Center(child: CircularProgressIndicator()),
+                                ],
+                              );
+                            } else {
+                              if (snapshot.error == null) {
+                                return Consumer<CastingAppliesListViewModel>(
+                                    builder: (ctx, data, child) =>
+                                        IncomingAppliesListComponent(
+                                          listApplies: data,
+                                        ));
+                              } else {
+                                return Center(
+                                  child: SizedBox(
+                                    child: Center(
+                                      child: Text('Không Có lịch đặt'),
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+                          }),
+                    ),
+                  )
+                ],
+              )),
+              SingleChildScrollView(
+                  child: Column(
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 100),
+                    child: SizedBox(
+                      height: height - 162,
                       child: FutureBuilder<CastingBrowseListViewModel>(
                           future: Provider.of<CastingBrowseListViewModel>(context,
                                   listen: false)
                               .getCastingBrowseList(),
                           builder: (context, data) {
-                            print(data);
                             if (data.connectionState ==
                                 ConnectionState.waiting) {
                               return Column(
@@ -98,50 +142,6 @@ class IncomingCastingPage extends StatelessWidget {
                                   child: SizedBox(
                                     child: Center(
                                       child: Text('Không có lịch đặt'),
-                                    ),
-                                  ),
-                                );
-                              }
-                            }
-                          }),
-                    ),
-                  )
-                ],
-              )),
-              SingleChildScrollView(
-                  child: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 100),
-                    child: SizedBox(
-                      height: height - 162,
-                      child: FutureBuilder<CastingAppliesListViewModel>(
-                          future: Provider.of<CastingAppliesListViewModel>(context,
-                                  listen: false)
-                              .getCastingAppliesList(),
-                          builder: (context, data) {
-                            if (data.connectionState ==
-                                ConnectionState.waiting) {
-                              return Column(
-                                children: <Widget>[
-                                  SizedBox(
-                                    height: 150,
-                                  ),
-                                  Center(child: CircularProgressIndicator()),
-                                ],
-                              );
-                            } else {
-                              if (data.error == null) {
-                                return Consumer<CastingAppliesListViewModel>(
-                                    builder: (ctx, data, child) =>
-                                        IncomingAppliesListComponent(
-                                          listApplies: data,
-                                        ));
-                              } else {
-                                return Center(
-                                  child: SizedBox(
-                                    child: Center(
-                                      child: Text('Không Có lịch đặt'),
                                     ),
                                   ),
                                 );
