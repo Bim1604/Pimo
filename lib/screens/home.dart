@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Center(
                     child: Text(
-                      'Casting',
+                      'Chiến dịch',
                       style: TextStyle(fontSize: 10),
                     ),
                   )

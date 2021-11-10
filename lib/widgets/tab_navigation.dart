@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/screens/home_page.dart';
 import 'package:pimo/screens/incoming_casting.dart';
+import 'package:pimo/screens/model_task.dart';
 import 'package:pimo/screens/model_collection.dart';
 import 'package:pimo/screens/model_profile.dart';
 import 'package:pimo/viewmodels/casting_applies_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_browse_list_view_model.dart';
 import 'package:pimo/viewmodels/casting_info_list_view_model.dart';
-import 'package:pimo/viewmodels/casting_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_result_list_view_model.dart';
 import 'package:pimo/viewmodels/image_collection_project_list_view_model.dart';
 import 'package:pimo/viewmodels/model_view_model.dart';
+import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
 
 class TabNavigatorRoutes {
@@ -91,12 +93,13 @@ class Page3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (_) => CastingListViewModel()),
+          ChangeNotifierProvider(create: (_) => TaskListViewModel()),
+          ChangeNotifierProvider(create: (_) => CastingResultListViewModel()),
         ],
         child: FutureBuilder(
           builder: (context, snapshot) {
             // return Container();
-            return IncomingCastingPage();
+            return ModelTaskPage();
           },
         ));
   }

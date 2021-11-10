@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pimo/constants/Theme.dart';
+import 'package:pimo/utils/result_card.dart';
 import 'package:pimo/utils/task_card.dart';
 import 'package:pimo/viewmodels/casting_list_view_model.dart';
+import 'package:pimo/viewmodels/casting_result_list_view_model.dart';
 import 'package:pimo/viewmodels/task_list_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -46,10 +48,10 @@ class _ModelTaskPageState extends State<ModelTaskPage> {
                             padding: EdgeInsets.only(bottom: 100),
                             child: SizedBox(
                               height: height - 162,
-                              child: FutureBuilder<TaskListViewModel>(
-                                  future: Provider.of<TaskListViewModel>(context,
+                              child: FutureBuilder<CastingResultListViewModel>(
+                                  future: Provider.of<CastingResultListViewModel>(context,
                                       listen: false)
-                                      .getTaskListViewModel(),
+                                      .getCastingResultList(),
                                   builder: (context, data) {
                                     if (data.connectionState ==
                                         ConnectionState.waiting) {
@@ -62,11 +64,11 @@ class _ModelTaskPageState extends State<ModelTaskPage> {
                                         ],
                                       );
                                     } else {
-                                      if (data.error == null && false) {
-                                        return Consumer<TaskListViewModel>(
+                                      if (data.error == null) {
+                                        return Consumer<CastingResultListViewModel>(
                                             builder: (ctx, data, child) =>
-                                                TaskListComponent(
-                                                  taskInfo: data,
+                                                CastingResultComponent(
+                                                  castingResult: data,
                                                 ));
                                       } else {
                                         return Center(
