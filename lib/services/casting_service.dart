@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:pimo/models/casting_applies.dart';
 import 'package:pimo/models/casting_browse.dart';
 import 'package:pimo/models/casting_info.dart';
+import 'package:pimo/models/casting_result.dart';
 import 'package:pimo/module/deprecated/flutter_session/flutter_session.dart';
 import 'package:pimo/viewmodels/casting_view_model.dart';
 
@@ -166,7 +167,6 @@ class CastingService {
     return castingBrowse;
   }
 
-
   Future<List<ApplyList>> getCastingAppliesList() async {
     var jwt = (await FlutterSession().get("jwt")).toString();
     var headers = {
@@ -193,5 +193,36 @@ class CastingService {
       castingApplies.add(ApplyList.fromJson(list['applyList'][i]));
     }
     return castingApplies;
+  }
+
+
+  Future<List<ResultList>> getCastingResultList() async {
+    var jwt = (await FlutterSession().get("jwt")).toString();
+    var headers = {
+      'Content-Type': 'application/json;charset=UTF-8',
+      "Access-Control-Allow-Origin": "*",
+      'Authorization': 'Bearer ' + jwt
+    };
+
+    final response = await http.get(Uri.parse(url + "api/v1/results/model"), headers: headers);
+    if (response.statusCode == 200) {
+      var list = parseCastingResultList(response.body);
+      print('Quao mung qua');
+      return list;
+    } else {
+      throw Exception("ERROR at getCastingResultList");
+    }
+  }
+
+  List<ResultList> parseCastingResultList(String responseBody) {
+    int count = 0;
+    var list = jsonDecode(responseBody);
+    List<ResultList> castingResult = new List<ResultList>();
+    list['resultList'].map((e) => count++).toList();
+    for (int i = 0; i < count; i++) {
+
+      castingResult.add(ResultList.fromJson(list['resultList'][i]));
+    }
+    return castingResult;
   }
 }

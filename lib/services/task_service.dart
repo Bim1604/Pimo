@@ -33,7 +33,6 @@ class TaskService {
         .get(Uri.parse(url + "api/v1/tasks/model") ,headers: headers);
     if (response.statusCode == 200) {
       var list = parseTaskList(response.body);
-      print('Xong r ne');
       return list;
     } else {
       throw Exception('Failed to load');
