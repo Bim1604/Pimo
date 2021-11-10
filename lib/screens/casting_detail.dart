@@ -97,6 +97,11 @@ class Casting extends StatelessWidget with ChangeNotifier {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    String formatDateAndTime(String dateTime) {
+      DateTime dt = DateTime.parse(dateTime);
+      var formatter = new DateFormat('HH:mm - dd MMM, yyyy');
+      return formatter.format(dt);
+    }
     final List<String> imgList = [urlImg];
     final double width = MediaQuery.of(context).size.width / 2;
     var genderString = "";
@@ -381,7 +386,7 @@ class Casting extends StatelessWidget with ChangeNotifier {
                                                           .mainColor),
                                                 ),
                                                 Text(
-                                                  openTime + " - " + closeTime,
+                                                  formatDateAndTime(openTime) + " - " + formatDateAndTime(closeTime),
                                                   style: const TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.black),

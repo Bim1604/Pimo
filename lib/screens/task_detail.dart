@@ -184,7 +184,7 @@ class _TaskDetailPageState extends State<TaskDetailPage> {
                         ),
                         Container(
                             child: Text(
-                          widget.taskInfo.task.salary.toString(),
+                          widget.taskInfo.task.salary.toString() + " VNĐ " ?? '',
                           style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,

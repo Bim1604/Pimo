@@ -91,6 +91,7 @@ class IncomingCastingPage extends StatelessWidget {
                                 return Consumer<CastingAppliesListViewModel>(
                                     builder: (ctx, data, child) =>
                                         IncomingAppliesListComponent(
+                                          //Đã ứng tuyển
                                           listApplies: data,
                                         ));
                               } else {
@@ -135,6 +136,7 @@ class IncomingCastingPage extends StatelessWidget {
                                 return Consumer<CastingBrowseListViewModel>(
                                     builder: (ctx, data, child) =>
                                         IncomingCastingListComponent(
+                                          //Đã được duyệt
                                           listBrowse: data,
                                         ));
                               } else {

@@ -54,7 +54,7 @@ class Onboarding extends StatelessWidget {
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 15.0, right: 8, top: 8, bottom: 8),
+                                left: 12.0, right: 8, top: 8, bottom: 8),
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
@@ -64,8 +64,8 @@ class Onboarding extends StatelessWidget {
                                     width: 30,
                                   ),
                                   const Padding(
-                                    padding: EdgeInsets.all(2.0),
-                                    child: Text("ĐĂNG NHẬP VỚI GOOGLE",
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Text("ĐĂNG NHẬP",
                                         style: TextStyle(
                                             fontWeight: FontWeight.w600,
                                             fontSize: 13.0)),

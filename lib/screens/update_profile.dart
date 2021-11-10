@@ -85,7 +85,7 @@ class ModelUpdate extends StatefulWidget {
 
 class _ModelUpdateState extends State<ModelUpdate> {
   DateTime _date;
-  String genderController;
+  int genderController;
   TextEditingController nameController,
       dobController,
       phoneController,
@@ -167,7 +167,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
 
   void _loadData() {
     nameController = TextEditingController()..text = widget.modelDetail.name;
-    genderController = widget.modelDetail.genderName;
+    genderController = widget.modelDetail.gender;
     dobController = TextEditingController()
       ..text = formatDate(widget.modelDetail.dateOfBirth);
     descriptionController = TextEditingController()
@@ -220,7 +220,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
                     // ),
                   ),
                 ),
-                DropdownButtonFormField<String>(
+                DropdownButtonFormField<int>(
                   value: genderController,
                   decoration: InputDecoration(
                     icon: Icon(Icons.drive_file_rename_outline),
@@ -231,19 +231,19 @@ class _ModelUpdateState extends State<ModelUpdate> {
                   ),
                   items: [
                     DropdownMenuItem(
-                      child: Text("Không rõ"),
-                      value: null,
+                      child: Text("Khác"),
+                      value: 3,
                     ),
                     DropdownMenuItem(
                       child: Text("Nam"),
-                      value: "Nam",
+                      value: 1,
                     ),
                     DropdownMenuItem(
                       child: Text("Nữ"),
-                      value: "Nữ",
+                      value: 2,
                     )
                   ],
-                  onChanged: (String value) {
+                  onChanged: (int value) {
                     setState(() {
                       genderController = value;
                     });
@@ -332,7 +332,7 @@ class _ModelUpdateState extends State<ModelUpdate> {
               // params['id'] = widget.modelDetail.id;
               params['name'] = nameController.text;
               params['description'] = descriptionController.text;
-              params['genderId'] = 1.toString();
+              params['genderId'] = genderController.toString();
               params['dateOfBirth'] = _date.toString();
               params['country'] = countryController.text;
               params['imageAvatar'] = '';

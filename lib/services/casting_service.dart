@@ -148,6 +148,7 @@ class CastingService {
       'Authorization': 'Bearer ' + jwt
     };
     final response = await http.get(Uri.parse(url + "api/v1/browses"), headers: headers);
+
     if (response.statusCode == 200) {
       var list = parseCastingBrowseList(response.body);
       return list;
@@ -161,7 +162,9 @@ class CastingService {
     var list = jsonDecode(responseBody);
     List<CastingBrowses> castingBrowse = new List<CastingBrowses>();
     list['castingBrowses'].map((e) => count++).toList();
+    print('Alo' + count.toString());
     for (int i = 0; i < count; i++) {
+      print(list['castingBrowses'][i]);
       castingBrowse.add(CastingBrowses.fromJson(list['castingBrowses'][i]));
     }
     return castingBrowse;

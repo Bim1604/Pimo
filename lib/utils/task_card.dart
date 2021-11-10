@@ -97,7 +97,7 @@ class TaskCard extends StatelessWidget {
                 Container(
                     child: Expanded(
                       child: Text(
-                        task.casting.status ?  'Đang thực hiện' : 'Hoàn thành' ,
+                        task.task.status ?  'Đang thực hiện' : 'Hoàn thành' ,
                         style: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
@@ -118,7 +118,7 @@ class TaskCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  task.casting.salary.toString()+ " VNĐ"?? '',
+                  task.task.salary.toString()+ " VNĐ"?? '',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,

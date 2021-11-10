@@ -204,7 +204,7 @@ class _ProjectPageState extends State<ProjectPage> {
         var body = jsonDecode(response.body);
         if (body["success"]) {
           msg = "Tạo thành công";
-          //_reloadPage();
+          // _reloadPage();
         }
       } else {
         msg = "Tạo thất bại";
