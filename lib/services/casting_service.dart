@@ -207,7 +207,6 @@ class CastingService {
     final response = await http.get(Uri.parse(url + "api/v1/results/model"), headers: headers);
     if (response.statusCode == 200) {
       var list = parseCastingResultList(response.body);
-      print('Quao mung qua');
       return list;
     } else {
       throw Exception("ERROR at getCastingResultList");

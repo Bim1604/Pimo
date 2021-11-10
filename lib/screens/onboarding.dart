@@ -38,7 +38,7 @@ class Onboarding extends StatelessWidget {
                           ),
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        width: 230,
+                        width: width * 0.6,
                         child: FlatButton(
                           textColor: Colors.pinkAccent,
                           color: Colors.white,
